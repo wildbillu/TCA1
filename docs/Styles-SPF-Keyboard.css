@@ -1,0 +1,45 @@
+/* Styles-SPF-Keyboard.css */
+
+.KB_Button_Letter 
+{
+    width: 40;
+    font-size: 30px;
+}
+
+.KB_Button_Backspace 
+{
+    width: 80;
+    font-size: 15px;
+}
+
+.KB_Button 
+{
+    padding: 0px;
+    height: 55px;
+    border: 2px;
+    outline: none;    
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    background-color:antiquewhite;
+    caret-color: antiquewhite;
+    color:black;
+}
+
+.KB_Area
+{
+    padding: 0px;
+    height: 20%;
+    width: 100%;
+    border: 0px;
+    border-collapse: collapse;    
+    outline: none;    
+     text-align: center;
+    font-size: 30px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    background-color: gray;
+    caret-color: grey;
+    color:black;
+}
+

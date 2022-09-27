@@ -1,0 +1,159 @@
+<HTML>
+<HEAD>
+    <TITLE>SmartPhoneFormat-B 2022-09-18 C</TITLE>
+    <META name="GENERATOR" content="Microsoft FrontPage 4.0">
+    <link rel="stylesheet" href="Styles-SmartPhoneFormat-OverallSpacing.css">
+    <link rel="stylesheet" href="Styles-SPF-Keyboard.css">
+    <link rel="stylesheet" href="Styles-SketchiToonsFullWindow.css">
+    <link rel="stylesheet" href="Styles-SmartPhoneFormat-A.css">
+    <link rel="stylesheet" href="Styles-SPF-CA.css">
+    <link rel="stylesheet" href="Styles-Place.css">
+    <link rel="stylesheet" href="Styles-SPF-GR.css">
+    <link rel="stylesheet" href="Styles-SuccessWindow.css">
+    <link rel="stylesheet" href="Styles-SPF-TopRowControl.css">
+    <link rel="stylesheet" href="Styles-Settings.css">
+    <link rel="stylesheet" href="Styles-More.css">
+    <link rel="stylesheet" href="Styles-Info.css">
+    <link rel="stylesheet" href="Styles-Info-Content.css">
+    <SCRIPT SRC="TC-Defines-SmartPhoneFormat-B.js"></SCRIPT>
+    <SCRIPT SRC="TC-Base.js"></SCRIPT>
+    <SCRIPT SRC="TC-GeneralFunctions.js"></SCRIPT>
+    <SCRIPT SRC="TC-CA-Helpers-Process.js"></SCRIPT>
+    <SCRIPT SRC="TC-CA-Helpers-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-CA-Helpers-Basic.js"></SCRIPT>
+    <SCRIPT SRC="TC-CA-Defines-StyleSupport.js"></SCRIPT>
+    <SCRIPT SRC="TC-CA-Place.js"></SCRIPT>
+    <SCRIPT SRC="TC-GR-Defines-StyleSupport.js"></SCRIPT>
+    <SCRIPT SRC="TC-GR-Helpers-Process.js"></SCRIPT>
+    <SCRIPT SRC="TC-GR-Helpers-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-GR-Helpers-Basic.js"></SCRIPT>
+    <SCRIPT SRC="TC-Keyboard.js"></SCRIPT>
+    <SCRIPT SRC="TC-SketchiToonsFullWindow.js"></SCRIPT>
+    <SCRIPT SRC="TC-SuccessWindow.js"></SCRIPT>
+    <SCRIPT SRC="TC-More.js"></SCRIPT>
+    <SCRIPT SRC="TC-Info-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-Info-Content.js"></SCRIPT>
+    <SCRIPT SRC="TC-Settings-Setup.js"></SCRIPT>
+    <SCRIPT SRC="TC-Settings-Support.js"></SCRIPT>
+    <SCRIPT SRC="TC-TopRowButton-Setup-Process.js"></SCRIPT>
+    <SCRIPT SRC="test.js"></SCRIPT>
+    <SCRIPT SRC="TC-Cookies.js"></SCRIPT>
+    <SCRIPT SRC="TC-PuzzleFromFile.js"></SCRIPT>
+    <SCRIPT SRC="TC-Status-Process.js"></SCRIPT>
+</HEAD>
+<SCRIPT>
+// https://wildbillu.github.io/TCA.github.io/?file=C.txt&device=P&
+// https://wildbillu.github.io/TCA.github.io/?file=C.txt&device=D&
+function getResolution() 
+{
+    alert("Your screen resolution is: " + screen.width + "x" + screen.height);
+}
+
+function LoadValues()
+{
+    var g_bLocal = false;
+    var sPageURL = window.location.search.substring(1);
+    var aPairs = sPageURL.split('&');
+    var iPairs = aPairs.length;
+    if (window.location.protocol === "file:")
+       g_bLocal = true;
+    var sFile = 'Puzzle-Default-A.txt'; // default
+    if ( !g_bLocal )
+    {   
+        if ( iPairs != 0 )
+        {   
+            for ( iPair = 0; iPair < iPairs; iPair++ )
+            {
+                var iFound = aPairs[iPair].indexOf("file=");
+                if ( iFound != -1 )
+                   sFile = aPairs[iPair].substring(iFound+5);
+            }
+        }
+        LoadPuzzleFromFile(sFile); // doesnt work with run and debug
+    }
+    HandleCookiesOnStart();
+    LoadPuzzle();
+    TopRowButtons_Setup();
+    LoadInnerHTML();
+//    const d = new Date();
+//    document.getElementById('PuzzleTitle').innerHTML = d.toUTCString();
+    Status_Check();
+    if ( iPairs != 0 )
+    {
+        for ( iPair = 0; iPair < aPairs.length; iPair++ )
+        {
+            var sDevice = '';
+            var iFound = aPairs[iPair].indexOf("device=");
+            if ( iFound != -1 )
+            {
+               sDevice = aPairs[iPair].substring(iFound+7);
+                if ( sDevice == 'D' )
+                {
+                    elem = document.getElementById("All");
+                    if (elem.requestFullscreen) 
+                    {
+                        elem.requestFullscreen();
+                    } 
+                    else if (elem.webkitRequestFullscreen) 
+                    { /* Safari */
+                        elem.webkitRequestFullscreen();
+                    } else if (elem.msRequestFullscreen) 
+                    { /* IE11 */
+                        elem.msRequestFullscreen();
+                    }
+                }
+            }
+        }
+    }
+}
+</SCRIPT>
+
+<BODY Id="All" topmargin="0" leftmargin="0" OnLoad="LoadValues()">
+<TABLE BGCOLOR="#777777" height=800 width=450 border=0 cellspacing=0 cellspacing=0 padding="0">
+    <FONT face="Arial">
+    <TR height=4% width=100%><TD>
+        <TABLE height="100%" width="100%" padding="0" cellspacing="0">
+            <TR height="100%">
+                <TD width="5%" bgcolor=#FFFFFF><FONT face="Arial">Progress</FONT></TD>
+                <TD width="30%" class="TopRowControlClass_StatusIndicators"><div Id='Status_GR' class="TopRowControlClass_StatusIndicators_DivForBorder">0 of 8</div></TD>
+                <TD width="30%" class="TopRowControlClass_StatusIndicators"><div Id='Status_CA' class="TopRowControlClass_StatusIndicators_DivForBorder">0 0f 8</div></TD>
+                <TD Id="TopRowControl" class="TopRowControlClass">This Row for Controls</TD>
+            </TR>
+        </TABLE>
+    <TR><TD bgcolor="#FFFFFF" Id="Popup_SketchiToonsFull" height=0 align=center></TD></TR>
+    <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_Settings" height=0 align=center></TD></TR>
+    <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_More" height=0 align=left></TD></TR>
+    <TR><TD bgcolor="#FFFFFF" Id="Popup_SuccessWindow" height=0 align=center></TD></TR>
+    <TR>
+      <TD class="Row_TwistiCrossTitle" id=TwistiCrossTitle name=TwistiCrossTitle>TwistiCross with SketchiToons by Sketchi Bill</TD>
+    </TR>
+    <TR class="Row_PuzzleTitle">
+        <TD class="Row_PuzzleTitle" id=PuzzleTitle name=PuzzleTitle>PuzzleTitle</TD>
+    </TR>
+    <TR class="Row_GridAndSketchiToon"><TD>
+        <TABLE border=0 cellspacing=0>
+            <TR>
+                <TD width=50% align=center Id="GridVersion"></TD>
+                <TD width=50% Id="TwistiCrossImage"></TD>
+            </TR>
+        </TABLE>
+    </TD></TR>	
+    <TR class="Row_IntroClueIntro CA_Color_InActive"><TD Id="CA_01_CI">Intro</TD></TR>
+    <TR class="Row_IntroClueItself CA_Color_InActive"><TD Id="CA_01_C">ClueItself</TD></TR>    
+    <TR Id="CA_01_R" class="Row_DualClue CA_Color_InActive" width="100%"><TD Id="CA_01">IIIIII</TD></TR>   
+    <TR Id="CA_2_R" class="CA_Row_Base"><TD><TABLE align="right"><TR><TD Id="CA_2_C">CLUE</TD><TD Id="CA_2_A">ANSWER</TD></TR></TABLE></TD></TR>
+    <TR Id="CA_3_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_3_C"></TD><TD Id="CA_3_A"></TD></TR></TABLE></TD></TR>
+    <TR Id="CA_4_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_4_C"></TD><TD Id="CA_4_A"></TD></TR></TABLE></TD></TR>
+    <TR Id="CA_5_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_5_C"></TD><TD Id="CA_5_A"></TD></TR></TABLE></TD></TR>
+    <TR Id="CA_6_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_6_C"></TD><TD Id="CA_6_A"></TD></TR></TABLE></TD></TR>
+    <TR Id="CA_7_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_7_C"></TD><TD Id="CA_7_A"></TD></TR></TABLE></TD></TR>
+    <TR Id="CA_8_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_8_C"></TD><TD Id="CA_8_A"></TD></TR></TABLE></TD></TR>
+    <TR Id="CA_9_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_9_C"></TD><TD Id="CA_9_A"></TD></TR></TABLE></TD></TR>
+    <TR width=100%><TD Id="CA_2ToN"></TD></TR>
+    <TR class="KB_Area"><TD id=KB name=KB>notset</TD></TR>
+    <TR><TD Id="Popup_Button_Info" height=0 align=center></TD></TR>
+    <TR height=10 align="bottom"><TD id="Messages">Messages</TD></TR>
+</TABLE>		
+</FONT>
+</BODY>
+</HTML>

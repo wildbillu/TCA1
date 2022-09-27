@@ -1,0 +1,51 @@
+/* Styles-SPF-TopRowControl.css */
+.TopRowControlClass_StatusIndicators
+{
+    text-align: center;
+    height: 3%;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:20px;
+    background-color:aliceblue;
+
+}
+
+.TopRowControlClass_StatusIndicators_DivForBorder
+{
+    height:30px;
+    border-width:1px;
+    border-style:solid;
+    border-color:black;
+}
+
+.TopRowControlClass
+{
+    padding: 0px;
+    height: 3%;
+    width: 100%;
+    border: 0px;
+    outline: none;    
+    text-align: right;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    background-color:aliceblue;
+    caret-color: aliceblue;
+    color:black;
+}
+
+.TopRowControl_Button
+{
+    border: 0px;
+    background-color:red;
+    padding: 0px;
+    height: 32px;
+    width:32px;
+    outline: none;
+    caret-color: red;
+    color:black;
+
+}
+
