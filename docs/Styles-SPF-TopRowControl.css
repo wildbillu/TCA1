@@ -1,4 +1,52 @@
 /* Styles-SPF-TopRowControl.css */
+.NewTitle
+{
+    text-align: center;
+    padding: 0px;
+    border: 0px;
+    color:red;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:20px;
+    background-color:white;
+}
+
+.NewTitle_S
+{
+    text-align: center;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:16px;
+    background-color:white;
+}
+
+.NewDual
+{
+    text-align: center;
+    height: 3%;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:20px;
+}
+
+.NewDual_S
+{
+    text-align: center;
+    height: 3%;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:16px;
+}
+
 .TopRowControlClass_StatusIndicators
 {
     text-align: center;
