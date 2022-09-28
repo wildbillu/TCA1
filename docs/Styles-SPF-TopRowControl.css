@@ -12,6 +12,18 @@
     background-color:aliceblue;
 }
 
+.TopRowControlClass_StatusIndicators_S
+{
+    text-align: center;
+    height: 3%;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:14px;
+    background-color:aliceblue;
+}
 .TopRowControlClass_StatusIndicators_DivForBorder
 {
     height:30px;

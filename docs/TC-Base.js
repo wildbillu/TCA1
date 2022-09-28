@@ -41,7 +41,7 @@ function LoadInnerHTML()
 {
 	LoadTwistiCrossAndPopup();
 	LoadSuccessWindowPopup();	
-	document.getElementById('PuzzleTitle').innerHTML = g_sPuzzleTitle;
+	document.getElementById('PT').innerHTML = g_sPuzzleTitle;
 //
 	LoadGridInnerHTML();
 //
