@@ -1,20 +1,29 @@
 /* Styles-SmartPhoneFormat-OverallSpacing.css */
 
+.TopRowControlClass_StatusIndicators
+{
+    text-align: center;
+    height: 3%;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:20px;
+    background-color:aliceblue;
+}
+
 .TwistiCrossTitle
 {
     text-align: center;
-    font-family:Arial, Helvetica, sans-serif;
-    color:blue;
-    background-color: white;
+    height: 3%;
     padding: 0px;
     border: 0px;
-    border-collapse: collapse;    
-    outline: none;    
-    text-align: center;
-    font-size: 20px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    height: 25px;
-    width: 450px;
+    font-size: 20px;
+    background-color: white;
 }
 
 .Row_DualClue

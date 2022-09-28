@@ -105,8 +105,8 @@ function LoadValues()
             }
         }
     }
-var elem = document.getElementById('TwistiCrossTitle');
-elem.innerHTML = 'EEEEEEEE'
+    var elem = document.getElementById('TwistiCrossTitle');
+    elem.innerHTML = 'FFFFFFF'
 alert('TCT.class:' + elem.className);
 computedStyle = window.getComputedStyle(elem, null);
 alert('TCT.CS.' + computedStyle)
@@ -114,6 +114,15 @@ alert('TCT.fF.' + computedStyle.fontFamily)
 alert('TCT.tA.' + computedStyle.textAlign)
     alert('TCT.bgCol' + computedStyle.getPropertyValue("background-color"));
     alert('TCT.Col' + computedStyle.getPropertyValue("color"));
+
+    var elem = document.getElementById('TwistiCrossTitleB');
+alert('TCTB.class:' + elem.className);
+computedStyle = window.getComputedStyle(elem, null);
+alert('TCTB.CS.' + computedStyle)
+alert('TCTB.fF.' + computedStyle.fontFamily)
+alert('TCTB.tA.' + computedStyle.textAlign)
+    alert('TCTB.bgCol' + computedStyle.getPropertyValue("background-color"));
+    alert('TCTB.Col' + computedStyle.getPropertyValue("color"));
 
 }
 </SCRIPT>
@@ -135,7 +144,10 @@ alert('TCT.tA.' + computedStyle.textAlign)
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_More" height=0 align=left></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_SuccessWindow" height=0 align=center></TD></TR>
     <TR>
-        <TD class="TopRowControlClass_StatusIndicators" Id="TwistiCrossTitle">TwistiCross with SketchiToons by Sketchi Bill</TD>
+        <TD class="TopRowControlClass_StatusIndicators" Id="TwistiCrossTitleB">TwistiCross with SketchiToons by Sketchi Bill</TD>
+    </TR>
+    <TR>
+        <TD class="TwistiCrossTitle" Id="TwistiCrossTitle">TwistiCross with SketchiToons by Sketchi Bill</TD>
     </TR>
     <TR class="Row_PuzzleTitle">
         <TD class="Row_PuzzleTitle" Id="PuzzleTitle">PuzzleTitle</TD>
