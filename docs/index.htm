@@ -113,7 +113,8 @@ computedStyle = window.getComputedStyle(elem, null);
 alert('TCT.CS.' + computedStyle)
 alert('TCT.fF.' + computedStyle.fontFamily)
 alert('TCT.tA.' + computedStyle.textAlign)
-alert('TCT.Col' + computedstyle.color)
+    alert('TCT.bgCol' + computedStyle.getPropertyValue("background-color"));
+    alert('TCT.Col' + computedStyle.getPropertyValue("color"));
 
 }
 </SCRIPT>

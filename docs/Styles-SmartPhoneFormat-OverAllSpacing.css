@@ -6,15 +6,16 @@
     outline: none;    
     text-align: center;
     font-size: 20px;
-    font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    background-color: white;
     height: 25px;
     width: 450px;
 */
 .Row_TwistiCrossTitle
 {
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
     color:blue;
+    background-color: white;
 }
 
 
