@@ -1,56 +1,6 @@
 /* Styles-SmartPhoneFormat-OverallSpacing.css */
 
-.NewTitle
-{
-    text-align: center;
-    padding: 0px;
-    border: 0px;
-    color:red;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-    font-size:20px;
-    background-color:white;
-}
 
-.NewTitle_S
-{
-    text-align: center;
-    padding: 0px;
-    border: 0px;
-    color:blue;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-    font-size:16px;
-    background-color:white;
-}
-
-.Row_DualClue
-{
-    padding: 0px;
-    height: 2%;
-    width: 100%;
-    border: 0px;
-    border-collapse: collapse;    
-    outline: none;    
-    text-align: center;
-    font-size: 2.5vmin;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-}
-
-.Row_DualClue_S
-{
-    padding: 0px;
-    height: 2%;
-    width: 100%;
-    border: 0px;
-    border-collapse: collapse;    
-    outline: none;    
-    text-align: center;
-    font-size: 2.0vmin;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-}
 
 .Row_GridAndSketchiToon
 {
