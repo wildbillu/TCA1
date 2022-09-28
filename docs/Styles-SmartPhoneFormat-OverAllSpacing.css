@@ -69,20 +69,5 @@
     color:brown;
 }
 
-.Row_PuzzleTitle
-{
-    padding: 0px;
-    height: 4%;
-    width: 100%;
-    border: 0px;
-    border-collapse: collapse;    
-    outline: none;    
-    text-align: center;
-    font-size: 3.2vmin;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;
-    background-color: white;
-    caret-color: white;
-    color:red;
-}
+
 
