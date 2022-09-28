@@ -1,6 +1,6 @@
 /* Styles-SmartPhoneFormat-OverallSpacing.css */
 
-.TopRowControlClass_StatusIndicators
+.NewTitle
 {
     text-align: center;
     height: 3%;
@@ -10,7 +10,46 @@
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
     font-size:20px;
-    background-color:aliceblue;
+    background-color:white;
+}
+
+.NewTitle_S
+{
+    text-align: center;
+    height: 3%;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:16px;
+    background-color:white;
+}
+
+.NewDual
+{
+    text-align: center;
+    height: 3%;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:20px;
+    background-color:antiquewhite;
+}
+
+.NewDual_S
+{
+    text-align: center;
+    height: 3%;
+    padding: 0px;
+    border: 0px;
+    color:blue;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    font-size:16px;
+    background-color:antiquewhite;
 }
 
 .TwistiCrossTitle
