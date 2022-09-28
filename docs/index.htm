@@ -105,15 +105,15 @@ function LoadValues()
             }
         }
     }
-    var elem = document.getElementById('TCT');
-    elem.innerHTML = 'KKKKKKKKKKKKKKKK'
-alert('TCT.class:' + elem.className);
+    var elem = document.getElementById('PT');
+    elem.innerHTML = 'LLLLLLLLLLLLLLLLLLL'
+alert('PT.class:' + elem.className);
 computedStyle = window.getComputedStyle(elem, null);
-alert('TCT.CS.' + computedStyle)
-alert('TCT.fF.' + computedStyle.fontFamily)
-alert('TCT.tA.' + computedStyle.textAlign)
-    alert('TCT.bgCol' + computedStyle.getPropertyValue("background-color"));
-    alert('TCT.Col' + computedStyle.getPropertyValue("color"));
+alert('PT.CS.' + computedStyle)
+alert('PT.fF.' + computedStyle.fontFamily)
+alert('PT.tA.' + computedStyle.textAlign)
+    alert('PT.bgCol' + computedStyle.getPropertyValue("background-color"));
+    alert('PT.Col' + computedStyle.getPropertyValue("color"));
 }
 </SCRIPT>
 
@@ -122,6 +122,11 @@ alert('TCT.tA.' + computedStyle.textAlign)
     <TR>
         <TD class="TopRowControlClass_StatusIndicators_S" Id="TCT">TwistiCross with SketchiToons by Sketchi Bill</TD>
     </TR>
+    <TR class="Row_PuzzleTitle">
+        <TD Id="PT"  class="TopRowControlClass_StatusIndicators">PuzzleTitle</TD>
+    </TR>
+    <TR><TD class="TopRowControlClass_StatusIndicators_S CA_Color_InActive" Id="CA01CI">Intro</TD></TR>
+    <TR><TD class="TopRowControlClass_StatusIndicators CA_Color_InActive" Id="CA01C">ClueItself</TD></TR>    
     <TR height=4% width=100%><TD>
         <TABLE height="100%" width="100%" padding="0" cellspacing="0">
             <TR height="100%">
@@ -135,9 +140,6 @@ alert('TCT.tA.' + computedStyle.textAlign)
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_Settings" height=0 align=center></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_More" height=0 align=left></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_SuccessWindow" height=0 align=center></TD></TR>
-    <TR class="Row_PuzzleTitle">
-        <TD Id="PT"  class="TopRowControlClass_StatusIndicators">PuzzleTitle</TD>
-    </TR>
     <TR class="Row_GridAndSketchiToon"><TD>
         <TABLE border=0 cellspacing=0>
             <TR>
@@ -146,8 +148,6 @@ alert('TCT.tA.' + computedStyle.textAlign)
             </TR>
         </TABLE>
     </TD></TR>	
-    <TR><TD class="TopRowControlClass_StatusIndicators_S CA_Color_InActive" Id="CA01CI">Intro</TD></TR>
-    <TR><TD class="TopRowControlClass_StatusIndicators CA_Color_InActive" Id="CA01C">ClueItself</TD></TR>    
     <TR Id="CA_01_R" class="Row_DualClue CA_Color_InActive" width="100%"><TD Id="CA_01">IIIIII</TD></TR>   
     <TR Id="CA_2_R" class="CA_Row_Base"><TD><TABLE align="right"><TR><TD Id="CA_2_C">CLUE</TD><TD Id="CA_2_A">ANSWER</TD></TR></TABLE></TD></TR>
     <TR Id="CA_3_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_3_C"></TD><TD Id="CA_3_A"></TD></TR></TABLE></TD></TR>
