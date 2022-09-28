@@ -115,25 +115,18 @@ alert('TCT.tA.' + computedStyle.textAlign)
     alert('TCT.bgCol' + computedStyle.getPropertyValue("background-color"));
     alert('TCT.Col' + computedStyle.getPropertyValue("color"));
 
-    var elem = document.getElementById('TwistiCrossTitleB');
-alert('TCTB.class:' + elem.className);
-computedStyle = window.getComputedStyle(elem, null);
-alert('TCTB.CS.' + computedStyle)
-alert('TCTB.fF.' + computedStyle.fontFamily)
-alert('TCTB.tA.' + computedStyle.textAlign)
-    alert('TCTB.bgCol' + computedStyle.getPropertyValue("background-color"));
-    alert('TCTB.Col' + computedStyle.getPropertyValue("color"));
-
 }
 </SCRIPT>
 
 <BODY Id="All" topmargin="0" leftmargin="0" OnLoad="LoadValues()">
 <TABLE BGCOLOR="#FFFFFF" height=800 width=450 border=0 cellspacing=0 cellspacing=0 padding="0">
-    <FONT face="Arial">
+    <TR>
+        <TD class="NewTitle_S" Id="TwistiCrossTitle">TwistiCross with SketchiToons by Sketchi Bill</TD>
+    </TR>
     <TR height=4% width=100%><TD>
         <TABLE height="100%" width="100%" padding="0" cellspacing="0">
             <TR height="100%">
-                <TD width="5%" bgcolor=#FFFFFF><FONT face="Arial">Progress</FONT></TD>
+                <TD width="5%" bgcolor=#FFFFFF>Progress</TD>
                 <TD width="30%" class="TopRowControlClass_StatusIndicators"><div Id='Status_GR' class="TopRowControlClass_StatusIndicators_DivForBorder">0 of 8</div></TD>
                 <TD width="30%" class="TopRowControlClass_StatusIndicators"><div Id='Status_CA' class="TopRowControlClass_StatusIndicators_DivForBorder">0 0f 8</div></TD>
                 <TD Id="TopRowControl" class="TopRowControlClass">This Row for Controls</TD>
@@ -143,9 +136,6 @@ alert('TCTB.tA.' + computedStyle.textAlign)
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_Settings" height=0 align=center></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_More" height=0 align=left></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_SuccessWindow" height=0 align=center></TD></TR>
-    <TR>
-        <TD class="NewTitle_S" Id="TwistiCrossTitle">TwistiCross with SketchiToons by Sketchi Bill</TD>
-    </TR>
     <TR class="Row_PuzzleTitle">
         <TD class="NewTitle" Id="PuzzleTitle">PuzzleTitle</TD>
     </TR>
@@ -173,6 +163,5 @@ alert('TCTB.tA.' + computedStyle.textAlign)
     <TR><TD Id="Popup_Button_Info" height=0 align=center></TD></TR>
     <TR height=10 align="bottom"><TD id="Messages">Messages</TD></TR>
 </TABLE>		
-</FONT>
 </BODY>
 </HTML>
