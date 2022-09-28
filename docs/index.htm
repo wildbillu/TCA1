@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="Styles-More.css">
     <link rel="stylesheet" href="Styles-Info.css">
     <link rel="stylesheet" href="Styles-Info-Content.css">
-    <link rel="stylesheet" href="Styles-SmartPhoneFormat-OverallSpacing.css">
     <SCRIPT SRC="TC-Defines-SmartPhoneFormat-B.js"></SCRIPT>
     <SCRIPT SRC="TC-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-GeneralFunctions.js"></SCRIPT>
@@ -105,16 +104,6 @@ function LoadValues()
             }
         }
     }
-
-    var elem = document.getElementById('PT');
-    elem.innerHTML = 'OOOOOOOOOOOOOOOOOOOO'
-alert('PT.class:' + elem.className);
-computedStyle = window.getComputedStyle(elem, null);
-alert('PT.CS.' + computedStyle)
-alert('PT.fF.' + computedStyle.fontFamily)
-alert('PT.tA.' + computedStyle.textAlign)
-alert('PT.bgCol' + computedStyle.getPropertyValue("background-color"));
-alert('PT.Col' + computedStyle.getPropertyValue("color"));
 }
 </SCRIPT>
 
@@ -136,7 +125,7 @@ alert('PT.Col' + computedStyle.getPropertyValue("color"));
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_Settings" height=0 align=center></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_More" height=0 align=left></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_SuccessWindow" height=0 align=center></TD></TR>
-    <TR class="Row_GridAndSketchiToon"><TD>
+    <TR ><TD>
         <TABLE border=0 cellspacing=0>
             <TR>
                 <TD width=50% align=center Id="GridVersion"></TD>
