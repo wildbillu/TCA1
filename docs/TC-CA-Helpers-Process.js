@@ -7,8 +7,8 @@ function CA_SetToInActive(iRow)
     if ( iRow == 0 || iRow == 1)
     {
         document.getElementById('CA_01_R').className = CA_SetColorsToClass_InActive(document.getElementById('CA_01_R').className);
-        document.getElementById('CA_01_C').className = CA_SetColorsToClass_InActive(document.getElementById('CA_01_C').className);
-        document.getElementById('CA_01_CI').className = CA_SetColorsToClass_InActive(document.getElementById('CA_01_CI').className);
+        document.getElementById('CA01C').className = CA_SetColorsToClass_InActive(document.getElementById('CA01C').className);
+        document.getElementById('CA01CI').className = CA_SetColorsToClass_InActive(document.getElementById('CA01CI').className);
     }
     else
     {
@@ -46,10 +46,10 @@ function ProcessCA_SetActive(iRow, iActiveCharacter)
         var sClass = '';
         sClass = CA_SetColorsToClass_Active(document.getElementById('CA_01_R').className);
         document.getElementById('CA_01_R').className = sClass;
-        sClass = CA_SetColorsToClass_Active(document.getElementById('CA_01_C').className);
-        document.getElementById('CA_01_C').className = sClass;
-        sClass = CA_SetColorsToClass_Active(document.getElementById('CA_01_CI').className);
-        document.getElementById('CA_01_CI').className = sClass;
+        sClass = CA_SetColorsToClass_Active(document.getElementById('CA01C').className);
+        document.getElementById('CA01C').className = sClass;
+        sClass = CA_SetColorsToClass_Active(document.getElementById('CA01CI').className);
+        document.getElementById('CA01CI').className = sClass;
     }
     else
     {    

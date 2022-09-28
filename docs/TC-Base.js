@@ -45,8 +45,8 @@ function LoadInnerHTML()
 //
 	LoadGridInnerHTML();
 //
-	document.getElementById('CA_01_CI').innerHTML = g_sSketchiToonsClueIntro;
-	document.getElementById('CA_01_C').innerHTML = g_sSketchiToonsClueItself;
+	document.getElementById('CA01CI').innerHTML = g_sSketchiToonsClueIntro;
+	document.getElementById('CA01C').innerHTML = g_sSketchiToonsClueItself;
 	var s01 = Clues1And2Entries_MakeInnerHTML_NoImage();
 	document.getElementById('CA_01').innerHTML = s01;
 
