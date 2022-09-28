@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-    <TITLE>SmartPhoneFormat-B 2022-09-18 C</TITLE>
+    <TITLE>Twisti=Cross V2022-09-27</TITLE>
     <META name="GENERATOR" content="Microsoft FrontPage 4.0">
     <link rel="stylesheet" href="Styles-SmartPhoneFormat-OverallSpacing.css">
     <link rel="stylesheet" href="Styles-SPF-Keyboard.css">
@@ -105,11 +105,19 @@ function LoadValues()
             }
         }
     }
+alert("CA:" + document.getElementById('CA_01_C').className);
+var elem = document.getElementById('TwistiCrossTitle');
+alert('TCT.class:' + elem.className);
+computedStyle = window.getComputedStyle(elem, null);
+alert('TCT.CS.' + computedStyle)
+alert('TCT.fF.' + computedStyle.fontFamily)
+alert('TCT.tA.' + computedStyle.textAlign)
+
 }
 </SCRIPT>
 
 <BODY Id="All" topmargin="0" leftmargin="0" OnLoad="LoadValues()">
-<TABLE BGCOLOR="#777777" height=800 width=450 border=0 cellspacing=0 cellspacing=0 padding="0">
+<TABLE BGCOLOR="#FFFFFF" height=800 width=450 border=0 cellspacing=0 cellspacing=0 padding="0">
     <FONT face="Arial">
     <TR height=4% width=100%><TD>
         <TABLE height="100%" width="100%" padding="0" cellspacing="0">
@@ -125,10 +133,10 @@ function LoadValues()
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_More" height=0 align=left></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_SuccessWindow" height=0 align=center></TD></TR>
     <TR>
-      <TD class="Row_TwistiCrossTitle" id=TwistiCrossTitle name=TwistiCrossTitle>TwistiCross with SketchiToons by Sketchi Bill</TD>
+      <TD class="Row_TwistiCrossTitle" Id="TwistiCrossTitle">TwistiCross with SketchiToons by Sketchi Bill</TD>
     </TR>
     <TR class="Row_PuzzleTitle">
-        <TD class="Row_PuzzleTitle" id=PuzzleTitle name=PuzzleTitle>PuzzleTitle</TD>
+        <TD class="Row_PuzzleTitle" Id="PuzzleTitle">PuzzleTitle</TD>
     </TR>
     <TR class="Row_GridAndSketchiToon"><TD>
         <TABLE border=0 cellspacing=0>
@@ -138,8 +146,8 @@ function LoadValues()
             </TR>
         </TABLE>
     </TD></TR>	
-    <TR class="Row_IntroClueIntro CA_Color_InActive"><TD Id="CA_01_CI">Intro</TD></TR>
-    <TR class="Row_IntroClueItself CA_Color_InActive"><TD Id="CA_01_C">ClueItself</TD></TR>    
+    <TR><TD class="Row_IntroClueIntro CA_Color_InActive" Id="CA_01_CI">Intro</TD></TR>
+    <TR><TD class="Row_IntroClueItself CA_Color_InActive" Id="CA_01_C">ClueItself</TD></TR>    
     <TR Id="CA_01_R" class="Row_DualClue CA_Color_InActive" width="100%"><TD Id="CA_01">IIIIII</TD></TR>   
     <TR Id="CA_2_R" class="CA_Row_Base"><TD><TABLE align="right"><TR><TD Id="CA_2_C">CLUE</TD><TD Id="CA_2_A">ANSWER</TD></TR></TABLE></TD></TR>
     <TR Id="CA_3_R" class="CA_Row_Base" height=0 width=100%><TD><TABLE align="right"><TR><TD align=right Id="CA_3_C"></TD><TD Id="CA_3_A"></TD></TR></TABLE></TD></TR>
