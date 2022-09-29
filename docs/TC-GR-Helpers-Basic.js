@@ -3,7 +3,6 @@
 
 function GR_ClearPuzzle()
 {
-    alert('clear')
     for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
     {
         for ( var iC = 0; iC < g_iGridWidth; iC++ )
@@ -11,7 +10,6 @@ function GR_ClearPuzzle()
             GR_ForRowLetterClearSquare(iRow, iC);
         }
     }
-    alert('clear.done')
     return true;
 }
 
