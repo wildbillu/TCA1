@@ -1,6 +1,15 @@
 // TC-Button-More.js
 //sDropdownMenu += '<span class="Dropdown_SpanPadding" style="display: inline-block; width: 300px;" Id="span1"></span>';
 
+function Dropdown_More_ResetPuzzle()
+{
+    CA_ClearPuzzle();
+    GR_ClearPuzzle();
+    StoreCookie_Puzzle();
+    Status_Check();  
+    elem = document.getElementById(CA_MakeTag_Id(0,0)).focus();
+}
+
 function Dropdown_CanOpen()
 {
     if ( g_bDropdown_Menu_Active ) return false;
@@ -107,6 +116,7 @@ function Insertable_Dropdown_Menu_More()
     sDropdownMenu += '      <text onclick="Dropdown_More_CheckAnswer();">Check Answer</text>';
     sDropdownMenu += '      <text onclick="Dropdown_More_CheckSquare();">Check Square</text>';
     sDropdownMenu += '      <text onclick="Dropdown_More_CheckPuzzle();">Check Puzzle</text>';
+    sDropdownMenu += '      <text onclick="Dropdown_More_ResetPuzzle();">Reset Puzzle</text>';
     sDropdownMenu += '   </div>';
     sDropdownMenu += '</div>';
     document.getElementById("Popup_Button_More").innerHTML = sDropdownMenu;

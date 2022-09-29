@@ -1,6 +1,36 @@
 // TC-GridHelpers-Basic.js
 //
 
+function GR_ClearPuzzle()
+{
+    alert('clear')
+    for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
+    {
+        for ( var iC = 0; iC < g_iGridWidth; iC++ )
+        {
+            GR_ForRowLetterClearSquare(iRow, iC);
+        }
+    }
+    alert('clear.done')
+    return true;
+}
+
+function GR_ForRowLetterClearSquare(iRow, iC)
+{
+    var cAnswer = ' '
+    if ( !GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iC) )
+    {
+        MakeInputNotReadOnly(GR_MakeTag_TD(iRow, iC));
+        g_sGridAnswersPlayer = replaceAt(g_sGridAnswersPlayer, iRow*g_iGridWidth+iC, cAnswer) ;
+        var sButton = GR_MakeTag_Id(iRow, iC)
+        document.getElementById(sButton).value = cAnswer;
+        document.getElementById(sButton).setSelectionRange(0,1);
+        GR_UpdateAnswersPlayer(cAnswer, iRow, iC);
+        GR_ForRowLetter_UpdateStatusPlayer(g_sGR_CodeMeaning_Normal, iRow, iC);
+        GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Normal, iRow, iC);
+    }
+}
+
 function GR_ShowCheckPuzzle(sToDo)
 {
     for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
@@ -66,7 +96,7 @@ function GR_ForRowLetterShowCheckSquare(iRow, iC, sToDo)
         {
             if ( sToDo == 'Show')
             {
-                GR_ForRowLetter_UpdateStatusPlayer(g_sCA_CodeMeaning_Corrected, iRow, iC)
+                GR_ForRowLetter_UpdateStatusPlayer(g_sGR_CodeMeaning_Corrected, iRow, iC)
                 GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Corrected, iRow, iC)
             }
             else

@@ -13,7 +13,7 @@ function HandleCookiesOnStart()
     let s = document.cookie;
     if ( s == '' )
     {
-        setlineAdd('C:NoCookies');
+        setline('C:NoCookies');
         return false;
     }
     var aCookies = s.split(';');
@@ -67,7 +67,7 @@ setline("CP:wrong puzzle:" + sPuzzleName + ':' + aOurValues[0])
     sStatusPlayer = aOurValues[2];
     sGridAnswersPlayer = aOurValues[3];
     sGridStatusPlayer = aOurValues[4];
-setlineAdd('CP.LoadedPuzzleCookie');
+setline('CP.LoadedPuzzleCookie');
 }
 
 function StoreCookie_Puzzle()

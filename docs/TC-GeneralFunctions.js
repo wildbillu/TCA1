@@ -2,6 +2,18 @@
 // 
 var sToDisplay = '';
 
+function MakeInputNotReadOnly(sId)
+{
+    var elem = document.getElementById(sId);
+    var sInner = elem.innerHTML;
+    var iReadonly = sInner.indexOf("readonly");
+    if ( iReadonly == -1 ) // not readonly
+        return;
+    sInner = sInner.replace('readonly=""', '');
+    sInner = sInner.replace('readonly', '');
+    elem.innerHTML = sInner;
+}
+
 function MakeInputReadOnlyForceValue(sId, sForceLetter)
 {
     var elem = document.getElementById(sId);

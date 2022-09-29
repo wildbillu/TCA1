@@ -10,7 +10,7 @@ function LoadPuzzleFromFile(sFilename)
     var sResult = xmlhr.responseText;
     if ( sResult.search('404 Not Found') != -1 )
     {
-        setlineAdd('F:Didnotfindpuzzlefile');
+        setline('F:Didnotfindpuzzlefile');
         return;
     }
     var aLines = sResult.split('\n');
@@ -39,5 +39,5 @@ function LoadPuzzleFromFile(sFilename)
         else if ( sLine.startsWith('sGridStatusPlayer=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridStatusPlayer = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sGridNumbering=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridNumbering = aEntries[1]; iUpdated++;}}
     }
-    setlineAdd(sFilename + '.Updated:' + iUpdated + ';');
+    setline(sFilename + '.Updated:' + iUpdated + ';');
 }

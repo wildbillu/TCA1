@@ -1,5 +1,33 @@
 // TC-ClueAnswerHelpers-Basic.js
 
+function CA_ClearPuzzle()
+{
+    for ( iRow = 0; iRow < g_aAnswers.length; iRow++)
+    {
+        for ( iLetter = 0; iLetter < g_aAnswers[iRow].length; iLetter++ )
+        {
+            CA_ForRowLetterClearSquare(iRow, iLetter); 
+            CA_SetAnswersPlayer()
+        }
+    }
+    return true;        
+}
+
+function CA_ForRowLetterClearSquare(iRow, iC)
+{
+    var cAnswer = ' ';
+    MakeInputNotReadOnly(CA_MakeTag_TD(iRow, iC));
+    var sAnswerPlayer = g_aAnswersPlayer[iRow];
+    sAnswerPlayer = replaceAt(sAnswerPlayer, iC, cAnswer);
+    g_aAnswersPlayer[iRow] = sAnswerPlayer;
+    var sButton = CA_MakeTag_Id(iRow, iC);
+    document.getElementById(sButton).value = cAnswer;
+    document.getElementById(sButton).setSelectionRange(0,1);
+    CA_ForRowLetter_ReplaceAnswerPlayer(cAnswer, iRow, iC)
+    CA_ForRowLetter_UpdateClassForStatusPlayer(g_sCA_CodeMeaning_Normal, iRow, iC);
+    CA_ForRowLetter_ReplaceAnswerStatusPlayer(g_sCA_CodeMeaning_Normal, iRow, iC);
+    return true;
+}
 function CA_ShowCheckPuzzle(sToDo)
 {
     for ( iRow = 0; iRow < g_aAnswers.length; iRow++)
@@ -117,7 +145,7 @@ function CA_UpdateAllOnKeyDown(cAnswerPlayer, iRow, iLetter)
     }
     CA_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cAnswerPlayer);
     StoreCookie_Puzzle();
-    Status_Check()    
+    Status_Check();    
 }
 
 function CA_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cForceLetter)

@@ -29,7 +29,7 @@ function ProcessCA_FocusLostSetActiveToInActive()
 {
     if ( g_sCAidWithFocus == '' ) 
     {
-        setlineAdd('CAFocusAlreadyLost')
+        setline('CAFocusAlreadyLost')
         return;
     }
     var iActiveRow        = CA_RowFromId(g_sCAidWithFocus);
@@ -115,7 +115,7 @@ function ProcessCA_onkeypress(event)
     g_CA_sLastCharacterRejected = ekey;
     if ( event.code == 8 || event.code == 46 )
         return false;
-    setlineAdd('KPNotHandled:' + ekey + '-Code:' + event.code);
+    setline('KPNotHandled:' + ekey + '-Code:' + event.code);
     return false;
 }
 
@@ -185,7 +185,6 @@ function ProcessCA_onkeydown(key, iRow, iLetter)
     {
         setline('keydown:' + key + 'notprocessed');
     }
-setlineAdd('sfix');
     var sFixThisBox = CA_MakeTag_Id(iRow, iLetter);
     document.getElementById(sFixThisBox).focus();
     document.getElementById(sFixThisBox).setSelectionRange(0,1);

@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-    <TITLE>Twisti=Cross V2022-09-27C</TITLE>
+    <TITLE>Twisti=Cross V2022-09-28A</TITLE>
     <META name="GENERATOR" content="Microsoft FrontPage 4.0">
     <link rel="stylesheet" href="Styles-SPF-Keyboard.css">
     <link rel="stylesheet" href="Styles-SketchiToonsFullWindow.css">
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="Styles-More.css">
     <link rel="stylesheet" href="Styles-Info.css">
     <link rel="stylesheet" href="Styles-Info-Content.css">
+    <link rel="stylesheet" href="Styles-Title.css">
     <SCRIPT SRC="TC-Defines-SmartPhoneFormat-B.js"></SCRIPT>
     <SCRIPT SRC="TC-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-GeneralFunctions.js"></SCRIPT>
@@ -41,8 +42,6 @@
     <SCRIPT SRC="TC-Status-Process.js"></SCRIPT>
 </HEAD>
 <SCRIPT>
-// https://wildbillu.github.io/TCA.github.io/?file=C.txt&device=P&
-// https://wildbillu.github.io/TCA.github.io/?file=C.txt&device=D&
 function getResolution() 
 {
     alert("Your screen resolution is: " + screen.width + "x" + screen.height);
@@ -68,47 +67,18 @@ function LoadValues()
                    sFile = aPairs[iPair].substring(iFound+5);
             }
         }
-        LoadPuzzleFromFile(sFile); // doesnt work with run and debug
+        LoadPuzzleFromFile(sFile);
     }
     HandleCookiesOnStart();
     LoadPuzzle();
     TopRowButtons_Setup();
     LoadInnerHTML();
-//    const d = new Date();
-//    document.getElementById('PuzzleTitle').innerHTML = d.toUTCString();
     Status_Check();
-    if ( iPairs != 0 )
-    {
-        for ( iPair = 0; iPair < aPairs.length; iPair++ )
-        {
-            var sDevice = '';
-            var iFound = aPairs[iPair].indexOf("device=");
-            if ( iFound != -1 )
-            {
-               sDevice = aPairs[iPair].substring(iFound+7);
-                if ( sDevice == 'D' )
-                {
-                    elem = document.getElementById("All");
-                    if (elem.requestFullscreen) 
-                    {
-                        elem.requestFullscreen();
-                    } 
-                    else if (elem.webkitRequestFullscreen) 
-                    { /* Safari */
-                        elem.webkitRequestFullscreen();
-                    } else if (elem.msRequestFullscreen) 
-                    { /* IE11 */
-                        elem.msRequestFullscreen();
-                    }
-                }
-            }
-        }
-    }
 }
 </SCRIPT>
 
 <BODY Id="All" topmargin="0" leftmargin="0" OnLoad="LoadValues()">
-<TABLE BGCOLOR="#FFFFFF" height=800 width=450 border=0 cellspacing=0 cellspacing=0 padding="0">
+    <TABLE Id="AllTable" width=450 height=800 BGCOLOR="#FFFFFF" border=0 cellspacing=0 cellspacing=0 padding="0">
     <TR><TD Id="TCT"    class="NewTitle_S" >TwistiCross with SketchiToons by Sketchi Bill</TD></TR>
     <TR height=4% width=100%><TD>
         <TABLE height="100%" width="100%" padding="0" cellspacing="0">
@@ -148,6 +118,6 @@ function LoadValues()
     <TR class="KB_Area"><TD id=KB name=KB>notset</TD></TR>
     <TR><TD Id="Popup_Button_Info" height=0 align=center></TD></TR>
     <TR height=10 align="bottom"><TD id="Messages">Messages</TD></TR>
-</TABLE>		
+</TABLE>
 </BODY>
 </HTML>

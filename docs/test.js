@@ -10,7 +10,7 @@ var sGridStatusPlayer           = '.OOOOOOOOOOOOOO.';
 var sGridNumbering              = '-0123---4---5---';
 //
 var iClueAnswers    = 8;
-var sClues  = 'A|And|Switch Position|Also|Apt name for a worrier|Unfit to be eaten, not Kosher|One might have green filling for St. Pat\'s Day|Craft for ET';
+var sClues  = 'A|And|Switch Position|Also|Apt name for a worrier|Unfit to be eaten, not Kosher|One might have green filling for St. Pat\'s|Craft for ET';
 var sAnswers                    = 'SURF|TURF|OFF|TOO|STU|TREF|OREO|UFO';
 // these need to be equivalent to blank - they will be overwritten if proper cookia
 var sAnswersPlayer             = '----|----|---|---|---|----|----|---';

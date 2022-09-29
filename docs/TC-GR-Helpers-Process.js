@@ -52,12 +52,11 @@ function ProcessGR_onmousedown(iRow, iCharacter)
     return true;
 }
 
-
 function ProcessGR_FocusLostSetActiveToInActive()
 {
     if ( g_GR_sFocus == '' )
     {
-        setlineAdd('GRAlreadyLostFocus');
+        setline('GRAlreadyLostFocus');
         return;
     }
     var iRow        = GR_RowFromId(g_GR_sFocus);
@@ -77,7 +76,7 @@ function ProcessGR_onkeypress(event)
     g_GR_sLastCharacterRejected = ekey;
     if ( event.code == 8 || event.code == 46 )
         return false;
-    setlineAdd('KPNotHandled:' + ekey + '-Code:' + event.code);
+    setline('KPNotHandled:' + ekey + '-Code:' + event.code);
     return false;
 }
 
@@ -170,7 +169,7 @@ function ProcessGR_onfocus(x)
     }
     if ( GR_isThisSquareABlackSquare(sThisId) )
     {
-        setlineAdd('noBSFocus');
+        setline('noBSFocus');
         return;
     }
     var iThisRow        = GR_RowFromId(sThisId);
