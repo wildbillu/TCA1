@@ -40,7 +40,6 @@
     <SCRIPT SRC="TC-Cookies.js"></SCRIPT>
     <SCRIPT SRC="TC-PuzzleFromFile.js"></SCRIPT>
     <SCRIPT SRC="TC-Status-Process.js"></SCRIPT>
-    <script src="jquery.js"></script>
 </HEAD>
 <SCRIPT>
 function getResolution() 
@@ -50,15 +49,6 @@ function getResolution()
 
 function LoadValues()
 {
-jQuery(document).ready(function($) 
-{
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) 
-  {
-    alert('fudge')
-		$('input.mobile-no-keyboard, textarea.mobile-no-keyboard').attr( 'readonly', 'readonly' );
-  }
-}
-); 
     var g_bLocal = false;
     var sPageURL = window.location.search.substring(1);
     var aPairs = sPageURL.split('&');

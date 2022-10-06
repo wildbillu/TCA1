@@ -74,7 +74,7 @@ function StoreCookie_Puzzle()
 {
     var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleDate, g_sPuzzleName, g_sAnswersPlayer, g_sAnswersStatusPlayer, g_sGridAnswersPlayer, g_sGridStatusPlayer, 0)
     document.cookie = sCookieToAdd;
-setline('storepuzzlecookie')
+//setline('storepuzzlecookie')
 }
 
 function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds)

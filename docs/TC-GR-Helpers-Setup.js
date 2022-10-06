@@ -50,7 +50,7 @@ function GridRow_MakeInnerHTML(iRow)
         sFunctionsToCall += ' onkeyup="return ProcessGR_onkeydown(event.key,' + iRow + ',' + iLetter + ');"';
         sFunctionsToCall += ' onfocus="ProcessGR_onfocus(this);"';
         var sTId = 'Id="TD_' + GR_MakeTag_Id(iRow, iLetter) + '"';
-        var sInput = '<TD ' + sTId + ' class="GR_TD_border_collapse"><INPUT class="' + sClassName + '" type="text" ' + GR_MakeTag_HTMLId(iRow, iLetter) + ' value="' + sDisplayAnswer + '" maxlength="1" ' + sFunctionsToCall + ');" ' + sReadonly + '></TD>'
+        var sInput = '<TD ' + sTId + ' class="GR_TD_border_collapse"><INPUT class="' + sClassName + '" type="none" ' + GR_MakeTag_HTMLId(iRow, iLetter) + ' value="' + sDisplayAnswer + '" maxlength="1" ' + sFunctionsToCall + ');" ' + sReadonly + '></TD>'
         sInnerHTML += sInput;
     }  
     sInnerHTML += '</TR>';

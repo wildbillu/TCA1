@@ -1,4 +1,20 @@
 /* Styles-Place.css */
+
+.Place_Across_Row_Controls
+{
+  width:50%;
+  vertical-align:top;
+  border:0px solid green;
+}
+
+.Place_Down_Row_Controls
+{
+  width:50%;
+  vertical-align: top;
+  border:0px solid orange;
+  align-items:center;
+}
+
 .Place_Content_Common_Multiline
 {
     resize: none;
@@ -17,7 +33,7 @@
 .Place_Content_Common_Multiline::selection 
 {  
     background: antiquewhite;
-    color: black0;
+    color: black;
 }
 
 .Place_BackgroundColor
@@ -35,6 +51,7 @@
 .Place_TableBorder
 {
   border:0px solid;
+  border-color:red;
   padding:0px;
 }
 
@@ -45,16 +62,9 @@
   color:green;
 }
 
-.Place_CloseBoxRow
+.Place_SetBox_Across
 {
-  text-align:center;
-  font-size: 25px;
-  color:blue;
-}
-
-.Place_SetBox 
-{
-  width:120px;
+  width:100px;
   height:21px;
   border:1px solid blue;
   font-size: 15px;
@@ -65,7 +75,7 @@
 .Place_SetBox_Down
 {
   width:21px;
-  height:121px;
+  height:101px;
   border:1px solid blue;
   font-size: 15px;
   padding-top: px;
@@ -77,30 +87,24 @@
   width:60px;
   height:21px;
   border:1px solid blue;
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;  
   font-size: 15px;
-  padding-top: px;
+  padding-top: 0px;
   background-color:lightblue;
 }
 
-.Place_CheckBoxRow
+.Place_Word
 {
-  height:15px;
+  width:60px;
+  height:21px;
+  border:0px solid blue;
   text-align: center;
-}
-
-.Place_CheckBox
-{
-  font-size: 12px;
-  color:blue;
-  width: 15px;
-  height: 15px;
-}
-
-.Place_CheckBoxRowTitle
-{
-  text-align:right;
-  font-size: 15px;
-  color:red;
+  font-family:Arial, Helvetica, sans-serif;  
+  font-size: 20px;
+  padding-top: 0px;
+  color: blue;
+  background-color:lightblue;
 }
 
 .Place_Center
@@ -118,8 +122,6 @@
     text-align: right;
 }
 
-
-/* css for the Popup itself */
 .Place_Popup
 {
   width:100%;

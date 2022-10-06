@@ -1,10 +1,6 @@
 // TC=CA-Place.js
 var g_bPlaceWindow_Active = false;
 
-var CA_Place_bAcross = true;
-var CA_Place_iRowActual = 0;
-var CA_Place_iGridNumber = 0;
-
 function CA_PlaceButton_Setup(iRow)
 {
     var sFunctionsToCall = ''; 
@@ -16,15 +12,11 @@ function CA_PlaceButton_Setup(iRow)
 
 function CA_Place_Down(iLetter, sSetTo)
 {
-    CA_Place_bAcross = false;
-    CA_Place_iRowActual = iLetter;
     GR_ForLetterSetAnswerTo(iLetter, sSetTo);
 }
 
 function CA_Place_Across(iRow, sSetTo)
 {
-    CA_Place_bAcross = true;
-    CA_Place_iRowActual = iRow;
     GR_ForRowSetAnswerTo(iRow, sSetTo)
 }
 
@@ -34,10 +26,11 @@ function CA_Place(iRow_CA)
         return;
     var sWordBeingPlaced = g_aAnswersPlayer[iRow_CA];
     var iWordBeingPlacedLength = sWordBeingPlaced.length;
-    var sWordBeingPlaced_Title = 'Placing : ' + sWordBeingPlaced;
+    sWordBeingPlaced.replace(' ', '-');
+    var sWordBeingPlaced_Title = 'Place : ' + sWordBeingPlaced;
     elem = document.getElementById("Place_WordBeingPlaced");
     elem.innerHTML = sWordBeingPlaced_Title;
-    var sAcrossinnerHTML = '<TABLE><TR>';
+    var sAcrossinnerHTML = '<TABLE>';
     for ( iR = 0; iR < g_iGridHeight; iR++)
     {
         var sGridAnswer = g_GR_aAcrossAnswers[iR];
@@ -49,10 +42,10 @@ function CA_Place(iRow_CA)
             var sAcrossChoice = iNumber.toString(); 
             var sAcrossChoiceRow = iR.toString();
             var sFunctionsToCall = 'CA_Place_Across(' + sAcrossChoiceRow + ', \'' + sWordBeingPlaced + '\');';
-            sAcrossinnerHTML += '<TD><BUTTON class="Place_SetBox" onclick="' + sFunctionsToCall + '">' + sAcrossChoice + ' Across</TD>'            
+            sAcrossinnerHTML += '<TR><TD><BUTTON class="Place_SetBox_Across" onclick="' + sFunctionsToCall + '">' + sAcrossChoice + ' Across</TD></TR>';
         }
     }
-    sAcrossinnerHTML += '</TR></TABLE>';
+    sAcrossinnerHTML += '</TABLE>';
     elem = document.getElementById("Place_Across_Row_Controls");
     elem.innerHTML = sAcrossinnerHTML;
 //
@@ -68,7 +61,7 @@ function CA_Place(iRow_CA)
             var sDownChoice = iNumber.toString(); 
             var sDownChoiceLetter = iL.toString();
             var sFunctionsToCall = 'CA_Place_Down(' + sDownChoiceLetter + ', \'' + sWordBeingPlaced + '\');';
-            sDowninnerHTML += '<TD><BUTTON class="Place_SetBox_Down" onclick="' + sFunctionsToCall +'">' + sDownChoice + ' D o w n</TD>';
+            sDowninnerHTML += '<TD><BUTTON class="Place_SetBox_Down" onclick="' + sFunctionsToCall +'">' + sDownChoice + '  D o w n</TD>';
         }
     }
     elem = document.getElementById("Place_Down_Row_Controls");
@@ -84,16 +77,19 @@ function CA_Place_Popup_Setup()
     sPopupWindow += '<span width="100%" class="Place_Popup_Text Place_BackgroundColor" Id="Place">';
     sPopupWindow += '<div class=Place_DivBorder>';     
     sPopupWindow += '<TABLE class="Place_TableBorder" width="100%">'
-    sPopupWindow += '      <TR class="Place_CloseBoxRow"><TD>'
-    sPopupWindow += '          <TABLE width="100%"><TR><TD width="95%" Id="Place_WordBeingPlaced" class="Place_CloseBoxRow">Place</TD><TD width="5%"><BUTTON Id="Place_CloseBox" class="Place_CloseBox" onclick="Place_Popup_Toggle();">Quit</TD></TR></TABLE>';
-    sPopupWindow += '      </TD></TR>'
+    sPopupWindow += '      <TR><TD colspan=2>';
+    sPopupWindow += '          <TABLE class="Place_TableBorder" width="100%">';
+    sPopupWindow += '             <TR>';
+    sPopupWindow += '               <TD width="95%" Id="Place_WordBeingPlaced" class="Place_Word">Place</TD>';
+    sPopupWindow += '               <TD width="5%"><BUTTON Id="Place_CloseBox" class="Place_CloseBox" onclick="Place_Popup_Toggle();">Quit</TD>';
+    sPopupWindow += '             </TR>';
+    sPopupWindow += '          </TABLE>';
+    sPopupWindow += '      </TD></TR>';
     sPopupWindow += '      <TR>'
-    sPopupWindow += '      <TD Id="Place_Across_Row_Controls">fixme</TD>'
+    sPopupWindow += '        <TD align=right Id="Place_Across_Row_Controls" class="Place_Across_Row_Controls">fixme</TD>'
+    sPopupWindow += '        <TD align=left Id="Place_Down_Row_Controls" class="Place_Down_Row_Controls">fixme</TD>'
     sPopupWindow += '      </TR>'
-    sPopupWindow += '      <TR>'
-    sPopupWindow += '      <TD Id="Place_Down_Row_Controls">fixme</TD>'
-    sPopupWindow += '      </TR>'
-    sPopupWindow += '       <TR><TD><DIV class="Place_Center" Id="Place_Hints"><textarea class="Place_Content_Common_Multiline Place_BackgroundColor" readonly disabled rows="2" cols="40" border=1px>some hints</textarea></DIV></TD></TR>'
+    sPopupWindow += '      <TR><TD colspan=2><DIV class="Place_Center" Id="Place_Hints"><textarea class="Place_Content_Common_Multiline Place_BackgroundColor" readonly disabled rows="2" cols="40" border=1px>some hints</textarea></DIV></TD></TR>'
     sPopupWindow += '</TABLE>'
     sPopupWindow += '</div>';
     sPopupWindow += '</span>';

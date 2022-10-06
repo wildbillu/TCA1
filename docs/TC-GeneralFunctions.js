@@ -12,6 +12,7 @@ function MakeInputNotReadOnly(sId)
     sInner = sInner.replace('readonly=""', '');
     sInner = sInner.replace('readonly', '');
     elem.innerHTML = sInner;
+    setline('NRO:' + sId);
 }
 
 function MakeInputReadOnlyForceValue(sId, sForceLetter)
@@ -27,6 +28,7 @@ function MakeInputReadOnlyForceValue(sId, sForceLetter)
         sInner = replaceAt(sInner, iValue+6, '"' + sForceLetter + '" ');
     sInner = sInner.replace(">", " readonly>");
     elem.innerHTML = sInner;
+    setline('RO:' + sId);
 }
 
 function setlineAdd(sAdd)
