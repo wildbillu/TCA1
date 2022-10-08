@@ -30,7 +30,7 @@ function TRB_Click_Direction()
 {
     if ( !Dropdown_CanOpen() )
         return false;
-    ProcessGR_ChangeDirection();
+    GR_ChangeDirection();
 }
 
 function TRB_Click_Settings()

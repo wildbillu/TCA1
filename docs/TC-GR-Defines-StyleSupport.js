@@ -70,7 +70,7 @@ function GR_SetColorsToClass_Active(sClassName)
             sResult += a[iS] + ' ';
         }
     }
-    sResult += ' GR_Color_Active';
+    sResult += 'GR_Color_Active';
     return sResult;
 }
 
@@ -87,7 +87,7 @@ function GR_SetColorsToClass_InActive(sClassName)
             sResult += a[iS] + ' ';
         }
     }
-    sResult += ' GR_Color_InActive';
+    sResult += 'GR_Color_InActive';
     return sResult;
 }
 

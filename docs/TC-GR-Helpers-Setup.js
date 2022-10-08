@@ -45,10 +45,10 @@ function GridRow_MakeInnerHTML(iRow)
         if ( cAnswer == g_cCharacterDenotingBlackSquare )
             sClassName = g_sGR_Class_BlackSquare;
         var sFunctionsToCall = ''; 
-        sFunctionsToCall += ' onMouseDown="return ProcessGR_onmousedown(' + iRow + ',' + iLetter + ');"'
-        sFunctionsToCall += ' onkeypress="return ProcessGR_onkeypress(event,' + iRow + ',' + iLetter + ');"';
-        sFunctionsToCall += ' onkeyup="return ProcessGR_onkeydown(event.key,' + iRow + ',' + iLetter + ');"';
-        sFunctionsToCall += ' onfocus="ProcessGR_onfocus(this);"';
+        sFunctionsToCall += ' onMouseDown="return GR_onmousedown(' + iRow + ',' + iLetter + ');"'
+        sFunctionsToCall += ' onkeypress="return GR_onkeypress(event,' + iRow + ',' + iLetter + ');"';
+        sFunctionsToCall += ' onkeyup="return GR_onkeydown(event.key,' + iRow + ',' + iLetter + ');"';
+        sFunctionsToCall += ' onfocus="GR_onfocus(this);"';
         var sTId = 'Id="TD_' + GR_MakeTag_Id(iRow, iLetter) + '"';
         var sInput = '<TD ' + sTId + ' class="GR_TD_border_collapse"><INPUT class="' + sClassName + '" type="text" ' + GR_MakeTag_HTMLId(iRow, iLetter) + ' value="' + sDisplayAnswer + '" maxlength="1" ' + sFunctionsToCall + ');" ' + sReadonly + '></TD>'
         sInnerHTML += sInput;

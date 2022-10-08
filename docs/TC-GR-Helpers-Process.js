@@ -1,6 +1,6 @@
 // TC-GridHelpers-Process.js
 var iCount=0;
-function ProcessGR_onkeypress(event, iRow, iLetter)
+function GR_onkeypress(event, iRow, iLetter)
 {
     var ekey = event.key;
     if ( ( ekey >= 'a' && ekey <= 'z' ) || ( ekey >= 'A' && ekey <= 'Z') || ekey == ' ')
@@ -14,14 +14,14 @@ function ProcessGR_onkeypress(event, iRow, iLetter)
     return false;
 }
 
-function ProcessGR_onkeydown(key, iRow, iLetter)
+function GR_onkeydown(key, iRow, iLetter)
 {
     var letters = /^[a-zA-Z ]$/;
     if ( key.match(letters) ) 
     {
         var sUpper = key.toUpperCase();
         GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(sUpper, iRow, iLetter);
-        ProcessGR_SetFocusToNext(iRow, iLetter);
+        GR_SetFocusToNext(iRow, iLetter);
         return true;
     }
 // if last key rejected is number, then we fixup things
@@ -38,28 +38,28 @@ function ProcessGR_onkeydown(key, iRow, iLetter)
     {
         if ( key.match('Up') )
         {
-            var sNext = ProcessGR_GoUpToNext(iRow, iLetter);
-            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            var sNext = GR_GoUpToNext(iRow, iLetter);
+            GR_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
             return true;
         }
         else if ( key.match('Down') )
         {
-            var sNext = ProcessGR_GoDownToNext(iRow, iLetter);
-            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            var sNext = GR_GoDownToNext(iRow, iLetter);
+            GR_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
             return true;
         }
         else if ( key.match('Right') )
         {
-            var sNext = ProcessGR_GoRightToNext(iRow, iLetter);
+            var sNext = GR_GoRightToNext(iRow, iLetter);
 // unless the current row is 0 we want to move the focus to the previous row with the same letter
-            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            GR_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
             return true;
         }
         else 
         { // must be left
-            var sNext = ProcessGR_GoLeftToNext(iRow, iLetter);
+            var sNext = GR_GoLeftToNext(iRow, iLetter);
 // unless the current row is 0 we want to move the focus to the previous row with the same letter
-            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            GR_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
             return true;
         }
     }
@@ -82,7 +82,7 @@ function GR_UpdateAnswersPlayer(cNew, iRow, iLetter)
     GR_ForRowLetter_UpdateStatusPlayer(cNew, iRow, iLetter)
 }
 
-function ProcessGR_ChangeDirection()
+function GR_ChangeDirection()
 {
     if ( g_GR_sFocus == '')
     {
@@ -95,7 +95,7 @@ function ProcessGR_ChangeDirection()
     }
     var iRow = GR_RowFromId(g_GR_sFocus);
     var iLetter = GR_LetterFromId(g_GR_sFocus);
-    ProcessGR_onmousedown(iRow, iLetter);
+    GR_onmousedown(iRow, iLetter);
     document.getElementById(g_GR_sFocus).focus()
     if ( g_sCAidWithFocus != '')
         document.getElementById(g_sCAidWithFocus).focus();
@@ -103,7 +103,7 @@ function ProcessGR_ChangeDirection()
         document.getElementById(g_GR_sFocus).focus();
 }
 
-function ProcessGR_onmousedown(iRow, iCharacter)
+function GR_onmousedown(iRow, iCharacter)
 {
     var sMouseDownLocation = GR_MakeTag_Id(iRow, iCharacter)
     if ( sMouseDownLocation == g_GR_sFocus )
@@ -125,7 +125,7 @@ function ProcessGR_onmousedown(iRow, iCharacter)
     return true;
 }
 
-function ProcessGR_FocusLostSetActiveToInActive()
+function GR_FocusLostSetActiveToInActive()
 {
     if ( g_GR_sFocus == '' )
     {
@@ -188,7 +188,9 @@ function GR_SetRowToInActive(iRow)
         if ( !GR_isThisSquareABlackSquare(sidInRow) )
         {
             var sClass = document.getElementById(sidInRow).className;
-            document.getElementById(sidInRow).className = GR_SetColorsToClass_InActive(sClass);
+            sClass = GR_SetColorsToClass_InActive(sClass);
+           
+            document.getElementById(sidInRow).className = sClass;
         }
     }
 }
@@ -219,7 +221,7 @@ function GR_SetColumnToActive(iCharacter, iRowWithFocus)
     }
 }
 
-function ProcessGR_onfocus(x)
+function GR_onfocus(x)
 {
     var sThisId = x.id;
     if ( g_sCAidWithFocus != '')        
@@ -261,7 +263,7 @@ function ProcessGR_onfocus(x)
 }
 
 
-function ProcessGR_GoUpToNext(iRow, iLetter)
+function GR_GoUpToNext(iRow, iLetter)
 {
     var iNewLetter = iLetter;
     var iNewRow = iRow - 1;
@@ -270,13 +272,13 @@ function ProcessGR_GoUpToNext(iRow, iLetter)
     var sNewId = GR_MakeTag_Id(iNewRow, iNewLetter);
     if ( GR_isThisSquareABlackSquare(sNewId) )
     {
-        return ProcessGR_GoUpToNext(iNewRow, iNewLetter);
+        return GR_GoUpToNext(iNewRow, iNewLetter);
     }
     var s = iNewRow.toString() + iNewLetter.toString();
     return s;
 }
 
-function ProcessGR_GoDownToNext(iRow, iLetter)
+function GR_GoDownToNext(iRow, iLetter)
 {
     var iNewLetter = iLetter;
     var iNewRow = iRow + 1;
@@ -287,13 +289,13 @@ function ProcessGR_GoDownToNext(iRow, iLetter)
     var sNewId = GR_MakeTag_Id(iNewRow, iNewLetter);
     if ( GR_isThisSquareABlackSquare(sNewId) )
     {
-        return ProcessGR_GoDownToNext(iNewRow, iNewLetter);
+        return GR_GoDownToNext(iNewRow, iNewLetter);
     }
     var s = iNewRow.toString() + iNewLetter.toString();
     return s;
 }
 
-function ProcessGR_GoLeftToNext(iRow, iLetter)
+function GR_GoLeftToNext(iRow, iLetter)
 {
     var iNewRow = iRow;
     var iNewLetter = iLetter - 1;
@@ -302,13 +304,13 @@ function ProcessGR_GoLeftToNext(iRow, iLetter)
     var sNewId = GR_MakeTag_Id(iNewRow, iNewLetter);
     if ( GR_isThisSquareABlackSquare(sNewId) )
     {
-        return ProcessGR_GoLeftToNext(iNewRow, iNewLetter);
+        return GR_GoLeftToNext(iNewRow, iNewLetter);
     }
     var s = iNewRow.toString() + iNewLetter.toString();
     return s;
 }
 
-function ProcessGR_GoRightToNext(iRow, iLetter)
+function GR_GoRightToNext(iRow, iLetter)
 {
     var iNewRow = iRow;
     var iNewLetter = iLetter + 1;
@@ -317,14 +319,15 @@ function ProcessGR_GoRightToNext(iRow, iLetter)
     var sNewId = GR_MakeTag_Id(iNewRow, iNewLetter);
     if ( GR_isThisSquareABlackSquare(sNewId) )
     {
-        return ProcessGR_GoRightToNext(iNewRow, iNewLetter);
+        return GR_GoRightToNext(iNewRow, iNewLetter);
     }
     var s = iNewRow.toString() + iNewLetter.toString();
     return s;
 }
 
-function ProcessGR_MoveFocus(iRow, iLetter, iNewRow, iNewLetter)
+function GR_MoveFocus(iNewRow, iNewLetter)
 {
+
     var sNextBoxID = GR_MakeTag_Id(iNewRow, iNewLetter);
 	var sNextLetter = document.getElementById(sNextBoxID).value;
 	document.getElementById(sNextBoxID).focus();
@@ -332,7 +335,7 @@ function ProcessGR_MoveFocus(iRow, iLetter, iNewRow, iNewLetter)
 		document.getElementById(sNextBoxID).setSelectionRange(0,1);
 }
 
-function ProcessGR_SetFocusToNext(iRow, iLetter)
+function GR_SetFocusToNext(iRow, iLetter)
 {
     var iNewRow = iRow;
     var iNewLetter = iLetter;
@@ -379,8 +382,8 @@ function ProcessGR_SetFocusToNext(iRow, iLetter)
     var sNewId = GR_MakeTag_Id(iNewRow, iNewLetter);
     if ( GR_isThisSquareABlackSquare(sNewId) )
     {
-        ProcessGR_SetFocusToNext(iNewRow, iNewLetter);
+        GR_SetFocusToNext(iNewRow, iNewLetter);
         return;
     }
-    ProcessGR_MoveFocus(iRow, iLetter, iNewRow, iNewLetter)
+    GR_MoveFocus(iNewRow, iNewLetter)
 }

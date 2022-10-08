@@ -99,6 +99,6 @@ function CA_SetColorsToClass_Focus(sClassName)
             sResult += sThisClass + ' ';
         }
     }
-    sResult += ' CA_Color_Focus';
+    sResult += 'CA_Color_Focus';
     return sResult;
 }

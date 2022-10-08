@@ -91,7 +91,7 @@ function ProcessCA_onfocus(x)
     var sThisId = x.id;
     if ( g_GR_sFocus != '')        
     {
-        ProcessGR_FocusLostSetActiveToInActive();
+        GR_FocusLostSetActiveToInActive();
     }
     if ( sThisId == g_sCAidWithFocus )
         return;

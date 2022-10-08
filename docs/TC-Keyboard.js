@@ -66,7 +66,7 @@ function GR_HandleKeyboardPress(keypressed)
     iLetter = GR_LetterFromId(g_GR_sFocus);
     if ( IsInputReadOnly(GR_MakeTag_TD(iRow, iLetter)) )
     {
-        ProcessGR_SetFocusToNext(iRow, iLetter);
+        GR_SetFocusToNext(iRow, iLetter);
         return;
     }
     var sToSet = keypressed;
@@ -74,7 +74,7 @@ function GR_HandleKeyboardPress(keypressed)
     if ( keypressed == sCC )
         sToSet = ' ';
     document.getElementById(g_GR_sFocus).value = sToSet;
-    ProcessGR_onkeydown(keypressed, iRow, iLetter);
+    GR_onkeydown(keypressed, iRow, iLetter);
 }
 
 function CA_HandleKeyboardPress(keypressed)
