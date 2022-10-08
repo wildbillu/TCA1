@@ -69,21 +69,22 @@ function GR_ForRowLetterShowCheckSquare(iRow, iC, sToDo)
 {
     if ( !GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iC) )
     {
-        var cAnswer         = g_sGridAnswers.charAt(iRow*g_iGridWidth+iC);
-        var cAnswerPlayer   = g_sGridAnswersPlayer. charAt(iRow*g_iGridWidth+iC);
+        var index = iRow*g_iGridWidth+iC;
+        var cAnswer   = g_sGridAnswers.charAt(index);
+        var cPlayer   = g_sGridAnswersPlayer.charAt(index);
         var bCorrect = true;
-        if ( cAnswer != cAnswerPlayer )
+        if ( cAnswer != cPlayer )
             bCorrect = false;
         if ( sToDo == 'Show')
         {
-            if ( cAnswerPlayer == '' || cAnswerPlayer == ' ' || cAnswerPlayer == '-' )
+            if ( IfCharNotSet(cPlayer) )
                 bCorrect = true;                
             // now correct the value in the 'button' and in the player answer
             var sButton = GR_MakeTag_Id(iRow, iC)
             document.getElementById(sButton).value = cAnswer;
             document.getElementById(sButton).setSelectionRange(0,1);
             GR_UpdateAnswersPlayer(cAnswer, iRow, iC);
-        }                    
+        }
         // now deal with the status
         if ( bCorrect )    
         {
@@ -99,7 +100,7 @@ function GR_ForRowLetterShowCheckSquare(iRow, iC, sToDo)
             }
             else
             {
-                if ( cAnswerPlayer != '' && cAnswerPlayer != ' ' && cAnswerPlayer != '-' )
+                if ( cPlayer != '' && cPlayer != ' ' && cPlayer != '-' )
                 {
                     GR_ForRowLetter_UpdateStatusPlayer(g_sCA_CodeMeaning_Incorrect, iRow, iC)
                     GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Incorrect, iRow, iC)
@@ -107,7 +108,7 @@ function GR_ForRowLetterShowCheckSquare(iRow, iC, sToDo)
             }
         }
     }
-    GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iC, cAnswer);
+    GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iC, cPlayer);
 }
 
 function GR_ShowCheckSquare(sToDo)
@@ -130,11 +131,12 @@ function GR_ForLetterSetAnswerTo(iLetter, sForceAnswer)
         if ( !GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
         {
             var cForceCharacter = sForceAnswer.charAt(iForce);
-            if ( cForceCharacter != '' && cForceCharacter !=' ' && cForceCharacter != g_sCharMeaningNotSet )
+            if ( IfCharNotSet(cForceCharacter) )
+//            if ( cForceCharacter != '' && cForceCharacter !=' ' && cForceCharacter != g_sCharMeaningNotSet )
             {
-                sGridAnswerRow = g_aGridAnswersPlayer[iRow];
-                sGridAnswerRow = replaceAt(sGridAnswerRow, iLetter, cForceCharacter )
-                g_aGridAnswersPlayer[iRow] = sGridAnswerRow;
+                var sGridAnswerPlayerRow = g_aGridAnswersPlayer[iRow];
+                sGridAnswerPlayerRow = replaceAt(sGridAnswerPlayerRow, iLetter, cForceCharacter )
+                g_aGridAnswersPlayer[iRow] = sGridAnswerPlayerRow;
             }
             iForce++;
         }
@@ -145,6 +147,10 @@ function GR_ForLetterSetAnswerTo(iLetter, sForceAnswer)
         if ( !GR_ForRowAndLetter_isThisSquareABlackSquare(iRR, iLetter) )
         {
             GR_ForRowLetterNotABlackSquare_SetGridAnswer(iRR, iLetter);
+            if ( g_bSettings_CAGR_Answers_CheckRow || g_bSettings_CAGR_Answers_ShowCorrectLetters )
+            { // if correct we mus mark it correct and set readonly
+                GR_ForRowLetterShowCheckSquare(iRR, iLetter, 'check');
+            }
         }
     }
     return true;
@@ -175,6 +181,11 @@ function GR_ForRowSetAnswerTo(iRow, sForceAnswer)
         if ( !GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iC) )
         {
             GR_ForRowLetterNotABlackSquare_SetGridAnswer(iRow, iC)
+            if ( g_bSettings_CAGR_Answers_CheckRow || g_bSettings_CAGR_Answers_ShowCorrectLetters )
+            { // if correct we mus mark it correct and set readonly
+                GR_ForRowLetterShowCheckSquare(iRow, iC, 'check');
+            }
+
         }
     }
     return true;
@@ -190,7 +201,7 @@ function GR_ForRowLetterNotABlackSquare_SetGridAnswer(iRow, iC)
         document.getElementById(sButton).value = cAnswerPlayer;
         document.getElementById(sButton).setSelectionRange(0,1);
     }
-    GR_UpdateAnswersPlayer(cAnswer, iRow, iC);
+    GR_UpdateAnswersPlayer(cAnswerPlayer, iRow, iC);
     // now deal with the status
     // if we are checking things we check them
     // if not we just set the status to normal
@@ -267,13 +278,14 @@ function GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter)
 {
     return GR_isThisSquareABlackSquare(GR_MakeTag_Id(iRow, iLetter))
 }
+
 function GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cForceLetter)
 {
     var cStatusFinal = GR_ForRowLetter_GetStatusPlayer(iRow, iLetter);
     if ( cStatusFinal == g_sGR_CodeMeaning_Corrected || cStatusFinal == g_sGR_CodeMeaning_Correct )
     {
         var sIdTD = GR_MakeTag_TD(iRow, iLetter);
-        MakeInputReadOnlyForceValue(sIdTD, cForceLetter);
+        MakeInputReadOnlyForceValueIfNotAlready(sIdTD, cForceLetter);
     }
 }        
 
@@ -291,18 +303,12 @@ function GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(cAnswerPlayer, iRo
     if ( cAnswerPlayer == cAnswer )
         cStatus = g_sGR_CodeMeaning_Correct;
     GR_ForRowLetter_UpdateStatusPlayer(cStatus, iRow, iLetter);
-//var sRow = g_aGridStatusPlayer[iRow];
-//var sNewRow = replaceAt(sRow, iLetter, cStatus);
-//g_aGridStatusPlayer[iRow] = sNewRow;
-//GR_SetStatusPlayer();
-
     if ( g_bSettings_CAGR_Answers_ShowCorrectLetters )
     {
         GR_ForRowLetter_ForStatusPlayer(cStatus, iRow, iLetter);
-//        elem = document.getElementById(GR_MakeTag_Id(iRow, iLetter));
-//        sClassName = elem.className;
-//        sClassName = GR_SetStatusToClass_FromCode(cStatus, sClassName)
-//        elem.className = sClassName;
+        GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cAnswerPlayer)
+        Status_Check();
+        StoreCookie_Puzzle()
     }
     if ( g_bSettings_CAGR_Answers_CheckRow )
     {
@@ -312,13 +318,14 @@ function GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(cAnswerPlayer, iRo
             var sAnswersPlayer = g_aGridAnswersPlayer[iRow];
             if ( sAnswersPlayer == sAnswers )
             {
-                GR_ForRow_SetClassToStatusCorrect(iRow);
+                GR_ForRow_SetClassToStatusCorrect(iRow, sAnswers);
             }
         }
         else
         {
 // need to get the answers for a column
             var bMatch = true;
+            var sAnswer = '';
             for ( var iR = 0; iR < g_iGridHeight; iR++ )
             {
                 if ( ! GR_isThisSquareABlackSquare(GR_MakeTag_Id(iR, iLetter)) )
@@ -327,17 +334,21 @@ function GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(cAnswerPlayer, iRo
                     sAP= GR_ForRowLetter_GetAnswerPlayer(iR, iLetter);
                     if ( sA != sAP )
                         bMatch = false;
+                    sAnswer += sAP;
+                }
+                else
+                {
+                    sAnswer += ' ';
                 }
             }
             if ( bMatch )
             {
-                GR_ForLetter_SetClassToStatusCorrect(iLetter);
+                GR_ForLetter_SetClassToStatusCorrect(iLetter, sAnswer);
             }
         }
+        Status_Check();
+        StoreCookie_Puzzle()
     }
-    GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cAnswerPlayer)
-    Status_Check();
-    StoreCookie_Puzzle()
 }
 
 function GR_ForRowLetter_UpdateAnswersPlayer(cAnswer, iRow, iLetter)
@@ -357,24 +368,26 @@ function GR_ForRowLetter_UpdateStatusPlayer(cAnswer, iRow, iLetter)
     GR_SetStatusPlayer();
 }
 
-function GR_ForRow_SetClassToStatusCorrect(iRow)
+function GR_ForRow_SetClassToStatusCorrect(iRow, sAnswers)
 {
+
     for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++)
     {
-// need to ignore black squares
-if ( ! GR_isThisSquareABlackSquare(GR_MakeTag_Id(iRow, iLetter)) )
-{
-    var cStatus = g_sCA_CodeMeaning_Correct;
-    GR_ForRowLetter_UpdateStatusPlayer(cStatus, iRow, iLetter);
-    elem = document.getElementById(GR_MakeTag_Id(iRow, iLetter));
-    sClassName = elem.className;
-    sClassName = GR_SetStatusToClass_FromCode(cStatus, sClassName)
-    elem.className = sClassName;
-}
+        if ( ! GR_isThisSquareABlackSquare(GR_MakeTag_Id(iRow, iLetter)) )
+        {
+            var cStatus = g_sCA_CodeMeaning_Correct;
+            GR_ForRowLetter_UpdateStatusPlayer(cStatus, iRow, iLetter);
+            elem = document.getElementById(GR_MakeTag_Id(iRow, iLetter));
+            sClassName = elem.className;
+            sClassName = GR_SetStatusToClass_FromCode(cStatus, sClassName)
+            elem.className = sClassName;
+            var cChar = sAnswers.charAt(iLetter);
+            GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cChar);
+        }
     }
 }
 
-function GR_ForLetter_SetClassToStatusCorrect(iLetter)
+function GR_ForLetter_SetClassToStatusCorrect(iLetter, sAnswer)
 {
     for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
     {
@@ -386,6 +399,8 @@ function GR_ForLetter_SetClassToStatusCorrect(iLetter)
             sClassName = elem.className;
             sClassName = GR_SetStatusToClass_FromCode(cStatus, sClassName)
             elem.className = sClassName;
+            var cChar = sAnswer.charAt(iRow);
+            GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cChar);
         }
     }
 }

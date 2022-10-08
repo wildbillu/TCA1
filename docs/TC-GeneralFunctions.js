@@ -1,6 +1,23 @@
 // TC-GeneralFunctions
 // 
 var sToDisplay = '';
+function IfCharNotSet(cForceCharacter) 
+{
+    if ( cForceCharacter != '' && cForceCharacter !=' ' && cForceCharacter != g_sCharMeaningNotSet )
+        return true;
+    return false;
+}
+
+
+function IsInputReadOnly(sId)
+{
+    var elem = document.getElementById(sId);
+    var sInner = elem.innerHTML;
+    var iReadonly = sInner.indexOf('readonly')
+    if ( iReadonly == -1 )
+        return false;
+    return true;
+}
 
 function MakeInputNotReadOnly(sId)
 {
@@ -12,10 +29,9 @@ function MakeInputNotReadOnly(sId)
     sInner = sInner.replace('readonly=""', '');
     sInner = sInner.replace('readonly', '');
     elem.innerHTML = sInner;
-    setline('NRO:' + sId);
 }
 
-function MakeInputReadOnlyForceValue(sId, sForceLetter)
+function MakeInputReadOnlyForceValueIfNotAlready(sId, sForceLetter)
 {
     var elem = document.getElementById(sId);
     var sInner = elem.innerHTML;
@@ -28,7 +44,6 @@ function MakeInputReadOnlyForceValue(sId, sForceLetter)
         sInner = replaceAt(sInner, iValue+6, '"' + sForceLetter + '" ');
     sInner = sInner.replace(">", " readonly>");
     elem.innerHTML = sInner;
-    setline('RO:' + sId);
 }
 
 function setlineAdd(sAdd)

@@ -13,11 +13,13 @@ function CA_PlaceButton_Setup(iRow)
 function CA_Place_Down(iLetter, sSetTo)
 {
     GR_ForLetterSetAnswerTo(iLetter, sSetTo);
+    Place_Popup_Toggle();
 }
 
 function CA_Place_Across(iRow, sSetTo)
 {
-    GR_ForRowSetAnswerTo(iRow, sSetTo)
+    GR_ForRowSetAnswerTo(iRow, sSetTo);
+    Place_Popup_Toggle();
 }
 
 function CA_Place(iRow_CA)
@@ -27,6 +29,8 @@ function CA_Place(iRow_CA)
     var sWordBeingPlaced = g_aAnswersPlayer[iRow_CA];
     var iWordBeingPlacedLength = sWordBeingPlaced.length;
     sWordBeingPlaced.replace(' ', '-');
+    sWordBeingPlaced.replace('', '-');
+    sWordBeingPlaced.replace('.', '-');
     var sWordBeingPlaced_Title = 'Place : ' + sWordBeingPlaced;
     elem = document.getElementById("Place_WordBeingPlaced");
     elem.innerHTML = sWordBeingPlaced_Title;

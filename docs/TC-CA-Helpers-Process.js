@@ -2,13 +2,16 @@
 // 
 var g_CA_sLastCharacterRejected = '';
 
-function CA_SetToInActive(iRow)
+function CA_SetToInActive(iRow, bSetDualRow)
 {
-    if ( iRow == 0 || iRow == 1)
+    if ( iRow == 0 || iRow == 1) 
     {
-        document.getElementById('CA_01_R').className = CA_SetColorsToClass_InActive(document.getElementById('CA_01_R').className);
-        document.getElementById('CA01C').className = CA_SetColorsToClass_InActive(document.getElementById('CA01C').className);
-        document.getElementById('CA01CI').className = CA_SetColorsToClass_InActive(document.getElementById('CA01CI').className);
+        if ( bSetDualRow )
+        {
+            document.getElementById('CA_01_R').className = CA_SetColorsToClass_InActive(document.getElementById('CA_01_R').className);
+            document.getElementById('CA01C').className = CA_SetColorsToClass_InActive(document.getElementById('CA01C').className);
+            document.getElementById('CA01CI').className = CA_SetColorsToClass_InActive(document.getElementById('CA01CI').className);
+            }
     }
     else
     {
@@ -33,13 +36,13 @@ function ProcessCA_FocusLostSetActiveToInActive()
         return;
     }
     var iActiveRow        = CA_RowFromId(g_sCAidWithFocus);
-    CA_SetToInActive(iActiveRow)
+    CA_SetToInActive(iActiveRow, true);
     var sRowElement = 'CA_' + iRow + '_R';
     document.getElementById(sRowElement).className = CA_SetColorsToClass_InActive(document.getElementById(sRowElement).className);
     g_sCAidWithFocus = '';
 }
 
-function ProcessCA_SetActive(iRow, iActiveCharacter)
+function CA_SetToActive(iRow, iActiveCharacter)
 {
     if ( iRow == 0 || iRow == 1)
     {
@@ -95,13 +98,18 @@ function ProcessCA_onfocus(x)
     var iThisRow        = CA_RowFromId(sThisId);
     var iThisCharacter  = CA_LetterFromId(sThisId);
        // deal with changes to the new focus
-    ProcessCA_SetActive(iThisRow, iThisCharacter);
-    if ( g_sCAidWithFocus != '' )
+       CA_SetToActive(iThisRow, iThisCharacter);
+       if ( g_sCAidWithFocus != '' )
     {
         var iOldRow = CA_RowFromId(g_sCAidWithFocus);
         if ( iThisRow != iOldRow )
         { // need to change the old row to inactive
-            CA_SetToInActive(iOldRow);        
+            if ( ( iThisRow == 0 && iOldRow == 1 ) || ( iThisRow == 1 && iOldRow == 0 ) )
+            {
+                CA_SetToInActive(iOldRow, false);
+            }
+            else
+            CA_SetToInActive(iOldRow, true);
         }
     }
     g_sCAidWithFocus = sThisId;

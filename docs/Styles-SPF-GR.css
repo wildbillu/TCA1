@@ -43,6 +43,7 @@
 
 .GR_Base 
 {
+    padding-top: 10px;
     border: 0px;
     border-collapse: collapse;    
     outline: none;    
@@ -57,24 +58,24 @@
 
 .GR_Color_InActive
 {
-    background-color: antiquewhite;
-    caret-color: antiquewhite;    
+    background-color: white;
+    caret-color: transparent;
 }
 
 .GR_Color_Focus
 {
-    background-color: yellow;
-    caret-color: yellow;
+    background-color: #FFEE60;
+    caret-color: transparent;
 }
 
 .GR_Color_Active
 {
-    background-color: aqua;
-    caret-color: aqua;
+    background-color: #C0EFFF;
+    caret-color: transparent;
 }
 
 .GR_Color_BlackSquare
 {
     background-color: black;
-    caret-color: black;    
+    caret-color: transparent;
 }

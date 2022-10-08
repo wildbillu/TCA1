@@ -64,6 +64,11 @@ function GR_HandleKeyboardPress(keypressed)
         return;
     iRow = GR_RowFromId(g_GR_sFocus);
     iLetter = GR_LetterFromId(g_GR_sFocus);
+    if ( IsInputReadOnly(GR_MakeTag_TD(iRow, iLetter)) )
+    {
+        ProcessGR_SetFocusToNext(iRow, iLetter);
+        return;
+    }
     var sToSet = keypressed;
     var sCC = String.fromCharCode(8);
     if ( keypressed == sCC )
@@ -78,6 +83,12 @@ function CA_HandleKeyboardPress(keypressed)
         return;
     iRow = CA_RowFromId(g_sCAidWithFocus);
     iLetter = CA_LetterFromId(g_sCAidWithFocus);
+    var bIsReadOnly = IsInputReadOnly(CA_MakeTag_TD(iRow, iLetter))
+    if ( bIsReadOnly )
+    {
+        ProcessCA_SetFocusToNext(iRow, iLetter);
+        return;
+    }
     var sToSet = keypressed;
     var sCC = String.fromCharCode(8);
     if ( keypressed == sCC )

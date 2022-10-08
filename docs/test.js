@@ -16,7 +16,7 @@ var sAnswers                    = 'SURF|TURF|OFF|TOO|STU|TREF|OREO|UFO';
 var sAnswersPlayer             = '----|----|---|---|---|----|----|---';
 var sStatusPlayer              = 'OOOO|OOOO|OOO|OOO|OOO|OOOO|OOOO|OOO';
 
-var sPuzzleTitle    = "Dinner Anyone?e";
+var sPuzzleTitle    = "Dinner Anyone?n";
 var sSketchiToonsClueItself = 'Rhyming Restaurant Choice';
 var sSketchiToonsClueIntro = 'SketchiToons Clue to Dual Answers';
 var sSuccessWindowFilename = 'images/Puzzle-SurfAndTurf-Solved.jpg';

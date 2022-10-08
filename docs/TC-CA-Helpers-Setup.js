@@ -23,7 +23,7 @@ function CA_SetRow(iRow)
         var sPlayerAnswer = g_aAnswersPlayer[iRow];
         var cPlayerAnswer = sPlayerAnswer.charAt(iAE);
         var sDisplayAnswer = ' ';
-        if ( cPlayerAnswer != g_sCharMeaningNotSet )
+        if ( IfCharNotSet(cPlayerAnswer) )
             sDisplayAnswer = cPlayerAnswer;
         var sFunctionsToCall = ''; 
         sFunctionsToCall += ' onkeypress="return ProcessCA_onkeypress(event);"';
@@ -91,6 +91,7 @@ function TableForDualAnswer()
                 sReadonly = ' readonly '
             }
             var sLine =  '<TD ' + sTDId + ' class="CA_TD_border_collapse"><INPUT class="' + sClass + '" type="text" ' + aRowId[iAE] + ' value="' + sDisplayAnswer + '" maxlength="1" ' + sFunctionsToCall + sReadonly + '></TD>';
+//            var sLine =  '<TD ' + sTDId + ' class="CA_TD_border_collapse"><INPUT class="' + sClass + '" type="text" ' + aRowId[iAE] + ' value="' + sDisplayAnswer + '" maxlength="1" ' + sFunctionsToCall + sReadonly + '><img class="CA_Button_Image" src="images/Button_RedSlash.png" width="22" height="22"></TD>';
             sInnerHTML += sLine;
         }
         if ( iRow == 0)

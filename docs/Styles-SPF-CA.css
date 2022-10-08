@@ -1,5 +1,22 @@
 /* Styles-SPF-CA.css */
 
+.CA_Status_Incorrect
+{
+    z-index: 5;
+    color: black;
+    background-size: 22px;
+    background-repeat: no-repeat;
+    background-image: url("images/Button_RedSlash.png");
+}
+
+.CA_Button_Image
+{
+    position: relative;
+    left: 0px;
+    top: -22px;
+    z-index: 3;
+}
+
 .CA_TD_border_collapse
 {
     border: 1px solid black;
@@ -22,6 +39,7 @@
 
 .CA_Base
 {
+    padding-top: 6px;
     outline:none;
     border: 0px;
     text-transform: Uppercase;
@@ -29,7 +47,7 @@
     font-size: 16px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    width: 20px;
+    width: 24px;
     outline: none;
     caret-color: transparent;
 }
@@ -37,7 +55,7 @@
 .CA_Status_Normal
 {
     color: black;
-    background-size: 20px;
+    background-size: 24px;
     background-image: url("images/Button_Empty.png");
     background-position: right bottom, left top;
     background-repeat: no-repeat, repeat;
@@ -46,41 +64,43 @@
 
 .CA_Status_Incorrect
 {
+    z-index: 5;
     color: black;
-    background-size: 20px;
+    background-size: 24px;
+    background-repeat: no-repeat;
     background-image: url("images/Button_RedX.png");
 }
 
 .CA_Status_Corrected
 {
     color:blue;
-    background-size: 20px;
+    background-size: 24px;
+    background-repeat: no-repeat;
     background-image: url("images/Button_OrangeCorner.png");
 }
 
 .CA_Status_Correct
 {
     color:blue;
-    background-size: 20px;
+    background-size: 24px;
+    background-repeat: no-repeat;
     background-image: url("images/Button_Empty.png");
 }
 
 .CA_Color_InActive
 {
-    background-color: antiquewhite;
+    background-color: white;
     caret-color: transparent;
 }
 
 .CA_Color_Focus
 {
-    background-color: yellow;
+    background-color:#FFEE60;
     caret-color: transparent;
 }
 
 .CA_Color_Active
 {
-    background-color: aqua;
+    background-color: #C0EFFF;
     caret-color: transparent;
 }
-
-

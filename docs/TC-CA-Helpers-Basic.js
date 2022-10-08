@@ -7,7 +7,7 @@ function CA_ClearPuzzle()
         for ( iLetter = 0; iLetter < g_aAnswers[iRow].length; iLetter++ )
         {
             CA_ForRowLetterClearSquare(iRow, iLetter); 
-            CA_SetAnswersPlayer()
+            CA_SetAnswersPlayer();
         }
     }
     return true;        
@@ -126,13 +126,19 @@ function CA_UpdateAllOnKeyDown(cAnswerPlayer, iRow, iLetter)
     { // since a letter was typed we no longer know it is incorrect so set back to Normal
         cStatus = g_sCA_CodeMeaning_Normal;
         CA_ForRowLetter_ReplaceAnswerStatusPlayer(cStatus, iRow, iLetter);
-        CA_ForRowLetter_UpdateClassForStatusPlayer(cStatus, iRow, iLetter)
+        CA_ForRowLetter_UpdateClassForStatusPlayer(cStatus, iRow, iLetter);
+        CA_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cAnswerPlayer);
+        StoreCookie_Puzzle();
+        Status_Check();    
     }
     if ( g_bSettings_CAGR_Answers_ShowCorrectLetters && cAnswerPlayer == cAnswer )
     {
         cStatus = g_sCA_CodeMeaning_Correct;
         CA_ForRowLetter_ReplaceAnswerStatusPlayer(cStatus, iRow, iLetter);
         CA_ForRowLetter_UpdateClassForStatusPlayer(cStatus, iRow, iLetter)
+        CA_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cAnswerPlayer);
+        StoreCookie_Puzzle();
+        Status_Check();    
     }
     if ( g_bSettings_CAGR_Answers_CheckRow )
     { // if match then we want to set status of entire row
@@ -142,10 +148,9 @@ function CA_UpdateAllOnKeyDown(cAnswerPlayer, iRow, iLetter)
         { 
             CA_ForRow_SetClassToStatusCorrect(iRow);
         }
+        StoreCookie_Puzzle();
+        Status_Check();    
     }
-    CA_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cAnswerPlayer);
-    StoreCookie_Puzzle();
-    Status_Check();    
 }
 
 function CA_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cForceLetter)
@@ -154,7 +159,7 @@ function CA_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cForceLetter)
     if ( cStatusFinal == g_sCA_CodeMeaning_Corrected || cStatusFinal == g_sCA_CodeMeaning_Correct )
     {
         var sIdTD = CA_MakeTag_TD(iRow, iLetter);
-        MakeInputReadOnlyForceValue(sIdTD, cForceLetter);
+        MakeInputReadOnlyForceValueIfNotAlready(sIdTD, cForceLetter);
     }
 }        
 
@@ -168,14 +173,21 @@ function CA_ForRowLetter_UpdateAnswersPlayer(cAnswer, iRow, iLetter)
 
 function CA_ForRow_SetClassToStatusCorrect(iRow)
 {
-    for ( var iLetter = 0; iLetter < g_aAnswers[iRow].length; iLetter++)
+// called when we know the answer is correct
+    var sAnswer = g_aAnswers[iRow];
+    var iLength = sAnswer.length;
+    for ( var iLetter = 0; iLetter < iLength; iLetter++)
     {
         var cStatus = g_sCA_CodeMeaning_Correct;
         CA_ForRowLetter_ReplaceAnswerStatusPlayer(cStatus, iRow, iLetter);
-        elem = document.getElementById(CA_MakeTag_Id(iRow, iLetter));
+        var sId = CA_MakeTag_Id(iRow, iLetter)
+        elem = document.getElementById(sId);
         sClassName = elem.className;
         sClassName = CA_SetStatusToClass_FromCode(cStatus, sClassName)
         elem.className = sClassName;
+        var sTD = CA_MakeTag_TD(iRow, iLetter);
+        var cThis = sAnswer.charAt(iLetter)
+        MakeInputReadOnlyForceValueIfNotAlready(sTD, cThis);
     }
 }
 

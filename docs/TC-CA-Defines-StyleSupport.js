@@ -65,7 +65,7 @@ function CA_SetColorsToClass_Active(sClassName)
             sResult += a[iS] + ' ';
         }
     }
-    sResult += ' CA_Color_Active';
+    sResult += 'CA_Color_Active';
     return sResult;
 }
 
@@ -82,7 +82,7 @@ function CA_SetColorsToClass_InActive(sClassName)
             sResult += a[iS] + ' ';
         }
     }
-    sResult += ' CA_Color_InActive';
+    sResult += 'CA_Color_InActive';
     return sResult;
 }
 

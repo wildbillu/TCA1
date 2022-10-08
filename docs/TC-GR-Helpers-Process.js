@@ -1,4 +1,77 @@
 // TC-GridHelpers-Process.js
+var iCount=0;
+function ProcessGR_onkeypress(event, iRow, iLetter)
+{
+    var ekey = event.key;
+    if ( ( ekey >= 'a' && ekey <= 'z' ) || ( ekey >= 'A' && ekey <= 'Z') || ekey == ' ')
+    {
+        return true; // so character will be processed
+    }
+    g_GR_sLastCharacterRejected = ekey;
+    if ( event.code == 8 || event.code == 46 )
+        return false;
+    setline('KPNotHandled:' + ekey + '-Code:' + event.code);
+    return false;
+}
+
+function ProcessGR_onkeydown(key, iRow, iLetter)
+{
+    var letters = /^[a-zA-Z ]$/;
+    if ( key.match(letters) ) 
+    {
+        var sUpper = key.toUpperCase();
+        GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(sUpper, iRow, iLetter);
+        ProcessGR_SetFocusToNext(iRow, iLetter);
+        return true;
+    }
+// if last key rejected is number, then we fixup things
+    if ( g_GR_sLastCharacterRejected >= '0' && g_GR_sLastCharacterRejected <= '9' )
+    {
+        g_CA_sLastCharacterRejected = ' ';
+        var sFixThisBox = GR_MakeTag_Id(iRow, iLetter);
+        document.getElementById(sFixThisBox).focus();
+        document.getElementById(sFixThisBox).setSelectionRange(0,1);
+        return false;
+        }
+    // trap the arrow keys
+    if ( key.startsWith('Arrow') )
+    {
+        if ( key.match('Up') )
+        {
+            var sNext = ProcessGR_GoUpToNext(iRow, iLetter);
+            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            return true;
+        }
+        else if ( key.match('Down') )
+        {
+            var sNext = ProcessGR_GoDownToNext(iRow, iLetter);
+            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            return true;
+        }
+        else if ( key.match('Right') )
+        {
+            var sNext = ProcessGR_GoRightToNext(iRow, iLetter);
+// unless the current row is 0 we want to move the focus to the previous row with the same letter
+            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            return true;
+        }
+        else 
+        { // must be left
+            var sNext = ProcessGR_GoLeftToNext(iRow, iLetter);
+// unless the current row is 0 we want to move the focus to the previous row with the same letter
+            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            return true;
+        }
+    }
+    else
+    {
+        setline('keydown:' + key + 'notprocessed');
+    }
+    var sFixThisBox = GR_MakeTag_Id(iRow, iLetter);
+    document.getElementById(sFixThisBox).focus();
+    document.getElementById(sFixThisBox).setSelectionRange(0,1);
+    return false;
+}
 
 function GR_UpdateAnswersPlayer(cNew, iRow, iLetter)
 {
@@ -27,7 +100,7 @@ function ProcessGR_ChangeDirection()
     if ( g_sCAidWithFocus != '')
         document.getElementById(g_sCAidWithFocus).focus();
     if ( g_GR_sFocus != '')
-        document.getElementById().focus();
+        document.getElementById(g_GR_sFocus).focus();
 }
 
 function ProcessGR_onmousedown(iRow, iCharacter)
@@ -67,20 +140,6 @@ function ProcessGR_FocusLostSetActiveToInActive()
         GR_SetColumnToInActive(iCharacter);
     g_GR_sFocus = '';
 }
-
-function ProcessGR_onkeypress(event)
-{
-    var ekey = event.key;
-    if ( ( ekey >= 'a' && ekey <= 'z' ) || ( ekey >= 'A' && ekey <= 'Z') || ekey == ' ')
-        return true; // so character will be processed
-    g_GR_sLastCharacterRejected = ekey;
-    if ( event.code == 8 || event.code == 46 )
-        return false;
-    setline('KPNotHandled:' + ekey + '-Code:' + event.code);
-    return false;
-}
-
-
 
 function GR_SetRowToActive(iRow, iCharacterWithFocus)
 {
@@ -201,64 +260,6 @@ function ProcessGR_onfocus(x)
     return true;
 }
 
-function ProcessGR_onkeydown(key, iRow, iLetter)
-{
-    var letters = /^[a-zA-Z ]$/;
-    if ( key.match(letters) ) 
-    {
-        var sUpper = key.toUpperCase();
-        GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(sUpper, iRow, iLetter);
-        ProcessGR_SetFocusToNext(iRow, iLetter);
-        return true;
-    }
-// if last key rejected is number, then we fixup things
-    if ( g_GR_sLastCharacterRejected >= '0' && g_GR_sLastCharacterRejected <= '9' )
-    {
-        g_CA_sLastCharacterRejected = ' ';
-        var sFixThisBox = GR_MakeTag_Id(iRow, iLetter);
-        document.getElementById(sFixThisBox).focus();
-        document.getElementById(sFixThisBox).setSelectionRange(0,1);
-        return false;
-        }
-    // trap the arrow keys
-    if ( key.startsWith('Arrow') )
-    {
-        if ( key.match('Up') )
-        {
-            var sNext = ProcessGR_GoUpToNext(iRow, iLetter);
-            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
-            return true;
-        }
-        else if ( key.match('Down') )
-        {
-            var sNext = ProcessGR_GoDownToNext(iRow, iLetter);
-            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
-            return true;
-        }
-        else if ( key.match('Right') )
-        {
-            var sNext = ProcessGR_GoRightToNext(iRow, iLetter);
-// unless the current row is 0 we want to move the focus to the previous row with the same letter
-            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
-            return true;
-        }
-        else 
-        { // must be left
-            var sNext = ProcessGR_GoLeftToNext(iRow, iLetter);
-// unless the current row is 0 we want to move the focus to the previous row with the same letter
-            ProcessGR_MoveFocus(iRow, iLetter, parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
-            return true;
-        }
-    }
-    else
-    {
-        setline('keydown:' + key + 'notprocessed');
-    }
-    var sFixThisBox = GR_MakeTag_Id(iRow, iLetter);
-    document.getElementById(sFixThisBox).focus();
-    document.getElementById(sFixThisBox).setSelectionRange(0,1);
-    return false;
-}
 
 function ProcessGR_GoUpToNext(iRow, iLetter)
 {
