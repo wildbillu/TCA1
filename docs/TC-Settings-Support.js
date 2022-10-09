@@ -19,7 +19,7 @@ function HandleCookie_Settings(sOurCookie_Settings)
 {
     if ( sOurCookie_Settings == '')
     {
-        setline('CS:EmptySettingsCookie');
+//        setline('CS:EmptySettingsCookie');
         return;
     }
     var iEqual = sOurCookie_Settings.indexOf("=");

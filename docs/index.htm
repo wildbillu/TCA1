@@ -1,5 +1,6 @@
 <HTML>
 <HEAD>
+    <meta name="viewport" content="height=device-height, initial-scale=1.0">
     <TITLE>Twisti=Cross V2022-10-05A</TITLE>
     <META name="GENERATOR" content="Microsoft FrontPage 4.0">
     <link rel="stylesheet" href="Styles-SPF-Keyboard.css">
@@ -43,13 +44,17 @@
     <script src="jquery.js"></script>
 </HEAD>
 <SCRIPT>
+    var g_iScreen_Width = 800;
+    var g_iScreen_Height= 450;
 function getResolution() 
 {
-    alert("Your screen resolution is: " + screen.width + "x" + screen.height);
+    g_iScreen_Width = Math.round(screen.width * window.devicePixelRatio);
+    g_iScreen_Height= Math.round(screen.height * window.devicePixelRatio);
 }
 
 function LoadValues()
 {
+    getResolution(); 
 /*    
 jQuery(document).ready(function($) 
 {
@@ -84,6 +89,13 @@ jQuery(document).ready(function($)
     TopRowButtons_Setup();
     LoadInnerHTML();
     Status_Check();
+    setline('W:' + g_iScreen_Width + " H:" + g_iScreen_Height);
+    g_iBody_Width = Math.round(document.body.getBoundingClientRect().width);
+    g_iBody_Height= Math.round(document.body.getBoundingClientRect().height);
+    setlineAdd(' Body.W:' + g_iBody_Width + " H:" + g_iBody_Height);
+    g_iHTML_Width = Math.round(document.documentElement.getBoundingClientRect().width);
+    g_iHTML_Height= Math.round(document.documentElement.getBoundingClientRect().height);
+    setlineAdd(' HTML.W:' + g_iHTML_Width + " H:" + g_iHTML_Height);
 }
 </SCRIPT>
 

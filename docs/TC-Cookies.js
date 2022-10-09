@@ -13,7 +13,7 @@ function HandleCookiesOnStart()
     let s = document.cookie;
     if ( s == '' )
     {
-        setline('C:NoCookies');
+//        setline('C:NoCookies');
         return false;
     }
     var aCookies = s.split(';');
