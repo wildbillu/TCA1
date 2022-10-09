@@ -86,7 +86,7 @@ function CA_HandleKeyboardPress(keypressed)
     var bIsReadOnly = IsInputReadOnly(CA_MakeTag_TD(iRow, iLetter))
     if ( bIsReadOnly )
     {
-        ProcessCA_SetFocusToNext(iRow, iLetter);
+        CA_SetFocusToNext(iRow, iLetter);
         return;
     }
     var sToSet = keypressed;
@@ -94,7 +94,7 @@ function CA_HandleKeyboardPress(keypressed)
     if ( keypressed == sCC )
         sToSet = ' ';
     document.getElementById(g_sCAidWithFocus).value = sToSet;
-    ProcessCA_onkeydown(keypressed, iRow, iLetter);
+    CA_onkeydown(keypressed, iRow, iLetter);
 }
 
 

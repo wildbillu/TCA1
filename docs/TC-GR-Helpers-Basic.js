@@ -1,6 +1,70 @@
 // TC-GridHelpers-Basic.js
 //
 
+function GR_ForRowLetter_Across_IsLastLetter(iRow, iLetter)
+{ // cannot use the 'answers' because they don't have the . and we count location
+    if ( iLetter == g_iGridWidth - 1 )
+        return true;
+    for ( iL = iLetter+1; iL < g_iGridWidth; iL++ )        
+    {
+        if ( !GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iL) )
+            return false;    
+    }
+    return true;
+}
+
+function GR_ForRowLetter_Down_IsLastLetter(iRow, iLetter)
+{
+    if ( iRow == g_iGridHeight - 1 )
+        return true;
+    for ( iR = iRow+1; iR < g_iGridHeight; iR++ )        
+    {
+        if ( !GR_ForRowAndLetter_isThisSquareABlackSquare(iR, iLetter) )
+            return false;    
+    }
+    return true;
+}
+
+function GR_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)
+{
+    var cAnswerPlayer = g_sGridAnswersPlayer.charAt(iRow*(g_iGridWidth)+iLetter);
+    var bValid = CharValidEntry(cAnswerPlayer);
+    return bValid
+}
+
+function GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(cStatus, iRow, iLetter)
+{
+    elem = document.getElementById(GR_MakeTag_Id(iRow, iLetter));
+    sClassName = elem.className;
+    sClassName = GR_SetStatusToClass_FromCode(cStatus, sClassName)
+    elem.className = sClassName;
+    var cNumbering = g_sGridNumbering.charAt(iRow*g_iGridWidth+iLetter);
+    if ( cNumbering == '.')
+        return;
+    var sStatusImage = g_sGR_Status_Normal_Image;
+    if ( cStatus == g_sGR_CodeMeaning_Incorrect )
+        sStatusImage = g_sGR_Status_Incorrect_Image;
+    else if ( cStatus == g_sGR_CodeMeaning_Corrected )
+        sStatusImage = g_sGR_Status_Corrected_Image;
+    else if ( cStatus == g_sGR_CodeMeaning_Correct )
+        sStatusImage = g_sGR_Status_Correct_Image;
+// now combine this with the grid number
+    var iNumber = parseInt(cNumbering) + 1;
+    var sNumber = iNumber.toString();
+    if ( sNumber.length == 1 )
+        sNumber = '0' + sNumber;
+    sStatusImage += ', url("images/No-' + sNumber + '.png")';
+    elem.style.backgroundImage = sStatusImage;
+}
+
+function GR_ForRowLetter_UpdateStatusPlayer(cAnswer, iRow, iLetter)
+{
+    var sPlayerStatus = g_aGridStatusPlayer[iRow];
+    var sNew = replaceAt(sPlayerStatus, iLetter, cAnswer);
+    g_aGridStatusPlayer[iRow] = sNew;
+    GR_SetStatusPlayer();
+}
+
 function GR_ClearPuzzle()
 {
     for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
@@ -25,7 +89,7 @@ function GR_ForRowLetterClearSquare(iRow, iC)
         document.getElementById(sButton).setSelectionRange(0,1);
         GR_UpdateAnswersPlayer(cAnswer, iRow, iC);
         GR_ForRowLetter_UpdateStatusPlayer(g_sGR_CodeMeaning_Normal, iRow, iC);
-        GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Normal, iRow, iC);
+        GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(g_sGR_CodeMeaning_Normal, iRow, iC);
     }
 }
 
@@ -40,7 +104,6 @@ function GR_ShowCheckPuzzle(sToDo)
     }
     return true;
 }
-
 
 function GR_ShowCheckAnswer(sToDo)
 {
@@ -70,15 +133,17 @@ function GR_ForRowLetterShowCheckSquare(iRow, iC, sToDo)
     if ( !GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iC) )
     {
         var index = iRow*g_iGridWidth+iC;
-        var cAnswer   = g_sGridAnswers.charAt(index);
-        var cPlayer   = g_sGridAnswersPlayer.charAt(index);
+        var cAnswer = g_sGridAnswers.charAt(index);
+        var cPlayer = g_sGridAnswersPlayer.charAt(index);
+        var bSet = CharValidEntry(cPlayer);
         var bCorrect = true;
+        var bCorrected = false;
         if ( cAnswer != cPlayer )
             bCorrect = false;
         if ( sToDo == 'Show')
         {
-            if ( IfCharNotSet(cPlayer) )
-                bCorrect = true;                
+            if ( !bCorrect )
+                bCorrected = true;
             // now correct the value in the 'button' and in the player answer
             var sButton = GR_MakeTag_Id(iRow, iC)
             document.getElementById(sButton).value = cAnswer;
@@ -89,26 +154,34 @@ function GR_ForRowLetterShowCheckSquare(iRow, iC, sToDo)
         if ( bCorrect )    
         {
             GR_ForRowLetter_UpdateStatusPlayer(g_sGR_CodeMeaning_Correct, iRow, iC)
-            GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Correct, iRow, iC)
+            GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(g_sGR_CodeMeaning_Correct, iRow, iC)
         }
         else
         {
-            if ( sToDo == 'Show')
+            if ( bCorrected )
             {
                 GR_ForRowLetter_UpdateStatusPlayer(g_sGR_CodeMeaning_Corrected, iRow, iC)
-                GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Corrected, iRow, iC)
+                GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(g_sGR_CodeMeaning_Corrected, iRow, iC)
             }
             else
             {
-                if ( cPlayer != '' && cPlayer != ' ' && cPlayer != '-' )
+                if ( bSet )
                 {
                     GR_ForRowLetter_UpdateStatusPlayer(g_sCA_CodeMeaning_Incorrect, iRow, iC)
-                    GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Incorrect, iRow, iC)
+                    GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(g_sGR_CodeMeaning_Incorrect, iRow, iC)
                 }
             }
         }
+        var cToSet = ' ';
+        if ( sToDo == 'Show')
+            cToSet = cAnswer;
+        else
+        {
+            if ( bSet )
+                cToSet = cPlayer;
+        }
+        GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iC, cToSet);
     }
-    GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iC, cPlayer);
 }
 
 function GR_ShowCheckSquare(sToDo)
@@ -214,69 +287,39 @@ function GR_ForRowLetterNotABlackSquare_SetGridAnswer(iRow, iC)
         if ( bCorrect )
         {
             GR_ForRowLetter_UpdateStatusPlayer(g_sCA_CodeMeaning_Correct, iRow, iC)
-            GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Correct, iRow, iC)
+            GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(g_sGR_CodeMeaning_Correct, iRow, iC)
         }
         else
         {
             if ( cAnswerPlayer != '' && cAnswerPlayer != ' ' && cAnswerPlayer != '-' )
             {
                 GR_ForRowLetter_UpdateStatusPlayer(g_sCA_CodeMeaning_Incorrect, iRow, iC)
-                GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Incorrect, iRow, iC)
+                GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(g_sGR_CodeMeaning_Incorrect, iRow, iC)
             }
             else
             {
                 GR_ForRowLetter_UpdateStatusPlayer(g_sGR_CodeMeaning_Normal, iRow, iC)
-                GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Normal, iRow, iC)
+                GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(g_sGR_CodeMeaning_Normal, iRow, iC)
             }
         }
     }
     else
     {
         GR_ForRowLetter_UpdateStatusPlayer(g_sGR_CodeMeaning_Normal, iRow, iC)
-        GR_ForRowLetter_ForStatusPlayer(g_sGR_CodeMeaning_Normal, iRow, iC)
+        GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(g_sGR_CodeMeaning_Normal, iRow, iC)
     }
     GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iC, cAnswer);
 }
 
-function GR_ForRowLetter_ForStatusPlayer(cStatus, iRow, iLetter)
-{
-    elem = document.getElementById(GR_MakeTag_Id(iRow, iLetter));
-    sClassName = elem.className;
-    sClassName = GR_SetStatusToClass_FromCode(cStatus, sClassName)
-    elem.className = sClassName;
-// now we set the backgroundImage correctly
-    if ( cStatus == g_sCharMeaningNotSet )
-        return;
-    var cNumbering = g_sGridNumbering.charAt(iRow*g_iGridWidth+iLetter);
-    if ( cNumbering == '.')
-        return;
-    var sStatusImage = g_sGR_Status_Normal_Image;
-    if ( cStatus == g_sGR_CodeMeaning_Incorrect )
-        sStatusImage = g_sGR_Status_Incorrect_Image;
-    else if ( cStatus == g_sGR_CodeMeaning_Corrected )
-        sStatusImage = g_sGR_Status_Corrected_Image;
-    else if ( cStatus == g_sGR_CodeMeaning_Correct )
-        sStatusImage = g_sGR_Status_Correct_Image;
-// now combine this with the grid number
-    var iNumber = parseInt(cNumbering) + 1;
-    var sNumber = iNumber.toString();
-    if ( sNumber.length == 1 )
-        sNumber = '0' + sNumber;
-    sStatusImage += ', url("images/No-' + sNumber + '.png")';
-    elem.style.backgroundImage = sStatusImage;
-}
 
-function GR_isThisSquareABlackSquare(sId)
+
+function GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter)
 {
+    var sId = GR_MakeTag_Id(iRow, iLetter);
     var sClassName = document.getElementById(sId).className;
     if ( sClassName != g_sGR_Class_BlackSquare )
         return false;
     return true;
-}
-
-function GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter)
-{
-    return GR_isThisSquareABlackSquare(GR_MakeTag_Id(iRow, iLetter))
 }
 
 function GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cForceLetter)
@@ -297,7 +340,7 @@ function GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(cAnswerPlayer, iRo
     { // since a letter was typed we no longer know it is incorrect so set back to Normal
         cStatus = g_sGR_CodeMeaning_Normal;
         GR_ForRowLetter_UpdateStatusPlayer(cStatus, iRow, iLetter);
-        GR_ForRowLetter_ForStatusPlayer(cStatus, iRow, iLetter);
+        GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(cStatus, iRow, iLetter);
     }
     var cAnswer = GR_ForRowLetter_GetAnswer(iRow, iLetter);
     if ( cAnswerPlayer == cAnswer )
@@ -305,7 +348,7 @@ function GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(cAnswerPlayer, iRo
     GR_ForRowLetter_UpdateStatusPlayer(cStatus, iRow, iLetter);
     if ( g_bSettings_CAGR_Answers_ShowCorrectLetters )
     {
-        GR_ForRowLetter_ForStatusPlayer(cStatus, iRow, iLetter);
+        GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(cStatus, iRow, iLetter);
         GR_ForRowLetter_SetToReadonlyIfNecessary(iRow, iLetter, cAnswerPlayer)
         Status_Check();
         StoreCookie_Puzzle()
@@ -328,7 +371,7 @@ function GR_ForRowLetter_SetStatusPlayer_AndSetClassOfCurrent(cAnswerPlayer, iRo
             var sAnswer = '';
             for ( var iR = 0; iR < g_iGridHeight; iR++ )
             {
-                if ( ! GR_isThisSquareABlackSquare(GR_MakeTag_Id(iR, iLetter)) )
+                if ( ! GR_ForRowAndLetter_isThisSquareABlackSquare(iR, iLetter) )
                 {
                     sA = GR_ForRowLetter_GetAnswer(iR, iLetter);
                     sAP= GR_ForRowLetter_GetAnswerPlayer(iR, iLetter);
@@ -359,21 +402,12 @@ function GR_ForRowLetter_UpdateAnswersPlayer(cAnswer, iRow, iLetter)
     GR_SetAnswersPlayer();
 }
 
-
-function GR_ForRowLetter_UpdateStatusPlayer(cAnswer, iRow, iLetter)
-{
-    var sPlayerStatus = g_aGridStatusPlayer[iRow];
-    var sNew = replaceAt(sPlayerStatus, iLetter, cAnswer);
-    g_aGridStatusPlayer[iRow] = sNew;
-    GR_SetStatusPlayer();
-}
-
 function GR_ForRow_SetClassToStatusCorrect(iRow, sAnswers)
 {
 
     for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++)
     {
-        if ( ! GR_isThisSquareABlackSquare(GR_MakeTag_Id(iRow, iLetter)) )
+        if ( ! GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
         {
             var cStatus = g_sCA_CodeMeaning_Correct;
             GR_ForRowLetter_UpdateStatusPlayer(cStatus, iRow, iLetter);
@@ -391,7 +425,7 @@ function GR_ForLetter_SetClassToStatusCorrect(iLetter, sAnswer)
 {
     for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
     {
-        if ( ! GR_isThisSquareABlackSquare(GR_MakeTag_Id(iRow, iLetter)) )
+        if ( ! GR_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
         {
             var cStatus = g_sCA_CodeMeaning_Correct;
             CA_ForRowLetter_ReplaceAnswerStatusPlayer(cStatus, iRow, iLetter);

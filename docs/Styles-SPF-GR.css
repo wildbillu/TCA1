@@ -5,6 +5,7 @@
     width: 30px;
     height: 30px;
 }
+
 .GR_TD_border_collapse
 {
     border: 1px solid black;
@@ -43,10 +44,10 @@
 
 .GR_Base 
 {
+    border-collapse: collapse; 
     padding-top: 10px;
+    outline: none; 
     border: 0px;
-    border-collapse: collapse;    
-    outline: none;    
     text-transform: Uppercase;
     text-align: center;
     font-size: 24px;
@@ -54,6 +55,7 @@
     font-style:normal;
     width: 30px;
     height: 30px;
+    caret-color: transparent;
 }
 
 .GR_Color_InActive

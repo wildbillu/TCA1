@@ -45,7 +45,7 @@ var g_sGridNumbering;
 var g_sDualClueBefore; 
 var g_sDualClueMiddle;
 var g_sDualClueEnd;
-
+var g_bPuzzleSolved = false;
 
 function LoadPuzzle()
 {
@@ -70,7 +70,7 @@ function LoadPuzzle()
     g_aAnswersStatusPlayer  = sStatusPlayer.split(g_sCADelimiter);
     g_sAnswersStatusPlayer  = sStatusPlayer;
     if ( g_aClues.length != g_iClues || g_aAnswers.length != g_iClues || g_aAnswersPlayer.length != g_iClues)
-        alert('dataProblem');
+        alert('dataProblem.' + g_iClues + g_aClues.Length + g_aAnswers.Length + g_aAnswersPlayer.length);
 // GR stuff
     g_sGridAnswers      = sGridAnswers;
     g_sGridAnswersPlayer = sGridAnswersPlayer;

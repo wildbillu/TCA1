@@ -26,9 +26,9 @@ function CA_SetRow(iRow)
         if ( IfCharNotSet(cPlayerAnswer) )
             sDisplayAnswer = cPlayerAnswer;
         var sFunctionsToCall = ''; 
-        sFunctionsToCall += ' onkeypress="return ProcessCA_onkeypress(event);"';
-        sFunctionsToCall += ' onkeyup="return ProcessCA_onkeydown(event.key,' + iRow + ',' + iAE + ');"';
-        sFunctionsToCall += ' onfocus="ProcessCA_onfocus(this);"';
+        sFunctionsToCall += ' onkeypress="return CA_onkeypress(event);"';
+        sFunctionsToCall += ' onkeyup="return CA_onkeydown(event.key,' + iRow + ',' + iAE + ');"';
+        sFunctionsToCall += ' onfocus="CA_onfocus(this);"';
         var sClass = g_sCA_Class_InActive;
         cStatus = g_aAnswersStatusPlayer[iRow].charAt(iAE);
         sClass = CA_SetStatusToClass_FromCode(cStatus, sClass)
@@ -76,10 +76,10 @@ function TableForDualAnswer()
             if ( cPlayerAnswer != g_sCharMeaningNotSet )
                 sDisplayAnswer = cPlayerAnswer;
             var sFunctionsToCall = ''; 
-            sFunctionsToCall += '     onkeypress="return ProcessCA_onkeypress(event);"';
-            sFunctionsToCall += '     onkeyup="return ProcessCA_onkeydown(event.key,' + iRow + ',' + iAE + ');"';
-            sFunctionsToCall += '     onkeyup="return ProcessCA_onkeyup(event.key,' + iRow + ',' + iAE + ');"';
-            sFunctionsToCall += '     onfocus="ProcessCA_onfocus(this);"';
+            sFunctionsToCall += '     onkeypress="return CA_onkeypress(event);"';
+            sFunctionsToCall += '     onkeyup="return CA_onkeydown(event.key,' + iRow + ',' + iAE + ');"';
+            sFunctionsToCall += '     onkeyup="return CA_onkeyup(event.key,' + iRow + ',' + iAE + ');"';
+            sFunctionsToCall += '     onfocus="CA_onfocus(this);"';
             var sClass = g_sCA_Class_InActive;
             cStatus = g_aAnswersStatusPlayer[iRow].charAt(iAE);
             sClass = CA_SetStatusToClass_FromCode(cStatus, sClass);

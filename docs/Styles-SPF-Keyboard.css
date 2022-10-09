@@ -14,15 +14,15 @@
 
 .KB_Button 
 {
+    border: 1px solid #222222;
     padding: 0px;
     height: 55px;
-    border: 2px;
     outline: none;    
     text-align: center;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    background-color:antiquewhite;
-    caret-color: antiquewhite;
+    background-color:#DDDDDD;
+    caret-color: transparent;
     color:black;
 }
 
@@ -34,12 +34,12 @@
     border: 0px;
     border-collapse: collapse;    
     outline: none;    
-     text-align: center;
+    text-align: center;
     font-size: 30px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    background-color: gray;
-    caret-color: grey;
+    background-color: white;
+    caret-color: transparent;
     color:black;
 }
 

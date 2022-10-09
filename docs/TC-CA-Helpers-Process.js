@@ -2,6 +2,56 @@
 // 
 var g_CA_sLastCharacterRejected = '';
 
+function CA_SetFocusToNext(iRow, iLetter)
+{
+    var iLength = CA_ForRow_GetLength(iRow);
+    var bLastLetter = CA_ForRowLetter_IsLastLetter(iRow, iLetter);
+    if ( !bLastLetter && g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares )
+    {
+        for ( iL = iLetter+1; iL < iLength; iL++)
+        {
+            if ( !CA_ForRowLetter_IsPlayerAnswerSet(iRow, iL) )
+            {
+                CA_MoveFocus(iRow, iL);
+                return;
+            }
+            iLetter = iL;
+        }
+    }
+    if ( bLastLetter && g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare )
+    { 
+        for ( iL = 0; iL < iLength; iL++)
+        {
+            if ( !CA_ForRowLetter_IsPlayerAnswerSet(iRow, iL) )
+            {
+                CA_MoveFocus(iRow, iL);
+                return;
+            }
+        }
+    }
+    if ( bLastLetter && !g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue )
+    {
+        return;
+    }
+    var iNewRow = iRow;
+	var iNewLetter = iLetter;
+	if ( iLetter < iLength-1 )
+	{
+		iNewLetter = iNewLetter + 1;
+    }
+    else
+    {
+        iNewLetter = 0;
+        iNewRow++;
+    }
+	if ( iNewRow > g_iAnswers - 1 )
+    {
+        iNewRow = 0;
+        iNewLetter = 0;
+    }
+    CA_MoveFocus(iNewRow, iNewLetter)
+}
+
 function CA_SetToInActive(iRow, bSetDualRow)
 {
     if ( iRow == 0 || iRow == 1) 
@@ -28,7 +78,7 @@ function CA_SetToInActive(iRow, bSetDualRow)
     }
 }
 
-function ProcessCA_FocusLostSetActiveToInActive()
+function CA_FocusLostSetActiveToInActive()
 {
     if ( g_sCAidWithFocus == '' ) 
     {
@@ -86,7 +136,7 @@ function CA_SetToActive(iRow, iActiveCharacter)
     }
 }
 
-function ProcessCA_onfocus(x)
+function CA_onfocus(x)
 {
     var sThisId = x.id;
     if ( g_GR_sFocus != '')        
@@ -115,7 +165,7 @@ function ProcessCA_onfocus(x)
     g_sCAidWithFocus = sThisId;
 }
 
-function ProcessCA_onkeypress(event)
+function CA_onkeypress(event)
 {
     var ekey = event.key;
     if ( ( ekey >= 'a' && ekey <= 'z' ) || ( ekey >= 'A' && ekey <= 'Z') || ekey == ' ')
@@ -127,14 +177,14 @@ function ProcessCA_onkeypress(event)
     return false;
 }
 
-function ProcessCA_onkeydown(key, iRow, iLetter)
+function CA_onkeydown(key, iRow, iLetter)
 {
     var letters = /^[a-zA-Z ]$/;
     if ( key.match(letters) ) 
     {
         var sUpper = key.toUpperCase();
         CA_UpdateAllOnKeyDown(sUpper, iRow, iLetter);
-        ProcessCA_SetFocusToNext(iRow, iLetter);
+        CA_SetFocusToNext(iRow, iLetter);
         return true;
     }
 // if last key rejected is number, then we fixup things
@@ -158,7 +208,7 @@ function ProcessCA_onkeydown(key, iRow, iLetter)
             var iLengthOfNewRow = CA_ForRow_GetLength(iNewRow);
             if ( iNewLetter > iLengthOfNewRow - 1 )
                  iNewLetter = iLengthOfNewRow - 1;
-            ProcessCA_MoveFocus(iNewRow, iNewLetter);
+            CA_MoveFocus(iNewRow, iNewLetter);
             return true;
         }
         else if ( key.match('Down') )
@@ -176,16 +226,16 @@ function ProcessCA_onkeydown(key, iRow, iLetter)
         }
         else if ( key.match('Right') )
         {
-            var sNext = ProcessCA_RowLetterNext(iRow, iLetter);
+            var sNext = CA_RowLetterNext(iRow, iLetter);
 // unless the current row is 0 we want to move the focus to the previous row with the same letter
-            ProcessCA_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            CA_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
             return true;
         }
         else 
         { // must be left
-            var sNext = ProcessCA_RowLetterPrevious(iRow, iLetter);
+            var sNext = CA_RowLetterPrevious(iRow, iLetter);
 // unless the current row is 0 we want to move the focus to the previous row with the same letter
-            ProcessCA_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
+            CA_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
             return true;
         }
     }
@@ -199,7 +249,7 @@ function ProcessCA_onkeydown(key, iRow, iLetter)
     return false;
 }
 
-function ProcessCA_RowLetterNext(iRow, iLetter)
+function CA_RowLetterNext(iRow, iLetter)
 {
     var iNewRow = iRow;
 	var iNewLetter = iLetter;
@@ -224,7 +274,7 @@ function ProcessCA_RowLetterNext(iRow, iLetter)
     return s;
 }
 
-function ProcessCA_RowLetterPrevious(iRow, iLetter)
+function CA_RowLetterPrevious(iRow, iLetter)
 {
     var iNewRow = iRow;
 	var iNewLetter = iLetter;
@@ -248,7 +298,7 @@ function ProcessCA_RowLetterPrevious(iRow, iLetter)
     return s;
 }
 
-function ProcessCA_MoveFocus(iNewRow, iNewLetter)
+function CA_MoveFocus(iNewRow, iNewLetter)
 {
     if ( iNewRow > iClueAnswers -1 || iNewRow < 0 )
     {
@@ -262,27 +312,6 @@ function ProcessCA_MoveFocus(iNewRow, iNewLetter)
 		document.getElementById(sNextBox).setSelectionRange(0,1);
 }
 
-function ProcessCA_SetFocusToNext(iRow, iLetter)
-{
-    var iLength = CA_ForRow_GetLength(iRow);
-    var iNewRow = iRow;
-	var iNewLetter = iLetter;
-	if ( iLetter < iLength-1 )
-	{
-		iNewLetter = iNewLetter + 1;
-    }
-    else
-    {
-        iNewLetter = 0;
-        iNewRow++;
-    }
-	if ( iNewRow > g_iAnswers - 1 )
-    {
-        iNewRow = 0;
-        iNewLetter = 0;
-    }
-    ProcessCA_MoveFocus(iNewRow, iNewLetter)
-}
 
 
 

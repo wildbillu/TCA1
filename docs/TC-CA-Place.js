@@ -3,10 +3,11 @@ var g_bPlaceWindow_Active = false;
 
 function CA_PlaceButton_Setup(iRow)
 {
+    var sId = 'Id=Place_' + iRow + ' ';
     var sFunctionsToCall = ''; 
     sFunctionsToCall += ' onclick="return CA_Place(' + iRow + ');"';
     var sButton = '';
-    sButton += '<TD><BUTTON ' + sFunctionsToCall + '>Place</BUTTON></TD>'
+    sButton += '<TD><BUTTON ' + sId + sFunctionsToCall + '>Place</BUTTON></TD>'
     return sButton;
 }
 

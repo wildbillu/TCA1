@@ -1,6 +1,14 @@
 // TC-GeneralFunctions
 // 
 var sToDisplay = '';
+
+function CharValidEntry(cForceCharacter) 
+{
+    if ( cForceCharacter != '' && cForceCharacter !=' ' && cForceCharacter != g_sCharMeaningNotSet )
+        return true;
+    return false;
+}
+
 function IfCharNotSet(cForceCharacter) 
 {
     if ( cForceCharacter != '' && cForceCharacter !=' ' && cForceCharacter != g_sCharMeaningNotSet )

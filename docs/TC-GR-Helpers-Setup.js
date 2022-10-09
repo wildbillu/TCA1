@@ -17,7 +17,7 @@ function LoadGridInnerHTML()
         for ( iL = 0; iL < g_iGridWidth; iL++ )
         {
             var cStatus = GR_ForRowLetter_GetStatusPlayer(iR, iL)
-            GR_ForRowLetter_ForStatusPlayer(cStatus, iR, iL)
+            GR_ForRowLetter_ForStatusPlayer_UpdateClassAndImage(cStatus, iR, iL)
         }
     }
 }

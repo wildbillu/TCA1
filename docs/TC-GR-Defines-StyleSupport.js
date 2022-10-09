@@ -104,6 +104,6 @@ function GR_SetColorsToClass_Focus(sClassName)
             sResult += sThisClass + ' ';
         }
     }
-    sResult += ' GR_Color_Focus';
+    sResult += 'GR_Color_Focus';
     return sResult;
 }

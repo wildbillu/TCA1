@@ -1,5 +1,34 @@
 // TC-Status-Process.js
 
+function FeaturesDependingOnPuzzleSolved()
+{
+    document.getElementById("Dropdown_More_ShowAnswer").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_ShowSquare").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_SolveAnswers").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_SolveGrid").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_SolvePuzzle").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_CheckAnswer").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_CheckSquare").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_CheckPuzzle").disabled = g_bPuzzleSolved;
+    var sClass = 'Dropdown_More_Button'
+    if ( g_bPuzzleSolved )
+        sClass = 'Dropdown_More_Button_Disabled'    
+    document.getElementById("Dropdown_More_ShowAnswer").className = sClass;
+    document.getElementById("Dropdown_More_ShowSquare").className = sClass;
+    document.getElementById("Dropdown_More_SolveAnswers").className = sClass;
+    document.getElementById("Dropdown_More_SolveGrid").className = sClass;
+    document.getElementById("Dropdown_More_SolvePuzzle").className = sClass;
+    document.getElementById("Dropdown_More_CheckAnswer").className = sClass;
+    document.getElementById("Dropdown_More_CheckSquare").className = sClass;
+    document.getElementById("Dropdown_More_CheckPuzzle").className = sClass;
+    for ( iRow = 0; iRow < g_aAnswers.length; iRow++ )
+    {
+        var sId = 'Place_' + iRow;
+        document.getElementById(sId).disabled = g_bPuzzleSolved;
+    }
+
+}
+
 function Status_Check()
 { // called everytime character is done, show answer(CA or GR), solve(CA, GR, All)
 // CA
@@ -10,7 +39,11 @@ function Status_Check()
         if ( g_aAnswers[iRow] == g_aAnswersPlayer[iRow])
             iCA_Correct++
     }
-    var sCA = 'Clues: ' + iCA_Correct + ' of ' + iCARows;
+    var sCA = 'Not Active'
+    if ( g_bSettings_CA_Display_ShowProgress )
+    {
+        var sCA = 'Clues: ' + iCA_Correct + ' of ' + iCARows;
+    }
     document.getElementById("Status_CA").innerHTML = sCA;
 // GR
     var iGR_Correct = 0;
@@ -34,6 +67,28 @@ function Status_Check()
             iGR_Correct++
     }
     var iTot = g_iGridWidth+g_iGridHeight;
-    var sGR = 'Grid: ' + iGR_Correct + ' of ' + iTot;
+    var sGR = 'Not Active'
+    if ( g_bSettings_CA_Display_ShowProgress )
+    {
+        sGR = 'Grid: ' + iGR_Correct + ' of ' + iTot;
+    }
     document.getElementById("Status_GR").innerHTML = sGR;
+    if ( iGR_Correct == iTot && iCA_Correct == iCARows)
+    {
+        if ( g_bPuzzleSolved )
+        {
+            // already solved nothing to do here
+        }
+        else
+        {
+            g_bPuzzleSolved = true;
+            if ( g_bSettings_CAGR_Display_Complete )
+                SuccessWindowPopup_Toggle(true);
+            FeaturesDependingOnPuzzleSolved();
+        }
+    }
+    else
+    {
+        g_bPuzzleSolved = false;
+    }
 }

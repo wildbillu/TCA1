@@ -2,15 +2,15 @@
 // settings
 var g_sSettings_Version = 'V01.01';
 var g_bSettings_DeleteCookiesOnStartUp = false;
-var g_bSettings_CAGR_Answers_CheckRow = true;
-var g_bSettings_CAGR_Answers_CheckOverall = true;
+var g_bSettings_CAGR_Answers_CheckRow = false;
+var g_bSettings_CAGR_Answers_CheckOverall = false;
 var g_bSettings_CAGR_Answers_ShowCorrectLetters = false;
-var g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares = false;
-var g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare = false;
+var g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares = true;
+var g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare = true;
 var g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue = false;
-var g_bSettings_CA_Display_ShowProgress = false;
-var g_bSettings_GR_Display_ShowProgress = false;
-var g_bSettings_CAGR_Display_Complete = false;
+var g_bSettings_CA_Display_ShowProgress = true;
+var g_bSettings_GR_Display_ShowProgress = true;
+var g_bSettings_CAGR_Display_Complete = true;
 var g_iSettings_DaysToExpire = 30;
 
 function IsTrue(s){var b = false;if ( s == 'true')b = true;return b;}

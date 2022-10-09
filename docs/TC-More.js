@@ -7,6 +7,7 @@ function Dropdown_More_ResetPuzzle()
     GR_ClearPuzzle();
     StoreCookie_Puzzle();
     Status_Check();  
+    FeaturesDependingOnPuzzleSolved();
     elem = document.getElementById(CA_MakeTag_Id(0,0)).focus();
 }
 
@@ -29,6 +30,22 @@ function Dropdown_More_CheckPuzzle()
 {
     CA_ShowCheckPuzzle('Check');
     GR_ShowCheckPuzzle('Check');
+    StoreCookie_Puzzle();    
+    Status_Check();
+    Dropdown_More_Hide();
+}
+
+function Dropdown_More_SolveAnswers()
+{
+    CA_ShowCheckPuzzle('Show');
+    StoreCookie_Puzzle();    
+    Status_Check();
+    Dropdown_More_Hide();
+}
+
+function Dropdown_More_SolveGrid()
+{
+    GR_ShowCheckPuzzle('Show');
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide();
@@ -104,19 +121,23 @@ function Dropdown_More_Hide()
     g_bDropdown_Menu_Active = false;
 }
 
+
+
 function Insertable_Dropdown_Menu_More()
 {
     var sDropdownMenu = ''
     sDropdownMenu += '<span class="Dropdown_SpanPadding" Id="span1"></span>'; // this is needed to position the dropdown properly
     sDropdownMenu += '<div Id="Dropdown_More" width=300 class="Dropdown_More">';
-    sDropdownMenu += '   <div Id="Dropdown_More_Content" class="Dropdown_More_Content">';
-    sDropdownMenu += '      <text onclick="Dropdown_More_ShowAnswer();">Reveal Answer</text>';
-    sDropdownMenu += '      <text onclick="Dropdown_More_ShowSquare();">Reveal Square</text>';
-    sDropdownMenu += '      <text onclick="Dropdown_More_SolvePuzzle();">Reveal Puzzle</text>';
-    sDropdownMenu += '      <text onclick="Dropdown_More_CheckAnswer();">Check Answer</text>';
-    sDropdownMenu += '      <text onclick="Dropdown_More_CheckSquare();">Check Square</text>';
-    sDropdownMenu += '      <text onclick="Dropdown_More_CheckPuzzle();">Check Puzzle</text>';
-    sDropdownMenu += '      <text onclick="Dropdown_More_ResetPuzzle();">Reset Puzzle</text>';
+    sDropdownMenu += '   <div Id="Dropdown_More_Content" class="Dropdown_More_Content" align=center>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowAnswer" onclick="Dropdown_More_ShowAnswer();">Reveal Answer</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowSquare" onclick="Dropdown_More_ShowSquare();">Reveal Square</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveAnswers" onclick="Dropdown_More_SolveAnswers();">Reveal Answers</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveGrid" onclick="Dropdown_More_SolveGrid();">Reveal Grid</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolvePuzzle" onclick="Dropdown_More_SolvePuzzle();">Reveal Puzzle</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckAnswer" onclick="Dropdown_More_CheckAnswer();">Check Answer</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckSquare" onclick="Dropdown_More_CheckSquare();">Check Square</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckPuzzle" onclick="Dropdown_More_CheckPuzzle();">Check Puzzle</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ResetPuzzle" onclick="Dropdown_More_ResetPuzzle();">Reset All</BUTTON>';
     sDropdownMenu += '   </div>';
     sDropdownMenu += '</div>';
     document.getElementById("Popup_Button_More").innerHTML = sDropdownMenu;

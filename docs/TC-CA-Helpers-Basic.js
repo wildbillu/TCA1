@@ -1,5 +1,21 @@
 // TC-ClueAnswerHelpers-Basic.js
 
+function CA_ForRowLetter_IsLastLetter(iRow, iLetter)
+{
+    var sAnswerPlayer = g_aAnswersPlayer[iRow];
+    if ( iLetter == ( sAnswerPlayer.length - 1) )
+        return true;
+    return false;
+}
+
+function CA_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)
+{
+    var sAnswerPlayer = g_aAnswersPlayer[iRow];
+    var cAnswerPlayer = sAnswerPlayer.charAt(iLetter)
+    var bValid = CharValidEntry(cAnswerPlayer);
+    return bValid
+}
+
 function CA_ClearPuzzle()
 {
     for ( iRow = 0; iRow < g_aAnswers.length; iRow++)
@@ -46,13 +62,15 @@ function CA_ForRowLetterShowCheckSquare(iRow, iC, sToDo)
     var sAnswerPlayer = g_aAnswersPlayer[iRow];
     var cAnswer = sAnswer.charAt(iC);
     var cAnswerPlayer = sAnswerPlayer.charAt(iC);
+    var bSet = CharValidEntry(cAnswerPlayer);
     var bCorrect = true;
+    var bCorrected = false;
     if ( cAnswer != cAnswerPlayer )
         bCorrect = false;
     if ( sToDo == 'Show')
     {
-        if ( cAnswerPlayer == '' || cAnswerPlayer == ' ' || cAnswerPlayer == '-' )
-            bCorrect = true;// but if the player answer was '' ' ' or '-' we just let it say correct
+        if ( !bCorrect )
+            bCorrected = true;
         var sButton = CA_MakeTag_Id(iRow, iC)
         document.getElementById(sButton).value = cAnswer;
         document.getElementById(sButton).setSelectionRange(0,1);
@@ -66,14 +84,14 @@ function CA_ForRowLetterShowCheckSquare(iRow, iC, sToDo)
     }
     else
     {
-        if ( sToDo == 'Show')
+        if ( bCorrected )
         {
             CA_ForRowLetter_ReplaceAnswerStatusPlayer(g_sCA_CodeMeaning_Corrected, iRow, iC)
             CA_ForRowLetter_UpdateClassForStatusPlayer(g_sCA_CodeMeaning_Corrected, iRow, iC)
         }
         else
         {   
-            if ( cAnswerPlayer != '' && cAnswerPlayer != ' ' && cAnswerPlayer != '-' )
+            if ( bSet )
             {
                 CA_ForRowLetter_ReplaceAnswerStatusPlayer(g_sCA_CodeMeaning_Incorrect, iRow, iC)
                 CA_ForRowLetter_UpdateClassForStatusPlayer(g_sCA_CodeMeaning_Incorrect, iRow, iC)
