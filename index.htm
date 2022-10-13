@@ -64,7 +64,7 @@ function getResolution()
 
 function LoadValues()
 {
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.005'
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.007'
     getResolution(); 
     var g_bLocal = false;
     var sPageURL = window.location.search.substring(1);
@@ -86,7 +86,7 @@ function LoadValues()
         }
         LoadPuzzleFromFile(sFile);
     }
-    HandleCookiesOnStart();
+//    HandleCookiesOnStart();
 //  
     LoadPuzzle();
     TopRowButtons_Setup();
@@ -124,15 +124,15 @@ function LoadValues()
     <TR><TD bgcolor="#FFFFFF" Id="Popup_Button_More" height=0 align=left></TD></TR>
     <TR><TD bgcolor="#FFFFFF" Id="Popup_SuccessWindow" height=0 align=center></TD></TR>
     <TR ><TD>
-        <TABLE border=0 cellspacing=0>
+        <TABLE border=0 cellspacing=0 width="100%">
             <TR>
-                <TD>
+                <TD width=250px>
                     <DIV class="GRB_Div" Id="GRB_Div0">aa</DIV>
                     <DIV class="GRB_Div" Id="GRB_Div1">aa</DIV>
                     <DIV class="GRB_Div" Id="GRB_Div2">aa</DIV>
                     <DIV class="GRB_Div" Id="GRB_Div3">aa</DIV>
+                    <DIV class="GRB_Div" Id="GRB_Div4">aa</DIV>
                     <DIV Id="Place_Popup" height=0 align=center></DIV>'
-
                 </TD>
                 <TD width=50% Id="TwistiCrossImage"></TD>
             </TR>
