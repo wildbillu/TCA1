@@ -2,31 +2,41 @@
 
 function FeaturesDependingOnPuzzleSolved()
 {
-    document.getElementById("Dropdown_More_ShowAnswer").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_ShowAnswer").disabled = g_bPuzzleSolved;
     document.getElementById("Dropdown_More_ShowSquare").disabled = g_bPuzzleSolved;    
     document.getElementById("Dropdown_More_SolveAnswers").disabled = g_bPuzzleSolved;    
-    document.getElementById("Dropdown_More_SolveGrid").disabled = g_bPuzzleSolved;    
+    document.getElementById("Dropdown_More_SolveGrid").disabled = g_bGridSolved;    
     document.getElementById("Dropdown_More_SolvePuzzle").disabled = g_bPuzzleSolved;    
     document.getElementById("Dropdown_More_CheckAnswer").disabled = g_bPuzzleSolved;    
     document.getElementById("Dropdown_More_CheckSquare").disabled = g_bPuzzleSolved;    
     document.getElementById("Dropdown_More_CheckPuzzle").disabled = g_bPuzzleSolved;
-    var sClass = 'Dropdown_More_Button'
+    var sClass_GridSolved = 'Dropdown_More_Button';
+    if ( g_bGridSolved )
+        sClass_GridSolved = 'Dropdown_More_Button_Disabled'    
+    var sClass_AnswersSolved = 'Dropdown_More_Button';
+    if ( g_bAnswersSolved )
+        sClass_AnswersSolved = 'Dropdown_More_Button_Disabled'    
+    var sClass_PuzzleSolved = 'Dropdown_More_Button';
     if ( g_bPuzzleSolved )
-        sClass = 'Dropdown_More_Button_Disabled'    
-    document.getElementById("Dropdown_More_ShowAnswer").className = sClass;
-    document.getElementById("Dropdown_More_ShowSquare").className = sClass;
-    document.getElementById("Dropdown_More_SolveAnswers").className = sClass;
-    document.getElementById("Dropdown_More_SolveGrid").className = sClass;
-    document.getElementById("Dropdown_More_SolvePuzzle").className = sClass;
-    document.getElementById("Dropdown_More_CheckAnswer").className = sClass;
-    document.getElementById("Dropdown_More_CheckSquare").className = sClass;
-    document.getElementById("Dropdown_More_CheckPuzzle").className = sClass;
+        sClass_PuzzleSolved = 'Dropdown_More_Button_Disabled'    
+    document.getElementById("Dropdown_More_ShowAnswer").className = sClass_PuzzleSolved;
+    document.getElementById("Dropdown_More_ShowSquare").className = sClass_PuzzleSolved;
+    document.getElementById("Dropdown_More_SolveAnswers").className = sClass_AnswersSolved;
+    document.getElementById("Dropdown_More_SolveGrid").className = sClass_GridSolved;
+    document.getElementById("Dropdown_More_SolvePuzzle").className = sClass_PuzzleSolved;
+    document.getElementById("Dropdown_More_CheckAnswer").className = sClass_PuzzleSolved;
+    document.getElementById("Dropdown_More_CheckSquare").className = sClass_PuzzleSolved;
+    document.getElementById("Dropdown_More_CheckPuzzle").className = sClass_PuzzleSolved;
+//
+    var sClassName = 'Place_Button';
+    if ( g_bGridSolved )
+        sClassName = 'Place_Buttion_Disabled';
     for ( iRow = 0; iRow < g_aAnswers.length; iRow++ )
     {
         var sId = 'Place_' + iRow;
-        document.getElementById(sId).disabled = g_bPuzzleSolved;
+        document.getElementById(sId).disabled = g_bGridSolved;
+        document.getElementById(sId).className = sClassName;
     }
-
 }
 
 function Status_Check()
@@ -60,7 +70,7 @@ function Status_Check()
         var bLetterCorrect = true;
         for ( var iRow = 0; iRow < g_iGridHeight; iRow++)
         {
-            if ( GR_ForRowLetter_GetAnswer(iRow, iGRLetter) != GR_ForRowLetter_GetAnswerPlayer(iRow, iGRLetter) )
+            if ( GRB_ForRowLetter_GetAnswer(iRow, iGRLetter) != GRB_ForRowLetter_GetAnswerPlayer(iRow, iGRLetter) )
                 bLetterCorrect = false;
         }
         if ( bLetterCorrect )
@@ -73,22 +83,14 @@ function Status_Check()
         sGR = 'Grid: ' + iGR_Correct + ' of ' + iTot;
     }
     document.getElementById("Status_GR").innerHTML = sGR;
-    if ( iGR_Correct == iTot && iCA_Correct == iCARows)
-    {
-        if ( g_bPuzzleSolved )
-        {
-            // already solved nothing to do here
-        }
-        else
-        {
-            g_bPuzzleSolved = true;
-            if ( g_bSettings_CAGR_Display_Complete )
-                SuccessWindowPopup_Toggle(true);
-            FeaturesDependingOnPuzzleSolved();
-        }
-    }
-    else
-    {
-        g_bPuzzleSolved = false;
-    }
+    if ( g_bPuzzleSolved )
+        return; // nothing to do here
+    if ( iGR_Correct == iTot )
+        g_bGridSolved = true;
+    if ( iCA_Correct == iCARows)
+        g_bAnswersSolved = true;
+    g_bPuzzleSolved = g_bAnswersSolved && g_bGridSolved;        
+    if ( g_bPuzzleSolved && g_bSettings_CAGR_Display_Complete )
+        SuccessWindowPopup_Toggle(true);
+    FeaturesDependingOnPuzzleSolved();
 }

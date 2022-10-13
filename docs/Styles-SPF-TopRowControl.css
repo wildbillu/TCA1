@@ -23,7 +23,7 @@
     background-color:white;
 }
 
-.Row_DualClue
+.CAB_Row_DualClue
 {
     padding: 0px;
     height: 2%;
@@ -32,12 +32,12 @@
     border-collapse: collapse;    
     outline: none;    
     text-align: center;
-    font-size: 2.5vmin;
+    font-size: 20px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
 }
 
-.Row_DualClue_S
+.CAB_Row_DualClue_S
 {
     padding: 0px;
     height: 2%;
@@ -46,7 +46,7 @@
     border-collapse: collapse;    
     outline: none;    
     text-align: center;
-    font-size: 2.0vmin;
+    font-size: 20px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
 }
@@ -102,13 +102,12 @@
 .TopRowControl_Button
 {
     border: 0px;
-    background-color:red;
+    background-color:aliceblue;
     padding: 0px;
     height: 32px;
     width:32px;
     outline: none;
-    caret-color: red;
+    caret-color: transparent;
     color:black;
-
 }
 

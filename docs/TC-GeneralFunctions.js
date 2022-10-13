@@ -2,16 +2,16 @@
 // 
 var sToDisplay = '';
 
-function CharValidEntry(cForceCharacter) 
+function CharValidEntry(cLetter) 
 {
-    if ( cForceCharacter != '' && cForceCharacter !=' ' && cForceCharacter != g_sCharMeaningNotSet )
+    if ( cLetter != '' && cLetter !=' ' && cLetter != g_TC_cCharMeaningNotSet )
         return true;
     return false;
 }
 
-function IfCharNotSet(cForceCharacter) 
+function IfCharNotSet(cLetter) 
 {
-    if ( cForceCharacter != '' && cForceCharacter !=' ' && cForceCharacter != g_sCharMeaningNotSet )
+    if ( cLetter != '' && cLetter !=' ' && cLetter != g_TC_cCharMeaningNotSet )
         return true;
     return false;
 }
@@ -38,6 +38,7 @@ function MakeInputNotReadOnly(sId)
     sInner = sInner.replace('readonly', '');
     elem.innerHTML = sInner;
 }
+
 
 function MakeInputReadOnlyForceValueIfNotAlready(sId, sForceLetter)
 {

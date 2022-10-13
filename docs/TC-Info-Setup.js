@@ -1,6 +1,9 @@
 // TC-Button-Info.js
 //
+var g_sCAOnInfoClick = '';
+var g_sGRBOnInfoClick = '';
 var g_bButton_Info_Active = false;
+
 function Load_Button_Info()
 {
     var sPopupWindow = '';
@@ -23,8 +26,6 @@ function Make_Button_Info()
     return sInnerHTML;
 }
 
-var g_sCAOnInfoClick = '';
-var g_sGROnInfoClick = '';
 
 function Button_Info_Click()
 {
@@ -34,17 +35,17 @@ function Button_Info_Click()
     popup.classList.toggle("show");
     if ( !g_bButton_Info_Active )
     {
-        g_sCAOnInfoClick = g_sCAidWithFocus;
-        g_sGROnInfoClick = g_GR_sFocus;
+        g_sCAOnInfoClick = g_CAB_Focus_sId;
+        g_sGRBOnInfoClick = g_GRB_Focus_sId;
     }
     else
     {
         if ( g_sCAOnInfoClick != '')
             document.getElementById(g_sCAOnInfoClick).focus();
-        if ( g_sGROnInfoClick != '')
-            document.getElementById(g_sGROnInfoClick).focus();
+        if ( g_sGRBOnInfoClick != '')
+            document.getElementById(g_sGRBOnInfoClick).focus();
         g_sCAOnInfoClick = '';
-        g_sGROnInfoClick = '';
+        g_sGRBOnInfoClick = '';
     }
     g_bButton_Info_Active = !g_bButton_Info_Active;
 }

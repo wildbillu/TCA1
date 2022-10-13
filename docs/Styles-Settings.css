@@ -1,7 +1,7 @@
 /* Styles-Settings.css */
 .Settings_BackgroundColor
 {
-  background-color:lightblue;
+  background-color:white;
 }
 
 .Settings_DivBorder
@@ -19,47 +19,62 @@
 
 .Settings_SubtitleRow
 {
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:normal; 
   height:15px;
   font-size: 15px;
-  color:green;
+  color:black;
 }
 
 .Settings_CloseBoxRow
 {
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal; 
+  font-weight:bold; 
   text-align:center;
   font-size: 25px;
-  color:blue;
+  color:black;
 }
 
 .Settings_CloseBox 
 {
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal; 
   width:60px;
   height:21px;
   border:1px solid blue;
   font-size: 15px;
-  padding-top: px;
+  padding-top: 0px;
   background-color:lightblue;
 }
 
 .Settings_CheckBoxRow
 {
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal; 
   height:15px;
   text-align: center;
 }
 
 .Settings_CheckBox
 {
+  background-color: white;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal; 
   font-size: 12px;
+  border:1px;
   color:blue;
   width: 15px;
-  height: 15px;
+  height: 20px;
 }
 
 .Settings_CheckBoxRowTitle
 {
+  font-family:Arial, Helvetica, sans-serif;
+  font-style:normal; 
   text-align:right;
   font-size: 15px;
-  color:red;
+  color:blue;
 }
 
 .Settings_Center

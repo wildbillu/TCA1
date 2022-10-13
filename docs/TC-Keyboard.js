@@ -1,9 +1,45 @@
 // TC-keyboard.js
 // 
+function CAB_HandleKeyboardPress(keypressed)
+{
+    if ( g_CAB_Focus_sId == "")
+        return;
+    iRow = CAB_RowFromId(g_CAB_Focus_sId);
+    iLetter = CAB_LetterFromId(g_CAB_Focus_sId);
+    var cInitialStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    if ( cInitialStatus == g_TC_cCodeMeaning_Correct ) 
+    {
+        CAB_SetFocusToNext(iRow, iLetter);
+        return;
+    }
+    var sCC = String.fromCharCode(8);
+    if ( keypressed == sCC )
+        sToSet = ' ';
+    CAB_onkeydown(keypressed, iRow, iLetter);
+}
+
+function GRB_HandleKeyboardPress(keypressed)
+{
+    if ( g_GRB_Focus_sId == "")
+        return;
+    iRow = GRB_RowFromId(g_GRB_Focus_sId);
+    iLetter = GRB_LetterFromId(g_GRB_Focus_sId);
+    var cInitialStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    if ( cInitialStatus == g_TC_cCodeMeaning_Correct ) 
+    {
+        GRB_SetFocusToNext(iRow, iLetter);
+        return;
+    }
+    var sCC = String.fromCharCode(8);
+    if ( keypressed == sCC )
+        sToSet = ' ';
+    GRB_onkeydown(keypressed, iRow, iLetter);
+}
+
 function HandleKeyboardPress(sLetter)
 {
-    GR_HandleKeyboardPress(sLetter);
-    CA_HandleKeyboardPress(sLetter);
+    GRB_HandleKeyboardPress(sLetter);
+    CAB_HandleKeyboardPress(sLetter);
 }
 
 function KB_SetButtonRow(sLetters)
@@ -57,44 +93,4 @@ function KB_Set_innerHTML()
     sInner += '</TABLE>';
     document.getElementById('KB').innerHTML = sInner;
 }
-
-function GR_HandleKeyboardPress(keypressed)
-{
-    if ( g_GR_sFocus == "")
-        return;
-    iRow = GR_RowFromId(g_GR_sFocus);
-    iLetter = GR_LetterFromId(g_GR_sFocus);
-    if ( IsInputReadOnly(GR_MakeTag_TD(iRow, iLetter)) )
-    {
-        GR_SetFocusToNext(iRow, iLetter);
-        return;
-    }
-    var sToSet = keypressed;
-    var sCC = String.fromCharCode(8);
-    if ( keypressed == sCC )
-        sToSet = ' ';
-    document.getElementById(g_GR_sFocus).value = sToSet;
-    GR_onkeydown(keypressed, iRow, iLetter);
-}
-
-function CA_HandleKeyboardPress(keypressed)
-{
-    if ( g_sCAidWithFocus == "")
-        return;
-    iRow = CA_RowFromId(g_sCAidWithFocus);
-    iLetter = CA_LetterFromId(g_sCAidWithFocus);
-    var bIsReadOnly = IsInputReadOnly(CA_MakeTag_TD(iRow, iLetter))
-    if ( bIsReadOnly )
-    {
-        CA_SetFocusToNext(iRow, iLetter);
-        return;
-    }
-    var sToSet = keypressed;
-    var sCC = String.fromCharCode(8);
-    if ( keypressed == sCC )
-        sToSet = ' ';
-    document.getElementById(g_sCAidWithFocus).value = sToSet;
-    CA_onkeydown(keypressed, iRow, iLetter);
-}
-
 

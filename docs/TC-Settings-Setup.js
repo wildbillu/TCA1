@@ -14,7 +14,7 @@ function MakeCheckBox(bChecked, sidRaw, stitle )
     sCheckBox += '<TR align=center><TD>'
     sCheckBox += ' <TABLE class="Settings_TableBorder" ' + sIdA + ' width="90%"><TR>';
     sCheckBox += '  <TD width="95%" '+ sIdB + ' class="Settings_CheckBoxRowTitle">' + stitle + '</TD>';
-    sCheckBox += '  <TD width="5%" class="RowBox"><INPUT type="checkbox" ' + sChecked +' class="Settings_CheckBox"' + sId + ' onclick="Button_Settings_GetAllAndSaveCookie();"></TD>';
+    sCheckBox += '  <TD width="5%" class="Settings_CheckBox"><INPUT type="checkbox" ' + sChecked +' class="Settings_CheckBox"' + sId + ' onclick="Button_Settings_GetAllAndSaveCookie();"></TD>';
     sCheckBox += ' </TR></TABLE>';
     sCheckBox += '</TD></TR>'
     return sCheckBox;
@@ -45,7 +45,6 @@ function Load_Button_Settings_Popup()
     sPopupWindow += MakeSubTitleRow('Check and Show Correct Items', 'Settings_STA')
     sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Answers_CheckRow, 'Settings_CAGR_Answers_CheckRow', 'Check each answer and mark when correct');
     sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Answers_ShowCorrectLetters, 'Settings_CAGR_Answers_ShowCorrectLetters', 'Mark each square when correct');
-    //sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Answers_CheckOverall, 'CAGR_Answers_CheckOverall', 'Check Grid and Clue Answers and signal correct');
     sPopupWindow += MakeSubTitleRow('Actions On Add Letter', 'Settings_STB')
     sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares, 'Settings_CAGR_Navigation_WithinWord_SkipFilledSquares', 'Skip Filled Squares')
     sPopupWindow += MakeCheckBox(g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare, 'Settings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare', 'Jump to empty square at end of word')
@@ -74,8 +73,8 @@ function Button_Settings_GetAllAndSaveCookie()
     StoreCookie_Settings();
 }
 
-var g_sCAOnSettingsClick = '';
-var g_sGROnSettingsClick = '';
+var g_sCABOnSettingsClick = '';
+var g_sGRBOnSettingsClick = '';
 
 function Button_Settings_Toggle()
 {
@@ -83,17 +82,17 @@ function Button_Settings_Toggle()
     popup.classList.toggle("show");
     if ( !g_bButton_Settings_Active )
     {
-        g_sCAOnSettingsClick = g_sCAidWithFocus;
-        g_sGROnSettingsClick = g_GR_sFocus;
+        g_sCABOnSettingsClick = g_CAB_Focus_sId;
+        g_sGRBOnSettingsClick = g_GRB_Focus_sId;
     }
     else
     {
-        if ( g_sCAOnSettingsClick != '')
-            document.getElementById(g_sCAOnSettingsClick).focus();
-        if ( g_sGROnSettingsClick != '')
-            document.getElementById(g_sGROnSettingsClick).focus();
-        g_sCAOnSettingsClick = '';
-        g_sGROnSettingsClick = '';
+        if ( g_sCABOnSettingsClick != '')
+            document.getElementById(g_sCABOnSettingsClick).focus();
+            if ( g_sGRBOnSettingsClick != '')
+            document.getElementById(g_sGRBOnSettingsClick).focus();
+        g_sCABOnSettingsClick = '';
+        g_sGRBOnSettingsClick = '';
     }
     g_bButton_Settings_Active = !g_bButton_Settings_Active;
 }

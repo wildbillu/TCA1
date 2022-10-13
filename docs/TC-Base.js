@@ -36,31 +36,20 @@ window.onclick = function(event)
 
 function SetInitialSelection()
 {
-//    var sNextBox = CA_MakeTag_Id(0, 0);
-    var sNextBox = GR_MakeTag_Id(0, 1);
-	document.getElementById(sNextBox).focus();
+    var sCABBox = CAB_MakeId(0, 0);
+    var sGRBBox = GRB_MakeId(0, 1);
+	document.getElementById(sGRBBox).focus();
 }
-
 
 function LoadInnerHTML()
 {
 	LoadTwistiCrossAndPopup();
 	LoadSuccessWindowPopup();	
 	document.getElementById('PT').innerHTML = g_sPuzzleTitle;
-//
-	LoadGridInnerHTML();
-//
 	document.getElementById('CA01CI').innerHTML = g_sSketchiToonsClueIntro;
 	document.getElementById('CA01C').innerHTML = g_sSketchiToonsClueItself;
-	var s01 = Clues1And2Entries_MakeInnerHTML_NoImage();
-	document.getElementById('CA_01').innerHTML = s01;
-
-// here we make a table the rest of the rows
-	var iLastRow = g_aClues.length;
-	for ( iX = 2; iX < iLastRow; iX++ )
-	{
-		CA_SetRow(iX);
-	}
+	GRB_MakeGridAsButtons();
+	CAB_LoadClueAnswerSection();
 	KB_Set_innerHTML();
 	CA_Place_Popup_Setup();
 	SetInitialSelection();

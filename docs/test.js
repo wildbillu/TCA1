@@ -6,7 +6,7 @@ var iGridHeight     = 4;
 var sGridAnswers                = '.TOOSURFTREFUFO.';
 // these need to be equivalent to blank - they will be overwritten if proper cookie
 var sGridAnswersPlayer          = '.--------------.';
-var sGridStatusPlayer           = '.OOOOOOOOOOOOOO.';
+var sGridStatusPlayer           = '.NNNNNNNNNNNNNN.';
 var sGridNumbering              = '-0123---4---5---';
 //
 var iClueAnswers    = 8;
@@ -14,7 +14,7 @@ var sClues  = 'A|And|Switch Position|Also|Apt name for a worrier|Unfit to be eat
 var sAnswers                    = 'SURF|TURF|OFF|TOO|STU|TREF|OREO|UFO';
 // these need to be equivalent to blank - they will be overwritten if proper cookia
 var sAnswersPlayer             = '----|----|---|---|---|----|----|---';
-var sStatusPlayer              = 'OOOO|OOOO|OOO|OOO|OOO|OOOO|OOOO|OOO';
+var sStatusPlayer              = 'NNNN|NNNN|NNN|NNN|NNN|NNNN|NNNN|NNN';
 
 var sPuzzleTitle    = "Dinner Anyone?n";
 var sSketchiToonsClueItself = 'Rhyming Restaurant Choice';

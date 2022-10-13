@@ -1,5 +1,27 @@
 /* Styles-Place.css */
 
+.Place_Button_Disabled
+{
+  width:40px;
+  height:21px;
+  border:1px solid black;
+  font-size: 15px;
+  color: #666666;
+  padding: 0px;
+  background-color:#EEEEEE;
+}
+
+.Place_Button
+{
+  width:40px;
+  color: black;
+  height:21px;
+  border:1px solid black;
+  font-size: 15px;
+  padding: 0px;
+  background-color:white;
+}
+
 .Place_Across_Row_Controls
 {
   width:50%;
@@ -24,7 +46,7 @@
     border-collapse: collapse;    
     outline: none;    
     text-align: center;
-    font-size: 1.0vmin;
+    font-size: 10px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:bold;
     color:black;

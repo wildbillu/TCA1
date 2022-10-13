@@ -3,12 +3,12 @@
 
 function Dropdown_More_ResetPuzzle()
 {
-    CA_ClearPuzzle();
-    GR_ClearPuzzle();
+    CAB_ClearAnswers();
+    GRB_ClearGrid();
     StoreCookie_Puzzle();
     Status_Check();  
     FeaturesDependingOnPuzzleSolved();
-    elem = document.getElementById(CA_MakeTag_Id(0,0)).focus();
+    elem = document.getElementById(CAB_MakeId(0,0)).focus();
 }
 
 function Dropdown_CanOpen()
@@ -24,12 +24,12 @@ function Dropdown_CanOpen()
 
 var g_bDropdown_Menu_Active = false;
 var g_sCAOnMoreClick = '';
-var g_sGROnMoreClick = '';
+var g_sGRBOnMoreClick = '';
 
 function Dropdown_More_CheckPuzzle()
 {
-    CA_ShowCheckPuzzle('Check');
-    GR_ShowCheckPuzzle('Check');
+    GRB_ShowCheckGrid('Check');
+    CAB_ShowCheckAnswers('Check');
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide();
@@ -37,7 +37,7 @@ function Dropdown_More_CheckPuzzle()
 
 function Dropdown_More_SolveAnswers()
 {
-    CA_ShowCheckPuzzle('Show');
+    CAB_ShowCheckAnswers('Show');
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide();
@@ -45,7 +45,7 @@ function Dropdown_More_SolveAnswers()
 
 function Dropdown_More_SolveGrid()
 {
-    GR_ShowCheckPuzzle('Show');
+    GRB_ShowCheckGrid('Show');
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide();
@@ -53,8 +53,8 @@ function Dropdown_More_SolveGrid()
 
 function Dropdown_More_SolvePuzzle()
 {
-    CA_ShowCheckPuzzle('Show');
-    GR_ShowCheckPuzzle('Show');
+    CAB_ShowCheckAnswers('Show');
+    GRB_ShowCheckGrid('Show');
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide();
@@ -62,8 +62,8 @@ function Dropdown_More_SolvePuzzle()
 
 function Dropdown_More_ShowSquare()
 {
-    if ( !CA_ShowCheckSquare('Show') )
-        GR_ShowCheckSquare('Show');
+    if ( !CAB_ShowCheckActiveSquare('Show') )
+        GRB_ShowCheckActiveSquare('Show');
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide();
@@ -71,16 +71,17 @@ function Dropdown_More_ShowSquare()
 
 function Dropdown_More_CheckSquare()
 {
-    if ( !CA_ShowCheckSquare('Check') )
-        GR_ShowCheckSquare('Check')
+    if ( !CAB_ShowCheckActiveSquare('Check') )
+        GRB_ShowCheckActiveSquare('Check')
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide()
 }
+
 function Dropdown_More_ShowAnswer()
 {
-    if ( !CA_ShowCheckAnswer('Show') )
-        GR_ShowCheckAnswer('Show');
+    if ( !CAB_ShowCheckAnswerActiveRow('Show') )
+        GRB_ShowCheckAnswerActiveRowOrColumn('Show');
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide();
@@ -88,8 +89,8 @@ function Dropdown_More_ShowAnswer()
 
 function Dropdown_More_CheckAnswer()
 {
-    if ( !CA_ShowCheckAnswer('Check') )
-        GR_ShowCheckAnswer('Check')
+    if ( !CAB_ShowCheckAnswerActiveRow('Check') )
+        GRB_ShowCheckAnswerActiveRowOrColumn('Check');
     StoreCookie_Puzzle();    
     Status_Check();
     Dropdown_More_Hide()
@@ -100,8 +101,8 @@ function Dropdown_More_Show()
 // prevent open if other popup is open
     if ( !Dropdown_CanOpen() )
         return false;
-    g_sCAOnMoreClick = g_sCAidWithFocus;
-    g_sGROnMoreClick = g_GR_sFocus;
+    g_sCAOnMoreClick = g_CAB_Focus_sId;
+    g_sGRBOnMoreClick = g_GRB_Focus_sId;
     element = document.getElementById("Dropdown_More_Content");
     element.classList.toggle("show");
     g_bDropdown_Menu_Active = true;
@@ -112,30 +113,28 @@ function Dropdown_More_Hide()
 {
     if ( g_sCAOnMoreClick != '')
         document.getElementById(g_sCAOnMoreClick).focus();
-    if ( g_sGROnMoreClick != '')
-        document.getElementById(g_sGROnMoreClick).focus();
+    if ( g_sGRBOnMoreClick != '')
+        document.getElementById(g_sGRBOnMoreClick).focus();
     g_sCAOnMoreClick = '';
-    g_sGROnMoreClick = '';
+    g_sGRBOnMoreClick = '';
     e = document.getElementById("Dropdown_More_Content");
     e.classList.toggle("show");
     g_bDropdown_Menu_Active = false;
 }
 
-
-
 function Insertable_Dropdown_Menu_More()
 {
     var sDropdownMenu = ''
     sDropdownMenu += '<span class="Dropdown_SpanPadding" Id="span1"></span>'; // this is needed to position the dropdown properly
-    sDropdownMenu += '<div Id="Dropdown_More" width=300 class="Dropdown_More">';
+    sDropdownMenu += '<div Id="Dropdown_More" width=320 class="Dropdown_More">';
     sDropdownMenu += '   <div Id="Dropdown_More_Content" class="Dropdown_More_Content" align=center>';
-    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowAnswer" onclick="Dropdown_More_ShowAnswer();">Reveal Answer</BUTTON>';
-    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowSquare" onclick="Dropdown_More_ShowSquare();">Reveal Square</BUTTON>';
-    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveAnswers" onclick="Dropdown_More_SolveAnswers();">Reveal Answers</BUTTON>';
-    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveGrid" onclick="Dropdown_More_SolveGrid();">Reveal Grid</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowAnswer" onclick="Dropdown_More_ShowAnswer();">Reveal Selected Answer</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ShowSquare" onclick="Dropdown_More_ShowSquare();">Reveal Selected Square</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveAnswers" onclick="Dropdown_More_SolveAnswers();">Reveal Answers To Clues</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveGrid" onclick="Dropdown_More_SolveGrid();">Reveal Answers To Grid</BUTTON>';
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolvePuzzle" onclick="Dropdown_More_SolvePuzzle();">Reveal Puzzle</BUTTON>';
-    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckAnswer" onclick="Dropdown_More_CheckAnswer();">Check Answer</BUTTON>';
-    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckSquare" onclick="Dropdown_More_CheckSquare();">Check Square</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckAnswer" onclick="Dropdown_More_CheckAnswer();">Check Selected Answer</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckSquare" onclick="Dropdown_More_CheckSquare();">Check Selected Square</BUTTON>';
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckPuzzle" onclick="Dropdown_More_CheckPuzzle();">Check Puzzle</BUTTON>';
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ResetPuzzle" onclick="Dropdown_More_ResetPuzzle();">Reset All</BUTTON>';
     sDropdownMenu += '   </div>';

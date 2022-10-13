@@ -4,13 +4,8 @@ var g_sPuzzleName = '';
 var g_sPuzzleCreditAuthor = 'By Sketchi Bill';
 var g_sPuzzleCreditDate = 'September 26, 2022';
 var g_sCookie;
-var g_cCharacterDenotingBlackSquare = '.';
-var g_sCADelimiter = '|';
 var g_GR_sLastCharacterRejected = '';
 var g_GR_bAcross = true;
-var g_sCharMeaningNotSet = '-';
-var g_GR_sFocus = '';
-var g_sCAidWithFocus = '';
 var g_bDisplayMessages = true;
 //
 var g_sSketchiToonsClueIntro = 'SketchiToons Clue to Dual Answer';
@@ -46,6 +41,9 @@ var g_sDualClueBefore;
 var g_sDualClueMiddle;
 var g_sDualClueEnd;
 var g_bPuzzleSolved = false;
+var g_bGridSolved = false;
+var g_bAnswersSolved = false;
+var g_sPuzzleVersion = 'October 10, 2022'
 
 function LoadPuzzle()
 {
@@ -61,13 +59,13 @@ function LoadPuzzle()
     g_iGridHeight = iGridHeight;
 // CA Stuff
     g_iClues   = iClueAnswers;
-    g_aClues   = sClues.split(g_sCADelimiter);
+    g_aClues   = sClues.split(g_TC_cGeneralDelimiter);
     g_iAnswers = g_iClues;
-    g_aAnswers = sAnswers.split(g_sCADelimiter);
+    g_aAnswers = sAnswers.split(g_TC_cGeneralDelimiter);
     g_sAnswers              = sAnswers;
-    g_aAnswersPlayer        = sAnswersPlayer.split(g_sCADelimiter);
+    g_aAnswersPlayer        = sAnswersPlayer.split(g_TC_cGeneralDelimiter);
     g_sAnswersPlayer        = sAnswersPlayer;
-    g_aAnswersStatusPlayer  = sStatusPlayer.split(g_sCADelimiter);
+    g_aAnswersStatusPlayer  = sStatusPlayer.split(g_TC_cGeneralDelimiter);
     g_sAnswersStatusPlayer  = sStatusPlayer;
     if ( g_aClues.length != g_iClues || g_aAnswers.length != g_iClues || g_aAnswersPlayer.length != g_iClues)
         alert('dataProblem.' + g_iClues + g_aClues.Length + g_aAnswers.Length + g_aAnswersPlayer.length);
@@ -88,8 +86,8 @@ function LoadPuzzle()
         var sAnswer = '';
         for ( var iLL = 0; iLL < g_iGridWidth; iLL++ )
         {
-            var cThisChar = GR_ForRowLetter_GetAnswer(iRR, iLL);
-            if ( cThisChar != g_cCharacterDenotingBlackSquare )
+            var cThisChar = GRB_ForRowLetter_GetAnswer(iRR, iLL);
+            if ( cThisChar != g_TC_cCharacterDenotingBlackSquare )
             {
                 sAnswer += cThisChar;
                 if ( sNumber == '' )
@@ -106,8 +104,8 @@ function LoadPuzzle()
         var sAnswer = '';
         for ( var iRR = 0; iRR < g_iGridHeight; iRR++ )
         {
-            var cThisChar = GR_ForRowLetter_GetAnswer(iRR, iLL);
-            if ( cThisChar != g_cCharacterDenotingBlackSquare )
+            var cThisChar = GRB_ForRowLetter_GetAnswer(iRR, iLL);
+            if ( cThisChar != g_TC_cCharacterDenotingBlackSquare )
             {
                 sAnswer += cThisChar;
                 if ( sNumber == '' )

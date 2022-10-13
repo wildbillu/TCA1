@@ -7,19 +7,19 @@ function CA_PlaceButton_Setup(iRow)
     var sFunctionsToCall = ''; 
     sFunctionsToCall += ' onclick="return CA_Place(' + iRow + ');"';
     var sButton = '';
-    sButton += '<TD><BUTTON ' + sId + sFunctionsToCall + '>Place</BUTTON></TD>'
+    sButton += '<TD><BUTTON class="Place_Button" ' + sId + sFunctionsToCall + '>Place</BUTTON></TD>'
     return sButton;
 }
 
 function CA_Place_Down(iLetter, sSetTo)
 {
-    GR_ForLetterSetAnswerTo(iLetter, sSetTo);
+    GRB_ForLetterSetAnswerTo(iLetter, sSetTo);
     Place_Popup_Toggle();
 }
 
 function CA_Place_Across(iRow, sSetTo)
 {
-    GR_ForRowSetAnswerTo(iRow, sSetTo);
+    GRB_ForRowSetAnswerTo(iRow, sSetTo);
     Place_Popup_Toggle();
 }
 
@@ -27,11 +27,17 @@ function CA_Place(iRow_CA)
 {
     if ( !Dropdown_CanOpen() )
         return;
+// move focus to first character of that row
+    var sNextBox = CAB_MakeId(iRow_CA, 0);
+    document.getElementById(sNextBox).focus();
     var sWordBeingPlaced = g_aAnswersPlayer[iRow_CA];
     var iWordBeingPlacedLength = sWordBeingPlaced.length;
-    sWordBeingPlaced.replace(' ', '-');
-    sWordBeingPlaced.replace('', '-');
-    sWordBeingPlaced.replace('.', '-');
+    for ( iCC = 0; iCC < iWordBeingPlacedLength; iCC++)
+    {
+        var iCode = sWordBeingPlaced.charCodeAt(iCC);
+        if ( iCode == 8 || iCode == 32 || iCode == 46 )
+           sWordBeingPlaced = replaceAt(sWordBeingPlaced, iCC,"-")
+    }
     var sWordBeingPlaced_Title = 'Place : ' + sWordBeingPlaced;
     elem = document.getElementById("Place_WordBeingPlaced");
     elem.innerHTML = sWordBeingPlaced_Title;

@@ -53,7 +53,7 @@ setline('CP:cookiemissing=')
     var sCookieValue = sOurCookie_Puzzle.substring(iEqual + 1);
     var aOurValues = sCookieValue.split(g_cCookieDelimiter);
     var iOurValues = aOurValues.length;
-    if ( iOurValues != 7 )
+    if ( iOurValues != 9 )
     {
 setline('CP:not7values')
         return false;
@@ -68,6 +68,8 @@ setline("CP:wrong puzzle:" + sPuzzleName + ':' + aOurValues[0])
     sGridAnswersPlayer = aOurValues[3];
     sGridStatusPlayer = aOurValues[4];
     g_bPuzzleSolved = IsTrue(aOurValues[6]);
+    g_bGridSolved = IsTrue(aOurValues[7]);
+    g_bAnswersSolved = IsTrue(aOurValues[8]);
 setline('CP.LoadedPuzzleCookie');
 }
 
@@ -95,6 +97,10 @@ function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sG
     sCookie += iSeconds;
     sCookie += g_cCookieDelimiter;
     sCookie += g_bPuzzleSolved;
+    sCookie += g_cCookieDelimiter;
+    sCookie += g_bGridSolved;
+    sCookie += g_cCookieDelimiter;
+    sCookie += g_bAnswersSolved;
     var exdays = 365;
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
