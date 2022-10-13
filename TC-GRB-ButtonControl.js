@@ -2,7 +2,7 @@
 
 function GRB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
 {
-    alert('SB:' + iRow + iLetter + cCodeForActivity)
+    if ( iRow == 3 && iLetter == 2) alert('SB:' + iRow + iLetter + cCodeForActivity)
     var cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
     var cStatusPlayer = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
     var cNumbering    = g_sGridNumbering.charAt(iRow*g_iGridWidth+iLetter);
@@ -10,7 +10,7 @@ function GRB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
     sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, cNumbering, cCodeForActivity)
     sId = GRB_MakeId(iRow, iLetter)
     document.getElementById(sId).style.backgroundImage = sStatusImage;
-alert('SB:' + iRow + iLetter + cCodeForActivity + '.Done')
+    if ( iRow == 3 && iLetter == 2) alert('SB:' + iRow + iLetter + cCodeForActivity + '.Done')
 }
 
 function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cSelection)
