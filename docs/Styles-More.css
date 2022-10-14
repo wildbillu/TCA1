@@ -24,7 +24,7 @@
   min-width: 150px;
   background-color: white;
 }
-.Dropdown_More_Button:hover{background-color: red;}
+.Dropdown_More_Button:hover{background-color: lightblue;}
 
 .Dropdown_More_Button_Disabled
 {

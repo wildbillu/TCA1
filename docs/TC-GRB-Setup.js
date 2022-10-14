@@ -3,7 +3,9 @@
 function GRB_MakeGridAsButtons()
 {
     for ( var iRow = 0; iRow < g_iGridHeight; iRow++ )
+    {
         GRB_MakeGridRowAsButtons(iRow);
+    }
 }
 
 function GRB_MakeGridRowAsButtons(iRow)

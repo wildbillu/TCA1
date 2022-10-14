@@ -57,7 +57,7 @@ function LoadPuzzle()
     g_sPuzzleTitle = sPuzzleTitle;
     g_iGridWidth = iGridWidth;
     g_iGridHeight = iGridHeight;
-// CA Stuff
+    // CA Stuff
     g_iClues   = iClueAnswers;
     g_aClues   = sClues.split(g_TC_cGeneralDelimiter);
     g_iAnswers = g_iClues;

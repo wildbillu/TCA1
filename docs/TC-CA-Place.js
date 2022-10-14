@@ -42,6 +42,8 @@ function CA_Place(iRow_CA)
     elem = document.getElementById("Place_WordBeingPlaced");
     elem.innerHTML = sWordBeingPlaced_Title;
     var sAcrossinnerHTML = '<TABLE>';
+    var aHints = [];
+    var sHint = ''
     for ( iR = 0; iR < g_iGridHeight; iR++)
     {
         var sGridAnswer = g_GR_aAcrossAnswers[iR];
@@ -54,6 +56,9 @@ function CA_Place(iRow_CA)
             var sAcrossChoiceRow = iR.toString();
             var sFunctionsToCall = 'CA_Place_Across(' + sAcrossChoiceRow + ', \'' + sWordBeingPlaced + '\');';
             sAcrossinnerHTML += '<TR><TD><BUTTON class="Place_SetBox_Across" onclick="' + sFunctionsToCall + '">' + sAcrossChoice + ' Across</TD></TR>';
+//            
+            sHint = sAcrossChoice + ' Across Hint: ' + GRB_ForRowMakeHints(iR, sWordBeingPlaced);
+            aHints.push(sHint)
         }
     }
     sAcrossinnerHTML += '</TABLE>';
@@ -73,11 +78,29 @@ function CA_Place(iRow_CA)
             var sDownChoiceLetter = iL.toString();
             var sFunctionsToCall = 'CA_Place_Down(' + sDownChoiceLetter + ', \'' + sWordBeingPlaced + '\');';
             sDowninnerHTML += '<TD><BUTTON class="Place_SetBox_Down" onclick="' + sFunctionsToCall +'">' + sDownChoice + '  D o w n</TD>';
+            sHint = sDownChoice + ' Down. Hint: ' + GRB_ForLetterMakeHints(iL, sWordBeingPlaced);
+            aHints.push(sHint)
         }
     }
+//
     elem = document.getElementById("Place_Down_Row_Controls");
     elem.innerHTML = sDowninnerHTML;
 //
+    elem = document.getElementById("Place_Hints");
+    var sHintsHTML = ''
+    sHintsHTML += '<TABLE>'
+    for ( i = 0; i < aHints.length; i++ )
+    {
+        var sThisHint = aHints[i];
+        var sClass = 'class="Place_Hints_Errors" '
+        if ( sThisHint.includes('No Warnings') )
+            sClass = 'class="Place_Hints_NoErrors" '
+        sHintsHTML += '<TR><TD ' + sClass + '>';
+        sHintsHTML += sThisHint;
+        sHintsHTML += '</TR></TD>';
+    }
+    sHintsHTML += '</TABLE>';
+    elem.innerHTML = sHintsHTML;
     Place_Popup_Toggle()
 }
 
@@ -100,7 +123,7 @@ function CA_Place_Popup_Setup()
     sPopupWindow += '        <TD align=right Id="Place_Across_Row_Controls" class="Place_Across_Row_Controls">fixme</TD>'
     sPopupWindow += '        <TD align=left Id="Place_Down_Row_Controls" class="Place_Down_Row_Controls">fixme</TD>'
     sPopupWindow += '      </TR>'
-    sPopupWindow += '      <TR><TD colspan=2><DIV class="Place_Center" Id="Place_Hints"><textarea class="Place_Content_Common_Multiline Place_BackgroundColor" readonly disabled rows="2" cols="40" border=1px>some hints</textarea></DIV></TD></TR>'
+    sPopupWindow += '      <TR align=center><TD colspan=2 Id="Place_Hints">HintsGoHere</TD></TR>'
     sPopupWindow += '</TABLE>'
     sPopupWindow += '</div>';
     sPopupWindow += '</span>';

@@ -7,7 +7,7 @@ function LoadTwistiCrossAndPopup()
 {
     var sTwistiCrossImage = '';
     sTwistiCrossImage += '<TABLE>'
-    sTwistiCrossImage += '<TR><TD>'    
+    sTwistiCrossImage += '<TR><TD width=200px>'    
     sTwistiCrossImage += '<img onclick="SketchiToonPopup_Toggle();" src="' + g_sSketchiToonsFilename + '" alt="BB" height="200">';
     sTwistiCrossImage += '</TR></TD></TABLE>'  
     document.getElementById('TwistiCrossImage').innerHTML = sTwistiCrossImage;
