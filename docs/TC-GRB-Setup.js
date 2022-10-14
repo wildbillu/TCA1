@@ -10,7 +10,6 @@ function GRB_MakeGridAsButtons()
 
 function GRB_MakeGridRowAsButtons(iRow)
 {
-    alert('MG')
     var sInnerRowHTML = '';
     for ( var iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
     {
@@ -28,11 +27,9 @@ function GRB_MakeGridRowAsButtons(iRow)
     var sDiv = 'GRB_Div' + iRow;
     document.getElementById(sDiv).innerHTML=sInnerRowHTML;
 //
-alert('MG1')
 for ( var iLL = 0; iLL < g_iGridWidth; iLL++ )
     {
     
         GRB_ForRowLetter_SetButton(iRow, iLL, g_TC_cCodeMeaning_Inactive)
     }
-alert('MG2')
 }
