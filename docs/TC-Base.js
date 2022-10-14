@@ -17,11 +17,15 @@ window.onclick = function(event)
 	if ( g_bPlaceWindow_Active && !sTargetId.startsWith('Place_') )
 		Place_Popup_Toggle();
 
-	if ( g_bButton_Settings_Active && sTargetId != '' && ( sTargetId.indexOf('Settings') == -1) )
-	{
-		var popup = document.getElementById("Button_Settings");
-		popup.classList.toggle("show");
-		g_bButton_Settings_Active = !g_bButton_Settings_Active;
+	if ( g_bButton_Settings_Active && sTargetId != '')
+	{   
+		if (  sTargetId.indexOf('Settings') == -1) 
+//		if ( sTargetId == 'Button_Settings_Image' || sTargetId.indexOf('Settings') == -1) 
+		{
+			var popup = document.getElementById("Button_Settings");
+			popup.classList.toggle("show");
+			g_bButton_Settings_Active = !g_bButton_Settings_Active;
+		}
 	}
 	if ( g_bDropdown_Menu_Active && ( sTargetId != "Button_More_Image") )
 	{

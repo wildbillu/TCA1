@@ -28,6 +28,7 @@
     <SCRIPT SRC="TC-CAB-HandleEntries.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-ButtonControl.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-Helpers-Answers-Status.js"></SCRIPT>
+    <SCRIPT SRC="TC-CAB-HandleArrows.js"></SCRIPT>
     <SCRIPT SRC="TC-CA-Place.js"></SCRIPT>
 
     <SCRIPT SRC="TC-GRB-Defines.js"></SCRIPT>
@@ -38,6 +39,7 @@
     <SCRIPT SRC="TC-GRB-MoveFocus.js"></SCRIPT>
     <SCRIPT SRC="TC-GRB-HandleEntries.js"></SCRIPT>
     <SCRIPT SRC="TC-GRB-Helpers-Answers-Status.js"></SCRIPT>
+    <SCRIPT SRC="TC-GRB-HandleArrows.js"></SCRIPT>
 
     <SCRIPT SRC="TC-Keyboard.js"></SCRIPT>
     <SCRIPT SRC="TC-SketchiToonsFullWindow.js"></SCRIPT>
@@ -64,7 +66,7 @@ function getResolution()
 
 function LoadValues()
 {
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.010'
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.011'
     getResolution(); 
     var g_bLocal = false;
     var sPageURL = window.location.search.substring(1);
@@ -86,14 +88,13 @@ function LoadValues()
         }
         LoadPuzzleFromFile(sFile);
     }
-//    HandleCookiesOnStart();
-//  
+    HandleCookiesOnStart();
     LoadPuzzle();
     TopRowButtons_Setup();
     LoadInnerHTML();
-
     Status_Check();
     SetInitialSelection();
+/*
     setline('W:' + g_iScreen_Width + " H:" + g_iScreen_Height);
     g_iBody_Width = Math.round(document.body.getBoundingClientRect().width);
     g_iBody_Height= Math.round(document.body.getBoundingClientRect().height);
@@ -101,7 +102,7 @@ function LoadValues()
     g_iHTML_Width = Math.round(document.documentElement.getBoundingClientRect().width);
     g_iHTML_Height= Math.round(document.documentElement.getBoundingClientRect().height);
     setlineAdd(' HTML.W:' + g_iHTML_Width + " H:" + g_iHTML_Height);
-   
+*/   
 }
 </SCRIPT>
 

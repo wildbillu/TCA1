@@ -1,7 +1,5 @@
 // TC-GRB-CoreProcessing.js
 
-
-
 function GRB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
 {
     var cInitialStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
@@ -59,7 +57,6 @@ function GRB_onkeypress(event)
     var ekey = event.key;
     if ( ( ekey >= 'a' && ekey <= 'z' ) || ( ekey >= 'A' && ekey <= 'Z') || ekey == ' ')
         return true; // so character will be processed
-    g_GR_sLastCharacterRejected = ekey;
     if ( event.code == 8 || event.code == 46 )
         return false;
     setline('GRB.NotHandled:' + ekey + '-Code:' + event.code);
@@ -81,39 +78,9 @@ function GRB_onkeydown(key, iRow, iLetter)
         return true;
     }
     // trap the arrow keys
-    if ( key.startsWith('Arrow') )
-    {
-        if ( key.match('Up') )
-        {
-            var sNext = GR_GoUpToNext(iRow, iLetter);
-            GRB_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
-            return true;
-        }
-        else if ( key.match('Down') )
-        {
-            var sNext = GR_GoDownToNext(iRow, iLetter);
-            GRB_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
-            return true;
-        }
-        else if ( key.match('Right') )
-        {
-            var sNext = GR_GoRightToNext(iRow, iLetter);
-// unless the current row is 0 we want to move the focus to the previous row with the same letter
-            GRB_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
-            return true;
-        }
-        else 
-        { // must be left
-            var sNext = GR_GoLeftToNext(iRow, iLetter);
-// unless the current row is 0 we want to move the focus to the previous row with the same letter
-            GRB_MoveFocus(parseInt(sNext.charAt(0)), parseInt(sNext.charAt(1)));
-            return true;
-        }
-    }
-    else
-    {
-        setline('keydown:' + key + 'notprocessed');
-    }
+    if ( GRB_HandleArrows(key, iRow, iLetter) )
+        return true;
+    setline('keydown:' + key + 'notprocessed');
     var sFixThisBox = GRB_MakeId(iRow, iLetter);
     document.getElementById(sFixThisBox).focus();
     document.getElementById(sFixThisBox).setSelectionRange(0,1);

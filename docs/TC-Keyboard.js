@@ -3,42 +3,45 @@
 function CAB_HandleKeyboardPress(keypressed)
 {
     if ( g_CAB_Focus_sId == "")
-        return;
+        return false;
     iRow = CAB_RowFromId(g_CAB_Focus_sId);
     iLetter = CAB_LetterFromId(g_CAB_Focus_sId);
     var cInitialStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-    if ( cInitialStatus == g_TC_cCodeMeaning_Correct ) 
+    if ( cInitialStatus == g_TC_cCodeMeaning_Correct || cInitialStatus == g_TC_cCodeMeaning_Corrected ) 
     {
         CAB_SetFocusToNext(iRow, iLetter);
-        return;
+        return true;
     }
     var sCC = String.fromCharCode(8);
     if ( keypressed == sCC )
         sToSet = ' ';
     CAB_onkeydown(keypressed, iRow, iLetter);
+    return true;
 }
 
 function GRB_HandleKeyboardPress(keypressed)
 {
     if ( g_GRB_Focus_sId == "")
-        return;
+        return false;
     iRow = GRB_RowFromId(g_GRB_Focus_sId);
     iLetter = GRB_LetterFromId(g_GRB_Focus_sId);
     var cInitialStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-    if ( cInitialStatus == g_TC_cCodeMeaning_Correct ) 
+    if ( cInitialStatus == g_TC_cCodeMeaning_Correct || cInitialStatus == g_TC_cCodeMeaning_Corrected )  
     {
         GRB_SetFocusToNext(iRow, iLetter);
-        return;
+        return true;
     }
     var sCC = String.fromCharCode(8);
     if ( keypressed == sCC )
         sToSet = ' ';
     GRB_onkeydown(keypressed, iRow, iLetter);
+    return true;
 }
 
 function HandleKeyboardPress(sLetter)
 {
-    GRB_HandleKeyboardPress(sLetter);
+    if ( GRB_HandleKeyboardPress(sLetter) )
+        return;
     CAB_HandleKeyboardPress(sLetter);
 }
 

@@ -83,12 +83,17 @@ function Status_Check()
         sGR = 'Grid: ' + iGR_Correct + ' of ' + iTot;
     }
     document.getElementById("Status_GR").innerHTML = sGR;
-    if ( g_bPuzzleSolved )
-        return; // nothing to do here
     if ( iGR_Correct == iTot )
         g_bGridSolved = true;
+    else
+        g_bGridSolved = false;
+
     if ( iCA_Correct == iCARows)
         g_bAnswersSolved = true;
+    else
+        g_bAnswersSolved = false;
+    if ( g_bPuzzleSolved ) // if was already solved
+        return; 
     g_bPuzzleSolved = g_bAnswersSolved && g_bGridSolved;        
     if ( g_bPuzzleSolved && g_bSettings_CAGR_Display_Complete )
         SuccessWindowPopup_Toggle(true);
