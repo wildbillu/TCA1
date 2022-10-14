@@ -34,7 +34,7 @@ function CAB_ButtonBackgroundImage(cLetter, cStatus, cSelection)
     }
     if ( CharValidEntry(cLetter) )
     {
-        var sLetterImage = 'images/Letters/L_' + cLetter + '_' + cColor + '.png';
+        var sLetterImage = 'Letters/L_' + cLetter + '_' + cColor + '.png';
         if ( sStatusImage != '' )
             sStatusImage += ', '
         sStatusImage += 'url("' + sLetterImage + '")';
