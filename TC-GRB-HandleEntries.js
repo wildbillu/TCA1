@@ -1,23 +1,79 @@
 // TC-GRB-HandleEntries.js
-
-function GRB_ClearGrid()
+function GRB_ForLetterMakeHints(iLetter, sAnswerPlace)
 {
-    for ( var iR = 0; iR < g_iGridHeight; iR++)
+    var iSetCorrectToIncorrect = 0;
+    var iOverrideExistingAnswers = 0;
+    var cStatus ='';
+    var cAnswer ='';
+    var cAnswerPlayer = '';
+    var cAnswerPlace = '';
+    for ( iRow = 0; iRow < g_iGridHeight; iRow++ )
     {
-        for ( var iL = 0; iL < g_iGridWidth; iL++ )
+        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
         {
-            if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iR, iL) )
+            cAnswerPlace = sAnswerPlace.charAt(iLetter);
+            if ( CharValidEntry(cAnswerPlace) )
             {
-                GRB_ForRowLetter_SetAnswerPlayer(g_TC_cCharMeaningNotSet, iR, iL);
-                GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Normal, iR, iL);
-                GRB_ForRowLetter_SetButton(iR, iL, g_TC_cCodeMeaning_Inactive);
+                cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+                cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
+                cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                if ( cStatus == g_TC_cCodeMeaning_Correct && cAnswerPlace != cAnswer )
+                    iSetCorrectToIncorrect++;
+                else if ( CharValidEntry(cAnswerPlayer) && cAnswerPlace != cAnswerPlayer )
+                    iOverrideExistingAnswers++;
             }
         }
     }
+    var sWarningMessage = '';
+    if ( iSetCorrectToIncorrect )
+    sWarningMessage += 'Overrides (' + iSetCorrectToIncorrect +') Correct letters.'
+    if ( iOverrideExistingAnswers )
+        sWarningMessage += 'Overrides (' + iOverrideExistingAnswers +') Set letters'
+    if ( sWarningMessage == '' )
+        sWarningMessage = 'No Warnings';
+    return sWarningMessage;
+}
+
+function GRB_ForRowMakeHints(iRow, sAnswerPlace)
+{
+    var sWarningMessage = 'No Conflicts Detected;';
+    var iSetCorrectToIncorrect = 0;
+    var iOverrideExistingAnswers = 0;
+    var cStatus ='';
+    var cAnswer ='';
+    var cAnswerPlayer = '';
+    var cAnswerPlace = '';
+    for ( iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+    {
+        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+        {
+            cAnswerPlace = sAnswerPlace.charAt(iLetter);
+            if ( CharValidEntry(cAnswerPlace) )
+            {
+                cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+                cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
+                cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                if ( cStatus == g_TC_cCodeMeaning_Correct && cAnswerPlace != cAnswer )
+                    iSetCorrectToIncorrect++;
+                else if ( CharValidEntry(cAnswerPlayer) && cAnswerPlace != cAnswerPlayer )
+                    iOverrideExistingAnswers++;
+            }
+        }
+    }
+    var sWarningMessage = '';
+    if ( iSetCorrectToIncorrect )
+    sWarningMessage += 'Overrides (' + iSetCorrectToIncorrect +') Correct letters.'
+    if ( iOverrideExistingAnswers )
+        sWarningMessage += 'Overrides (' + iOverrideExistingAnswers +') Set letters'
+    if ( sWarningMessage == '' )
+        sWarningMessage = 'No Warnings';
+    return sWarningMessage;
 }
 
 function GRB_ForLetterSetAnswerTo(iLetter, sForceAnswer)
 {
+    GRB_ForLetterMakeHints(iLetter, sForceAnswer);
+//
 // first we set the grid answer player then all else should happen
 // we assume we cannot get here unless the right length
     var iForce = 0;
@@ -42,8 +98,8 @@ function GRB_ForLetterSetAnswerTo(iLetter, sForceAnswer)
         {
             GRB_ForRowLetter_SetButton(iRR, iLetter, g_TC_cCodeMeaning_Inactive);
             if ( g_bSettings_CAGR_Answers_CheckRow || g_bSettings_CAGR_Answers_ShowCorrectLetters )
-            { // if correct we mus mark it correct and set readonly
-                GRB_ForRowLetterShowCheckSquare(iRR, iLetter, 'check');
+            { // if correct we must mark it correct and set readonly
+                GRB_ForRowLetterShowCheckSquare(iRR, iLetter, 'Check');
             }
         }
     }
@@ -77,7 +133,7 @@ function GRB_ForRowSetAnswerTo(iRow, sForceAnswer)
             GRB_ForRowLetter_SetButton(iRow, iC, g_TC_cCodeMeaning_Inactive);
             if ( g_bSettings_CAGR_Answers_CheckRow || g_bSettings_CAGR_Answers_ShowCorrectLetters )
             { // if correct we mus mark it correct and set readonly
-                GRB_ForRowLetterShowCheckSquare(iRow, iC, 'check');
+                GRB_ForRowLetterShowCheckSquare(iRow, iC, 'Check');
             }
         }
     }
@@ -192,4 +248,20 @@ function GRB_ShowCheckActiveSquare(sToDo)
     var iLetter = GRB_LetterFromId(g_GRB_Focus_sId);
     GRB_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, g_TC_cCodeMeaning_HasFocus);
     return true;
+}
+
+function GRB_ClearGrid()
+{
+    for ( var iR = 0; iR < g_iGridHeight; iR++)
+    {
+        for ( var iL = 0; iL < g_iGridWidth; iL++ )
+        {
+            if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iR, iL) )
+            {
+                GRB_ForRowLetter_SetAnswerPlayer(g_TC_cCharMeaningNotSet, iR, iL);
+                GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Normal, iR, iL);
+                GRB_ForRowLetter_SetButton(iR, iL, g_TC_cCodeMeaning_Inactive);
+            }
+        }
+    }
 }
