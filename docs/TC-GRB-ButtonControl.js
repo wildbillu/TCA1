@@ -8,6 +8,7 @@ function GRB_ForRowLetter_SetButton(iRow, iLetter, cCodeForActivity)
     var sId = '';
     sStatusImage = GRB_ButtonBackgroundImage(cAnswerPlayer, cStatusPlayer, cNumbering, cCodeForActivity)
     sId = GRB_MakeId(iRow, iLetter)
+    alert(sId + '|' + sStatusImage)
     document.getElementById(sId).style.backgroundImage = sStatusImage;
 }
 
