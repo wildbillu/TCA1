@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="Styles-More.css">
     <link rel="stylesheet" href="Styles-Info.css">
     <link rel="stylesheet" href="Styles-Info-Content.css">
+
     <SCRIPT SRC="TC-Defines.js"></SCRIPT>
+    <SCRIPT SRC="TC-Defines-ImageSupport.js"></SCRIPT>
     <SCRIPT SRC="TC-Defines-SmartPhoneFormat-B.js"></SCRIPT>
     <SCRIPT SRC="TC-Base.js"></SCRIPT>
     <SCRIPT SRC="TC-GeneralFunctions.js"></SCRIPT>
@@ -29,7 +31,11 @@
     <SCRIPT SRC="TC-CAB-ButtonControl.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-Helpers-Answers-Status.js"></SCRIPT>
     <SCRIPT SRC="TC-CAB-HandleArrows.js"></SCRIPT>
-    <SCRIPT SRC="TC-CA-Place.js"></SCRIPT>
+
+    <SCRIPT SRC="TC-Place.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-Draggable.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-TouchMovable.js"></SCRIPT>
+    <SCRIPT SRC="TC-Place-MouseMovable.js"></SCRIPT>
 
     <SCRIPT SRC="TC-GRB-Defines.js"></SCRIPT>
     <SCRIPT SRC="TC-GRB-Setup.js"></SCRIPT>
@@ -66,7 +72,7 @@ function getResolution()
 
 function LoadValues()
 {
-    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.011'
+    g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.020'
     getResolution(); 
     var g_bLocal = false;
     var sPageURL = window.location.search.substring(1);
@@ -94,19 +100,11 @@ function LoadValues()
     LoadInnerHTML();
     Status_Check();
     SetInitialSelection();
-/*
-    setline('W:' + g_iScreen_Width + " H:" + g_iScreen_Height);
-    g_iBody_Width = Math.round(document.body.getBoundingClientRect().width);
-    g_iBody_Height= Math.round(document.body.getBoundingClientRect().height);
-    setlineAdd(' Body.W:' + g_iBody_Width + " H:" + g_iBody_Height);
-    g_iHTML_Width = Math.round(document.documentElement.getBoundingClientRect().width);
-    g_iHTML_Height= Math.round(document.documentElement.getBoundingClientRect().height);
-    setlineAdd(' HTML.W:' + g_iHTML_Width + " H:" + g_iHTML_Height);
-*/   
+//    
 }
-</SCRIPT>
 
-<BODY Id="All" topmargin="0" leftmargin="0" OnLoad="LoadValues()">
+</SCRIPT>
+<BODY Id="All" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="LoadValues()">
     <TABLE Id="AllTable" width=450 height=800 BGCOLOR="#FFFFFF" border=0 cellspacing=0 cellspacing=0 padding="0">
     <TR><TD Id="TCT"    class="NewTitle_S" >TwistiCross with SketchiToons by Sketchi Bill</TD></TR>
     <TR height=4% width=100%><TD>
@@ -127,13 +125,7 @@ function LoadValues()
     <TR ><TD>
         <TABLE border=0 cellspacing=0 width="100%">
             <TR valign=center>
-                <TD align=center valign=center width=250px>
-                    <DIV class="GRB_Div" Id="GRB_Div0">aa</DIV>
-                    <DIV class="GRB_Div" Id="GRB_Div1">aa</DIV>
-                    <DIV class="GRB_Div" Id="GRB_Div2">aa</DIV>
-                    <DIV class="GRB_Div" Id="GRB_Div3">aa</DIV>
-                    <DIV class="GRB_Div" Id="GRB_Div4">aa</DIV>
-                    <DIV Id="Place_Popup" height=0 align=center></DIV>'
+                <TD Id="GRB_GridRows" align=center valign=center width=250px>
                 </TD>
                 <TD width=50% Id="TwistiCrossImage"></TD>
             </TR>

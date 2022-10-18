@@ -14,8 +14,8 @@ window.onclick = function(event)
     	dropdown.classList.toggle('show'); 
 		g_bButton_Info_Active= false;
 	}
-	if ( g_bPlaceWindow_Active && !sTargetId.startsWith('Place_') )
-		Place_Popup_Toggle();
+//	if ( g_bPlaceWindow_Active && !sTargetId.startsWith('Place_') )
+//		Place_Popup_Toggle();
 
 	if ( g_bButton_Settings_Active && sTargetId != '')
 	{   

@@ -2,7 +2,6 @@
 
 function GRB_HandleArrows(key, iRow, iLetter)
 {
-alert(key)
     if ( !key.startsWith('Arrow') )
         return false;
     if ( key.match('Up') )

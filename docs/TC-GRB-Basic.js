@@ -64,18 +64,18 @@ function GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter)
 
 function GRB_MakeId(iRow, iLetter)
 {
-    var s = 'GRB_' + iRow + '_' + iLetter   
+    var s = 'GRBID_' + iRow + '_' + iLetter   
     return s;
 }
 
 function GRB_LetterFromId(sid)
 {
-    return parseInt(sid.charAt(6));
+    return parseInt(sid.charAt(8));
 }
 
 function GRB_RowFromId(sid)
 {
-    return parseInt(sid.charAt(4));
+    return parseInt(sid.charAt(6));
 }
 
 function GRB_MakeHTMLId(iRow, iLetter)

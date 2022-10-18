@@ -4,12 +4,9 @@ var g_sPuzzleName = '';
 var g_sPuzzleCreditAuthor = 'By Sketchi Bill';
 var g_sPuzzleCreditDate = 'September 26, 2022';
 var g_sCookie;
-var g_GR_sLastCharacterRejected = '';
-var g_GR_bAcross = true;
 var g_bDisplayMessages = true;
 //
 var g_sSketchiToonsClueIntro = 'SketchiToons Clue to Dual Answer';
-// these are the values that the actual js uses and are filled in loadPuzzle
 var g_sSketchiToonsFilename = '';
 var g_sSuccessWindowFilename = '';
 var g_sSketchiToonsClueIntro = '';
@@ -17,29 +14,9 @@ var g_sSketchiToonsClueItself = '';
 var g_sPuzzleTitle = '';
 var g_iGridWidth = 4;
 var g_iGridHeight = 4;
-var g_iClues;
-var g_aClues =          [];
-var g_aAnswers     =    [];
-var g_sAnswers     = '';
-var g_aAnswersPlayer        = [];
-var g_sAnswersPlayer  = '';
-var g_aAnswersStatusPlayer  = [];
-var g_sAnswersStatusPlayer;
 // now the grid stuff
-var g_aGridAnswers       = [];
-var g_sGridAnswer;
-var g_aGridAnswersPlayer = [];
-var g_sGridAnswersPlayer;
-var g_aGridStatusPlayer  = [];
-var g_sGridStatusPlayer =  '';
-var g_GR_aAcrossAnswers = [];
-var g_GR_aAcrossAnswersNumber = [];
-var g_GR_aDownAnswers = []
-var g_GR_aDownAnswersNumber = [];
-var g_sGridNumbering;
-var g_sDualClueBefore; 
-var g_sDualClueMiddle;
-var g_sDualClueEnd;
+
+
 var g_bPuzzleSolved = false;
 var g_bGridSolved = false;
 var g_bAnswersSolved = false;

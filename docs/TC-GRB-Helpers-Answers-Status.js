@@ -78,7 +78,8 @@ function GRB_ForRowLetter_Down_IsLastLetter(iRow, iLetter)
 
 function GRB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter)
 {
-    var cAnswerPlayer = g_sGridAnswersPlayer.charAt(iRow*(g_iGridWidth)+iLetter);
+    var cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter)
+    
     var bValid = CharValidEntry(cAnswerPlayer);
     return bValid
 }

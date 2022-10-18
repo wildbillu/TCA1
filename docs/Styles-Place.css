@@ -1,4 +1,98 @@
 /* Styles-Place.css */
+
+.Place_DragInstruction
+{
+  position:absolute;
+  top:15px;
+  left:5px;
+  width:45px;
+  height:45px;
+  border:0px solid blue;
+  background-color:lightblue;
+  font-family:Arial, Helvetica, sans-serif;  
+  font-size: 12px;
+  text-align: center;
+  padding-top: 0px;  
+}
+
+.Place_Down_Row_Controls
+{ /* this is only used to control the upper left */
+  position:absolute;
+  top:50;
+  left:50;
+  width:42px;
+  height:10px;
+  border:0px solid red;
+  background-color:lightblue;
+}
+
+.Place_Across_Row_Controls
+{
+  position:absolute;
+  top:50;
+  left:150;
+  width:10px;
+  height:10px;
+  border:0px solid green;
+  background-color:lightblue;
+}
+
+.Place_Hints_Div
+{
+  position:absolute;
+  top:80;
+  left:80;
+  width:20px;
+  height:20px;
+  border:1px solid blue;
+  background-color:lightblue;
+}
+
+.Place_CloseBox 
+{
+  position:absolute;
+  top:5;
+  left:220;
+  width:60px;
+  height:21px;
+  border:1px solid blue;
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;  
+  font-size: 15px;
+  padding-top: 0px;
+  background-color:lightblue;
+}
+
+.Place_Draggable_Down
+{
+  position:absolute;
+  top:50;
+  left:5;
+  width:36;
+  height:146;
+  border:1px solid red;
+  z-index:4;
+  text-align: center;
+  font-size: 45px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:0px;
+}
+
+.Place_Draggable_Across
+{
+  top:5;
+  left:50;
+  width:146;
+  height:36;
+  border:1px solid red;
+  position:absolute;
+  z-index:4;
+  text-align: center;
+  font-size: 45px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:0px;
+}
+
 .Place_Hints_NoErrors
 {
   border: 0px;
@@ -23,64 +117,6 @@
   color:red;
 }
 
-.Place_Button_Disabled
-{
-  width:40px;
-  height:21px;
-  border:1px solid black;
-  font-size: 15px;
-  color: #666666;
-  padding: 0px;
-  background-color:#EEEEEE;
-}
-
-.Place_Button
-{
-  width:40px;
-  color: black;
-  height:21px;
-  border:1px solid black;
-  font-size: 15px;
-  padding: 0px;
-  background-color:white;
-}
-
-.Place_Across_Row_Controls
-{
-  width:50%;
-  vertical-align:top;
-  border:0px solid green;
-}
-
-.Place_Down_Row_Controls
-{
-  width:50%;
-  vertical-align: top;
-  border:0px solid orange;
-  align-items:center;
-}
-
-.Place_Content_Common_Multiline
-{
-    resize: none;
-    padding: 0px;
-    width: 80%;
-    border: 0px;
-    border-collapse: collapse;    
-    outline: none;    
-    text-align: center;
-    font-size: 16px;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:bold;
-    color:black;
-}
-
-.Place_Content_Common_Multiline::selection 
-{  
-    background: antiquewhite;
-    color: black;
-}
-
 .Place_BackgroundColor
 {
   background-color:lightblue;
@@ -98,13 +134,6 @@
   border:0px solid;
   border-color:red;
   padding:0px;
-}
-
-.Place_SubtitleRow
-{
-  height:15px;
-  font-size: 15px;
-  color:green;
 }
 
 .Place_SetBox_Across
@@ -127,31 +156,6 @@
   background-color:lightblue;
 }
 
-.Place_CloseBox 
-{
-  width:60px;
-  height:21px;
-  border:1px solid blue;
-  text-align: center;
-  font-family:Arial, Helvetica, sans-serif;  
-  font-size: 15px;
-  padding-top: 0px;
-  background-color:lightblue;
-}
-
-.Place_Word
-{
-  width:60px;
-  height:21px;
-  border:0px solid blue;
-  text-align: center;
-  font-family:Arial, Helvetica, sans-serif;  
-  font-size: 20px;
-  padding-top: 0px;
-  color: blue;
-  background-color:lightblue;
-}
-
 .Place_Center
 {
   text-align: center;
@@ -169,26 +173,24 @@
 
 .Place_Popup
 {
-  width:100%;
   position: relative;
   display: inline-block;
   cursor: pointer;
-  font-size: 10px;
   color: red;
 }
 
 .Place_Popup .Place_Popup_Text 
 {
   visibility: hidden;
-  width: 200%;
-  text-align: center;
+  border:1px solid blue;
+  width:300px;
+  height:200px;
+  text-align: left;
   border-radius: 1px;
   padding: 0;
-  position: absolute;
   z-index: 1;
-  top:0%;
-  left: 5%;
-  margin-left: 0px;
+  position: absolute;
+  margin-left:0px;
 }
 
 .Place_Popup .show 
