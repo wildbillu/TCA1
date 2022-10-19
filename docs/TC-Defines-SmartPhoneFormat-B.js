@@ -35,14 +35,17 @@ function LoadPuzzle()
     g_iGridWidth = iGridWidth;
     g_iGridHeight = iGridHeight;
     // CA Stuff
-    g_iClues   = iClueAnswers;
     g_aClues   = sClues.split(g_TC_cGeneralDelimiter);
+    g_iClues   = iClueAnswers;
+
     g_aAnswers = sAnswers.split(g_TC_cGeneralDelimiter);
     g_iAnswers = g_aAnswers.length;
     g_sAnswers              = sAnswers;
-alert('sAP:' + sAnswersPlayer)
+
+    alert('sAP:' + sAnswersPlayer)
     g_aAnswersPlayer        = sAnswersPlayer.split(g_TC_cGeneralDelimiter);
     g_sAnswersPlayer        = sAnswersPlayer;
+
     g_aAnswersStatusPlayer  = sStatusPlayer.split(g_TC_cGeneralDelimiter);
     g_sAnswersStatusPlayer  = sStatusPlayer;
     if ( g_aClues.length != g_iClues || g_aAnswers.length != g_iClues || g_aAnswersPlayer.length != g_iClues)
