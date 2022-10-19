@@ -18,7 +18,7 @@ function LoadPuzzleFromFile(sFilename)
     for ( var iLine = 0; iLine < iLines; iLine++)
     {
         var sLine = aLines[iLine];
-        sLine = sLine.substring(0, sLine.length - 1)
+                sLine = sLine.substring(0, sLine.length - 1)
         if ( sLine.startsWith('sGridAnswers=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sGridAnswers = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sPuzzleDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sPuzzleDate = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sPuzzleName=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sPuzzleName = aEntries[1]; iUpdated++;}}
@@ -42,5 +42,5 @@ function LoadPuzzleFromFile(sFilename)
         else if ( sLine.startsWith('sDualClueMiddle=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sDualClueMiddle = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sDualClueEnd=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){sDualClueEnd = aEntries[1]; iUpdated++;}}
     }
-    setline(sFilename + '.Updated:' + iUpdated + ';');
+setline(sFilename + '.Updated:' + iUpdated + ';');
 }

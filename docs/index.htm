@@ -74,7 +74,6 @@ function getResolution()
 
 function LoadValues()
 {
-    alert("a")
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.020'
     getResolution(); 
     var g_bLocal = false;
@@ -97,21 +96,16 @@ function LoadValues()
         }
         LoadPuzzleFromFile(sFile);
     }
-    alert("b")
     HandleCookiesOnStart();
-    alert("c")
     LoadPuzzle();
-    alert("d")
     MakeItAll();
     TopRowButtons_Setup();
     LoadInnerHTML();
     Status_Check();
     SetInitialSelection();
-    alert("e")
     if ( g_bSettings_ShowInfoOnStart )
         Button_Info_Click();
     g_bSettings_ShowInfoOnStart = false;        
-    alert("f")
 //    
 }
 function MakeItAll()
@@ -155,7 +149,6 @@ function MakeItAll()
     sAllOfIt += '<TR width=100%><TD Id="CA_2ToN"></TD></TR>';
     sAllOfIt += '<TR class="KB_Area"><TD id=KB name=KB>notset</TD></TR>';
     sAllOfIt += '<TR><TD Id="Popup_Button_Info" height=0 align=center></TD></TR>';
-    sAllOfIt += '<TR height=10 align="bottom"><TD id="Messages">Messages</TD></TR>';
     sAllOfIt += '</TABLE>';
     document.getElementById("AllOfIt").innerHTML=sAllOfIt;
 }
@@ -163,5 +156,6 @@ function MakeItAll()
 
 <BODY Id="All" class="MoveCursor" topmargin="0" leftmargin="0" OnLoad="LoadValues()">
     <DIV Id="AllOfIt"></DIV>
+    <DIV Id="Messages"></DIV>
 </BODY>
 </HTML>

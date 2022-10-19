@@ -43,15 +43,20 @@ function setlineAdd(sAdd)
     if ( !g_bDisplayMessages)
         return;
     sToDisplay += sAdd;
-    document.getElementById("Messages").innerHTML = sToDisplay;
+    var elem = document.getElementById("Messages");
+    if ( elem )
+        elem.innerHTML = sToDisplay;
 }
 
 function setline(sAdd)
 {
     if ( !g_bDisplayMessages)
         return;
+    var elem = document.getElementById("Messages");
+    if ( !elem )
+        return;
     sToDisplay = sAdd;
-    document.getElementById("Messages").innerHTML = sToDisplay;
+    elem.innerHTML = sToDisplay;
 }
 
 function replaceAt(sOriginal, index, sReplacement) 
