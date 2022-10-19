@@ -37,15 +37,19 @@ function LoadPuzzle()
     // CA Stuff
     g_iClues   = iClueAnswers;
     g_aClues   = sClues.split(g_TC_cGeneralDelimiter);
-    g_iAnswers = g_iClues;
+alert(g_aClues.length + '.Clues:' + sClues)
     g_aAnswers = sAnswers.split(g_TC_cGeneralDelimiter);
+    g_iAnswers = g_aAnswers.length;
+alert(g_aAnswers.length + '.Answers:' + sAnswers)
     g_sAnswers              = sAnswers;
     g_aAnswersPlayer        = sAnswersPlayer.split(g_TC_cGeneralDelimiter);
+alert(g_aAnswersPlayer.length + '.AnswersPlayer:' + sAnswersPlayer)
     g_sAnswersPlayer        = sAnswersPlayer;
     g_aAnswersStatusPlayer  = sStatusPlayer.split(g_TC_cGeneralDelimiter);
+alert(g_aAnswersStatusPlayer.length + '.StatusPlayer:' + sStatusPlayer)
     g_sAnswersStatusPlayer  = sStatusPlayer;
     if ( g_aClues.length != g_iClues || g_aAnswers.length != g_iClues || g_aAnswersPlayer.length != g_iClues)
-        alert('dataProblem.' + g_iClues + g_aClues.Length + g_aAnswers.Length + g_aAnswersPlayer.length);
+        alert('dataProblem.' + g_iClues + g_aClues.length + g_aAnswers.length + g_aAnswersPlayer.length);
 // GR stuff
     g_sGridAnswers      = sGridAnswers;
     g_sGridAnswersPlayer = sGridAnswersPlayer;
