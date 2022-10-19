@@ -1,74 +1,4 @@
 // TC-GRB-HandleEntries.js
-function GRB_ForLetterMakeHints(iLetter, sAnswerPlace)
-{
-    var iSetCorrectToIncorrect = 0;
-    var iOverrideExistingAnswers = 0;
-    var cStatus ='';
-    var cAnswer ='';
-    var cAnswerPlayer = '';
-    var cAnswerPlace = '';
-    for ( iRow = 0; iRow < g_iGridHeight; iRow++ )
-    {
-        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
-        {
-            cAnswerPlace = sAnswerPlace.charAt(iLetter);
-            if ( CharValidEntry(cAnswerPlace) )
-            {
-                cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-                cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
-                cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-                if ( cStatus == g_TC_cCodeMeaning_Correct && cAnswerPlace != cAnswer )
-                    iSetCorrectToIncorrect++;
-                else if ( CharValidEntry(cAnswerPlayer) && cAnswerPlace != cAnswerPlayer )
-                    iOverrideExistingAnswers++;
-            }
-        }
-    }
-    var sWarningMessage = '';
-    if ( iSetCorrectToIncorrect )
-    sWarningMessage += 'Overrides (' + iSetCorrectToIncorrect +') Correct letters.'
-    if ( iOverrideExistingAnswers )
-        sWarningMessage += 'Overrides (' + iOverrideExistingAnswers +') Set letters'
-    if ( sWarningMessage == '' )
-        sWarningMessage = 'No Warnings';
-    return sWarningMessage;
-}
-
-function GRB_ForRowMakeHints(iRow, sAnswerPlace)
-{
-    var sWarningMessage = 'No Conflicts Detected;';
-    var iSetCorrectToIncorrect = 0;
-    var iOverrideExistingAnswers = 0;
-    var cStatus ='';
-    var cAnswer ='';
-    var cAnswerPlayer = '';
-    var cAnswerPlace = '';
-    for ( iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
-    {
-        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
-        {
-            cAnswerPlace = sAnswerPlace.charAt(iLetter);
-            if ( CharValidEntry(cAnswerPlace) )
-            {
-                cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
-                cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
-                cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
-                if ( cStatus == g_TC_cCodeMeaning_Correct && cAnswerPlace != cAnswer )
-                    iSetCorrectToIncorrect++;
-                else if ( CharValidEntry(cAnswerPlayer) && cAnswerPlace != cAnswerPlayer )
-                    iOverrideExistingAnswers++;
-            }
-        }
-    }
-    var sWarningMessage = '';
-    if ( iSetCorrectToIncorrect )
-    sWarningMessage += 'Overrides (' + iSetCorrectToIncorrect +') Correct letters.'
-    if ( iOverrideExistingAnswers )
-        sWarningMessage += 'Overrides (' + iOverrideExistingAnswers +') Set letters'
-    if ( sWarningMessage == '' )
-        sWarningMessage = 'No Warnings';
-    return sWarningMessage;
-}
 
 function GRB_ForLetterSetAnswerTo(iLetter, sForceAnswer)
 {
@@ -81,11 +11,17 @@ function GRB_ForLetterSetAnswerTo(iLetter, sForceAnswer)
     {
         if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
         {
-            var cForceCharacter = sForceAnswer.charAt(iForce);
-            if ( CharValidEntry(cForceCharacter) )
+            var cAnswerPlayer_New = sForceAnswer.charAt(iForce);
+            if ( CharValidEntry(cAnswerPlayer_New) )
             {
+                var cAnswerPlayer_Existing = GRB_ForRowLetter_GetAnswerPlayer(iRow,iLetter);
+                if ( cAnswerPlayer_New != cAnswerPlayer_Existing )
+                {
+                    GRB_ForRowLetter_SetStatusPlayer(g_TC_cCharMeaningNotSet, iRow, iLetter);
+                    GRB_ForRowLetter_SetButton(iRow, iLetter, g_TC_cCodeMeaning_Inactive)
+                }
                 var sGridAnswerPlayerRow = g_aGridAnswersPlayer[iRow];
-                sGridAnswerPlayerRow = replaceAt(sGridAnswerPlayerRow, iLetter, cForceCharacter )
+                sGridAnswerPlayerRow = replaceAt(sGridAnswerPlayerRow, iLetter, cAnswerPlayer_New);
                 g_aGridAnswersPlayer[iRow] = sGridAnswerPlayerRow;
             }
             iForce++;
@@ -107,24 +43,28 @@ function GRB_ForLetterSetAnswerTo(iLetter, sForceAnswer)
 }
 
 function GRB_ForRowSetAnswerTo(iRow, sForceAnswer)
-{
-    // first we set the grid answer player then all else should happen
-    // we assume we cannot get here unless the right length
-    var sGridAnswerRow = g_aGridAnswersPlayer[iRow];
+{ // we assume we cannot get here unless the right length
+    var sGridAnswerPlayerRow = g_aGridAnswersPlayer[iRow];
     var iForce = 0;
     for ( iCC = 0; iCC < g_iGridWidth; iCC++ )
     {
         if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iCC) )
         {
-            var cForceCharacter = sForceAnswer.charAt(iForce);
-            if ( CharValidEntry(cForceCharacter) )
+            var cAnswerPlayer_New = sForceAnswer.charAt(iForce);
+            if ( CharValidEntry(cAnswerPlayer_New) )
             {
-                sGridAnswerRow = replaceAt(sGridAnswerRow, iCC, cForceCharacter )
+                var cAnswerPlayer_Existing = GRB_ForRowLetter_GetAnswerPlayer(iRow,iCC);
+                if ( cAnswerPlayer_New != cAnswerPlayer_Existing )
+                {
+                    GRB_ForRowLetter_SetStatusPlayer(g_TC_cCharMeaningNotSet, iRow, iCC);
+                    GRB_ForRowLetter_SetButton(iRow, iCC, g_TC_cCodeMeaning_Inactive)
+                }
+                sGridAnswerPlayerRow = replaceAt(sGridAnswerPlayerRow, iCC, cAnswerPlayer_New )
             }
             iForce++;
         }
     }
-    g_aGridAnswersPlayer[iRow] = sGridAnswerRow;
+    g_aGridAnswersPlayer[iRow] = sGridAnswerPlayerRow;
     GRB_SetAnswersPlayer();
     for ( iC = 0; iC < g_iGridWidth; iC++ )
     {
@@ -132,13 +72,90 @@ function GRB_ForRowSetAnswerTo(iRow, sForceAnswer)
         {
             GRB_ForRowLetter_SetButton(iRow, iC, g_TC_cCodeMeaning_Inactive);
             if ( g_bSettings_CAGR_Answers_CheckRow || g_bSettings_CAGR_Answers_ShowCorrectLetters )
-            { // if correct we mus mark it correct and set readonly
+            { // if correct we must mark it correct and set readonly
                 GRB_ForRowLetterShowCheckSquare(iRow, iC, 'Check');
             }
         }
     }
     return true;
 }
+
+function GRB_ForLetterMakeHints(iLetter, sAnswerPlace)
+{
+    var iSetCorrectToIncorrect = 0;
+    var iOverrideExistingAnswers = 0;
+    var cStatus ='';
+    var cAnswer ='';
+    var cAnswerPlayer = '';
+    var cAnswerPlace = '';
+    var iIndex = 0;
+    for ( iRow = 0; iRow < g_iGridHeight; iRow++ )
+    {
+        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+        {
+            cAnswerPlace = sAnswerPlace.charAt(iIndex);
+            if ( CharValidEntry(cAnswerPlace) )
+            {
+                cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+                cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
+                cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                if ( cStatus == g_TC_cCodeMeaning_Correct && cAnswerPlace != cAnswer )
+                    iSetCorrectToIncorrect++;
+                else if ( CharValidEntry(cAnswerPlayer) && cAnswerPlace != cAnswerPlayer )
+                    iOverrideExistingAnswers++;
+            }
+            iIndex++;
+        }
+    }
+    var sWarningMessage = '';
+    if ( iSetCorrectToIncorrect )
+    sWarningMessage += 'Overrides (' + iSetCorrectToIncorrect +') Correct letters.'
+    if ( iOverrideExistingAnswers )
+        sWarningMessage += 'Overrides (' + iOverrideExistingAnswers +') Set letters'
+    if ( sWarningMessage == '' )
+        sWarningMessage = 'No Warnings';
+    return sWarningMessage;
+}
+
+function GRB_ForRowMakeHints(iRow, sAnswerPlace)
+{
+    var sWarningMessage = 'No Conflicts Detected;';
+    var iSetCorrectToIncorrect = 0;
+    var iOverrideExistingAnswers = 0;
+    var cStatus ='';
+    var cAnswer ='';
+    var cAnswerPlayer = '';
+    var cAnswerPlace = '';
+    var iIndex = 0;
+    for ( iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
+    {
+        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+        {
+            cAnswerPlace = sAnswerPlace.charAt(iIndex);
+            if ( CharValidEntry(cAnswerPlace) )
+            {
+                cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+                cAnswer = GRB_ForRowLetter_GetAnswer(iRow, iLetter);
+                cAnswerPlayer = GRB_ForRowLetter_GetAnswerPlayer(iRow, iLetter);
+                if ( cStatus == g_TC_cCodeMeaning_Correct && cAnswerPlace != cAnswer )
+                    iSetCorrectToIncorrect++;
+                else if ( CharValidEntry(cAnswerPlayer) && cAnswerPlace != cAnswerPlayer )
+                    iOverrideExistingAnswers++;
+            }
+            iIndex++;
+        }
+    }
+    var sWarningMessage = '';
+    if ( iSetCorrectToIncorrect )
+    sWarningMessage += 'Overrides (' + iSetCorrectToIncorrect +') Correct letters.'
+    if ( iOverrideExistingAnswers )
+        sWarningMessage += 'Overrides (' + iOverrideExistingAnswers +') Set letters'
+    if ( sWarningMessage == '' )
+        sWarningMessage = 'No Warnings';
+    return sWarningMessage;
+}
+
+
 
 
 function GRB_ShowCheckGrid(sToDo)

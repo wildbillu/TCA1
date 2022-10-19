@@ -1,13 +1,13 @@
 // TC-Settings-Support.js
 // settings
-var g_sSettings_Version = 'V01.01';
+var g_sSettings_Version = 'V01.02';
 var g_bSettings_DeleteCookiesOnStartUp = false;
 var g_bSettings_CAGR_Answers_CheckRow = false;
-var g_bSettings_CAGR_Answers_CheckOverall = false;
-var g_bSettings_CAGR_Answers_ShowCorrectLetters = false;
-var g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares = false;
-var g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare = false;
-var g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue = false;
+var g_bSettings_ShowInfoOnStart = true; // not used
+var g_bSettings_CAGR_Answers_ShowCorrectLetters = true;
+var g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares = true;
+var g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare = true;
+var g_bSettings_CAGR_Navigation_EndOfWord_JumpToNextClue = true;
 var g_bSettings_CA_Display_ShowProgress = true;
 var g_bSettings_GR_Display_ShowProgress = true;
 var g_bSettings_CAGR_Display_Complete = true;
@@ -52,7 +52,7 @@ function HandleCookie_Settings(sOurCookie_Settings)
     var iOurValue = 1;
     g_bSettings_DeleteCookiesOnStartUp = IsTrue(aOurValues[iOurValue++]);
     g_bSettings_CAGR_Answers_CheckRow = IsTrue(aOurValues[iOurValue++]);
-    g_bSettings_CAGR_Answers_CheckOverall = IsTrue(aOurValues[iOurValue++]);
+    g_bSettings_ShowInfoOnStart = IsTrue(aOurValues[iOurValue++]);
     g_bSettings_CAGR_Answers_ShowCorrectLetters = IsTrue(aOurValues[iOurValue++]);
     g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares = IsTrue(aOurValues[iOurValue++]);
     g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare = IsTrue(aOurValues[iOurValue++]);
@@ -71,7 +71,7 @@ function MakeCookie_Settings()
     sCookie += g_sSettings_Version; 
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_DeleteCookiesOnStartUp;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Answers_CheckRow;
-    sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Answers_CheckOverall;
+    sCookie += g_cCookieDelimiter; sCookie += g_bSettings_ShowInfoOnStart;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Answers_ShowCorrectLetters;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Navigation_WithinWord_SkipFilledSquares;
     sCookie += g_cCookieDelimiter; sCookie += g_bSettings_CAGR_Navigation_EndOfWord_JumpBackToEmptySquare;

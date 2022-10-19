@@ -83,8 +83,6 @@ function GRB_onkeydown(key, iRow, iLetter)
     setline('keydown:' + key + 'notprocessed');
     var sFixThisBox = GRB_MakeId(iRow, iLetter);
     document.getElementById(sFixThisBox).focus();
-    document.getElementById(sFixThisBox).setSelectionRange(0,1);
- 
     return false;
 }
 

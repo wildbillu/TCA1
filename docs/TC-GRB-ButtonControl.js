@@ -26,7 +26,7 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cSelection)
         if ( sStatusImage != '' )
             sStatusImage += ', '
         sStatusImage += 'url("images/Button_OrangeCorner.png")';
-        cColor = 'C';
+        cColor = g_sLetterForCorrect;
     }
     else if ( cStatus == g_TC_cCodeMeaning_Incorrect )
     {
@@ -36,7 +36,7 @@ function GRB_ButtonBackgroundImage(cLetter, cStatus, cNumber, cSelection)
     }
     else if ( cStatus == g_TC_cCodeMeaning_Correct )
     {
-        cColor = 'C';
+        cColor = g_sLetterForCorrect;
     }
     if ( CharValidEntry(cLetter) )
     {

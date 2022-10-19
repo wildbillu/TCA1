@@ -1,10 +1,28 @@
 // TC-CAB-Setup.js
 //
+
+function CAB_MakeRowEntry2toN(iRow)
+{ // ids are CA_#_R CA_#_C CA_# CA_#_Place
+    // classes are CAB_Row_Base CAB_Clue_Text 
+    var sInner = '';
+    sInner += '<TR Id="CA_';
+    sInner += iRow; 
+    sInner += '_R" class="CAB_Row_Base"><TD><TABLE cellspacing=1 cellpadding=0 align="right"><TR><TD Id="CA_';
+    sInner += iRow; 
+    sInner += '_C" class="CAB_Clue_Text">CLUE</TD><TD Id="CA_';
+    sInner += iRow; 
+    sInner += '_A">ANSWER</TD><TD Id="CA_';
+    sInner += iRow; 
+    sInner += '_Place">PLACE</TD></TR></TABLE></TD></TR>';
+    return sInner;
+}
+
 function CAB_LoadClueAnswerSection()
 {
     var s01 = CAB_Clues1And2Entries_MakeInnerHTML();
     document.getElementById('CA_01').innerHTML = s01;
     var iLastRow = g_aClues.length;
+// first we need to load the span
     for ( iX = 2; iX < iLastRow; iX++ )
         CAB_SetRow(iX);
     for ( var iR = 0; iR < iLastRow; iR++ )
@@ -28,7 +46,6 @@ function CAB_MakeButtonSingleHTML(iRow, iLetter)
 {
     var sInnerRowHTML = '';
     var sFunctionsToCall = '';
-//    sFunctionsToCall += ' onMouseDown="return CAB_onmousedown(' + iRow + ',' + iLetter + ');"'
     sFunctionsToCall += ' onkeypress="return CAB_onkeypress(event);"';
     sFunctionsToCall += ' onkeyup="return CAB_onkeydown(event.key,' + iRow + ',' + iLetter + ');"';
     sFunctionsToCall += ' onfocus="CAB_onfocus(this);"';

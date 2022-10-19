@@ -7,19 +7,20 @@
     color:red;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    font-size:20px;
+    font-size:24px;
     background-color:white;
 }
 
 .NewTitle_S
 {
+    height:15px;
     text-align: center;
     padding: 0px;
     border: 0px;
     color:blue;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    font-size:16px;
+    font-size:13px;
     background-color:white;
 }
 
@@ -32,7 +33,7 @@
     border-collapse: collapse;    
     outline: none;    
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
 }
@@ -46,7 +47,7 @@
     border-collapse: collapse;    
     outline: none;    
     text-align: center;
-    font-size: 20px;
+    font-size: 14px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
 }

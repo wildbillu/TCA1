@@ -5,16 +5,16 @@ var iGridWidth      = 4;
 var iGridHeight     = 4;
 var sGridAnswers                = '.TOOSURFTREFUFO.';
 // these need to be equivalent to blank - they will be overwritten if proper cookie
-var sGridAnswersPlayer          = '.--------------.';
-var sGridStatusPlayer           = '.NNNNNNNNNNNNNN.';
+var sGridAnswersPlayer          = '.----U---------.';
+var sGridStatusPlayer           = '.NNNNCNNNNNNNNN.';
 var sGridNumbering              = '-0123---4---5---';
 //
 var iClueAnswers    = 8;
 var sClues  = 'A|And|Switch Position|Also|Apt name for a worrier|Unfit to be eaten, not Kosher|One might have green filling for St. Pat\'s|Craft for ET';
 var sAnswers                    = 'SURF|TURF|OFF|TOO|STU|TREF|OREO|UFO';
 // these need to be equivalent to blank - they will be overwritten if proper cookia
-var sAnswersPlayer             = '----|----|---|---|---|----|----|---';
-var sStatusPlayer              = 'NNNN|NNNN|NNN|NNN|NNN|NNNN|NNNN|NNN';
+var sAnswersPlayer             = '-U--|-U--|---|---|---|----|----|---';
+var sStatusPlayer              = 'NCNN|NCNN|NNN|NNN|NNN|NNNN|NNNN|NNN';
 
 var sPuzzleTitle    = "Dinner Anyone?";
 var sSketchiToonsClueItself = 'Rhyming Restaurant Choice';

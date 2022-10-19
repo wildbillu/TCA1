@@ -103,7 +103,18 @@ function Dropdown_More_Show()
         return false;
     g_sCAOnMoreClick = g_CAB_Focus_sId;
     g_sGRBOnMoreClick = g_GRB_Focus_sId;
-    element = document.getElementById("Dropdown_More_Content");
+
+    var elemPopupItself = document.getElementById("Popup_Button_More");
+//    elemPopupItself.style.left = MakePixelString(iLeft);
+//    elemPopupItself.style.top  = MakePixelString(iTop);
+
+
+    var element = document.getElementById("Dropdown_More_Content");
+    var iLeft = 120;
+    var iTop  = -25;
+    element.style.left = MakePixelString(iLeft);
+    element.style.top  = MakePixelString(iTop);
+
     element.classList.toggle("show");
     g_bDropdown_Menu_Active = true;
     return false;
@@ -139,7 +150,12 @@ function Insertable_Dropdown_Menu_More()
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ResetPuzzle" onclick="Dropdown_More_ResetPuzzle();">Reset All</BUTTON>';
     sDropdownMenu += '   </div>';
     sDropdownMenu += '</div>';
-    document.getElementById("Popup_Button_More").innerHTML = sDropdownMenu;
+    var elemPopupItself = document.getElementById("Popup_Button_More");
+    elemPopupItself.innerHTML = sDropdownMenu;
+    var iLeft = 100;
+    var iTop  = 50;
+    elemPopupItself.style.left = MakePixelString(iLeft);
+    elemPopupItself.style.top  = MakePixelString(iTop);
 }
 
 function Make_Dropdown_Menu_More()

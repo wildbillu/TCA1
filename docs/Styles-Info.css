@@ -9,12 +9,12 @@
   background-size: 450px;
   background-image: url("images/InfoBackground.jpg");
   background-position: right bottom, left top;
-  background-repeat: no-repeat, repeat;
+  background-repeat: no-repeat;
 }
 
 .Info_DivBorder
 {
-  border-width:2px;
+  border-width:0px;
   border-style:solid;
   border-color:black;
 }
@@ -32,7 +32,7 @@
 
 .Button_Info 
 {
-  width:100%;
+  width:450px;
   position: relative;
   display: inline-block;
   cursor: pointer;

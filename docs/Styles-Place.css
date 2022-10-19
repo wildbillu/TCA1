@@ -51,7 +51,7 @@
 .Place_CloseBox 
 {
   position:absolute;
-  top:5;
+  top:15;
   left:220;
   width:60px;
   height:21px;
@@ -68,7 +68,7 @@
   position:absolute;
   top:50;
   left:5;
-  width:36;
+  width:40;
   height:146;
   border:1px solid red;
   z-index:4;
@@ -80,10 +80,10 @@
 
 .Place_Draggable_Across
 {
-  top:5;
-  left:50;
-  width:146;
-  height:36;
+  top:5px;
+  left:50px;
+  width:250px;
+  height:40px;
   border:1px solid red;
   position:absolute;
   z-index:4;
@@ -183,8 +183,8 @@
 {
   visibility: hidden;
   border:1px solid blue;
-  width:300px;
-  height:200px;
+  width:100px;
+  height:300px;
   text-align: left;
   border-radius: 1px;
   padding: 0;

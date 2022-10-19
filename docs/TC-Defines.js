@@ -12,3 +12,4 @@ var g_TC_cCharacterDenotingBlackSquare = '.';
 var g_TC_cCharacterDenotingNoNumberSquare = '.';
 var g_TC_cGeneralDelimiter = '|';
 var g_TC_cCharMeaningNotSet = '-';
+

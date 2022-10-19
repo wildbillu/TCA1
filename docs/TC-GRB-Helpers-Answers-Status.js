@@ -51,7 +51,6 @@ function GRB_ForRowLetter_UpdateAnswersPlayer(cAnswer, iRow, iLetter)
     GRB_SetAnswersPlayer();
 }
 
-
 function GRB_ForRowLetter_Across_IsLastLetter(iRow, iLetter)
 { // cannot use the 'answers' because they don't have the . and we count location
     if ( iLetter == g_iGridWidth - 1 )

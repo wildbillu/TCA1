@@ -47,6 +47,7 @@ function CA_Place(iRow_CA)
     var sAcrossinnerHTML = '<TABLE cellspacing=0 cellpadding=0>';
     var aHints = [];
     var sHint = ''
+    var iWidthAcross = 0;
     for ( iR = 0; iR < g_iGridHeight; iR++)
     {
         var sGridAnswer = g_GR_aAcrossAnswers[iR];
@@ -61,15 +62,19 @@ function CA_Place(iRow_CA)
             var sFunctionsToCall = 'CA_Place_Across(' + sAcrossChoiceRow + ', \'' + sWordBeingPlaced + '\');';
             sAcrossinnerHTML += '<TR><TD><BUTTON class="Place_SetBox_Across" onclick="' + sFunctionsToCall + '">' + sAcrossChoice + ' Across</TD></TR>';
 //            
-            sHint = sAcrossChoice + ' Across Hint: ' + GRB_ForRowMakeHints(iR, sWordBeingPlaced);
+            sHint = sAcrossChoice + ' A:' + GRB_ForRowMakeHints(iR, sWordBeingPlaced);
             aHints.push(sHint)
+            iWidthAcross += 21;
         }
     }
     sAcrossinnerHTML += '</TABLE>';
     var elemAcrossRow = document.getElementById("Place_Across_Row_Controls");
+// now adjust the size of the container
     elemAcrossRow.innerHTML = sAcrossinnerHTML;
+    elemAcrossRow.style.height = iWidthAcross.toString() + 'px' 
 //
     var sDowninnerHTML = ''; 
+    var iWidthDown = 0;
     for ( iL = 0; iL < g_iGridWidth; iL++)
     {
         var sGridAnswer = g_GR_aDownAnswers[iL];
@@ -83,21 +88,23 @@ function CA_Place(iRow_CA)
             var sDownChoiceLetter = iL.toString();
             var sFunctionsToCall = 'CA_Place_Down(' + sDownChoiceLetter + ', \'' + sWordBeingPlaced + '\');';
             sDowninnerHTML += '<TD><BUTTON class="Place_SetBox_Down" onclick="' + sFunctionsToCall +'">' + sDownChoice + '  D o w n</TD>';
-            sHint = sDownChoice + ' Down. Hint: ' + GRB_ForLetterMakeHints(iL, sWordBeingPlaced);
+            sHint = sDownChoice + ' D: ' + GRB_ForLetterMakeHints(iL, sWordBeingPlaced);
             aHints.push(sHint)
+            iWidthDown += 21;
         }
     }
     var elemDownRow = document.getElementById("Place_Down_Row_Controls")
     elemDownRow.innerHTML = sDowninnerHTML;
+    elemDownRow.style.width = MakePixelString(iWidthDown);
 
 // fill in and place the draggable words
     var elemSD = document.getElementById("Span_Draggable_Down")
     elemSD.innerHTML = TC_Place_Draggable_DownGridInDiv(sWordBeingPlaced);
-    elemPD = document.getElementById("Div_Draggable_Down");
+    var elemPD = document.getElementById("Div_Draggable_Down");
 
     var elemSA = document.getElementById("Span_Draggable_Across")
-    elemSA.innerHTML = TC_Place_Draggable_AcrossGridInDiv(sWordBeingPlaced)
-    elemPS = document.getElementById("Div_Draggable_Across");
+    elemSA.innerHTML = TC_Place_Draggable_AcrossGridInDiv(sWordBeingPlaced);
+    var elemPS = document.getElementById("Div_Draggable_Across");
 //
     var sHintsHTML = ''
     sHintsHTML += '<DIV class="Place_Hints_Div" Id="Place_Hints_Div"><TABLE>'
@@ -114,6 +121,24 @@ function CA_Place(iRow_CA)
     sHintsHTML += '</TABLE></DIV>';
     var elemHints = document.getElementById("Place_Hints");
     elemHints.innerHTML = sHintsHTML;
+// 
+    var iSizeDraggable = sWordBeingPlaced.length * 40 + 2;
+//
+    var elemPopup = document.getElementById("Place");
+// set the width
+    var iWidthPopup = 50 + iSizeDraggable + 60 + 20;
+    elemPopup.style.width = MakePixelString(iWidthPopup);
+    var iHeightPopup = 50 + iSizeDraggable + 5;
+    elemPopup.style.height = MakePixelString(iHeightPopup);
+// move the button to a reasonable place
+    var iButtonLeft = iWidthPopup - 65;
+    document.getElementById('Place_CloseBox').style.left = MakePixelString(iButtonLeft);
+// now the draggable words
+    var s = iSizeDraggable.toString() + 'px';
+    elemSA.style.width = s;
+    elemPS.style.width = s;
+    elemSD.style.height = s;
+    elemPD.style.height = s;
 // now we adjust positions
 //    elemDownRow;
 //    elemAcrossRow
@@ -123,6 +148,9 @@ function CA_Place(iRow_CA)
     var rectDownRow = CA_Place_RelativeToPlacePopup_rect(elemDownRow);
     var iNewLeft = rectDownRow.left + 21 * g_TC_Place_Draggable_sDownLettersAllowed.length + iPadding;
     elemAcrossRow.style.left = iNewLeft.toString() + "px";
+
+
+
 // now we move the hints to the same left and the top as the bottom of the new position of the across
     var rectAcrossRow = CA_Place_RelativeToPlacePopup_rect(elemAcrossRow);
     var elemHintsDiv = document.getElementById("Place_Hints_Div");
@@ -139,6 +167,9 @@ function CA_Place(iRow_CA)
 //
     Place_Popup_Toggle();
 }
+
+
+
 
 function CA_Place_RelativeToPlacePopup_rect(elem)
 {
