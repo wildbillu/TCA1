@@ -44,9 +44,11 @@ function HandleCookie_Settings(sOurCookie_Settings)
     var iMustHaveValues = 1;
     if ( g_sSettings_Version == 'V01.01' )
         iMustHaveValues = 12;
+    if ( g_sSettings_Version == 'V01.02' )
+        iMustHaveValues = 12;
     if ( iOurValues != iMustHaveValues )
     {
-        setline('CS:WrongNumberOfValues')
+        setline('CS:WrongNumberOfValues. Have:' + iOurValues + '.Need:' + iMustHaveValues)
         return false;
     }
     var iOurValue = 1;

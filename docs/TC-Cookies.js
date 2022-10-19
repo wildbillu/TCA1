@@ -10,11 +10,12 @@ setline('StoredCookie_Settings');
 
 function HandleCookiesOnStart()
 {
-    let s = document.cookie;
+setlineAdd('C:HandleCookieStart');
+let s = document.cookie;
     if ( s == '' )
     {
-//        setline('C:NoCookies');
-        return false;
+setline('C:NoCookies');
+return false;
     }
     var aCookies = s.split(';');
     var iCookies = aCookies.length;
@@ -33,8 +34,8 @@ function HandleCookiesOnStart()
             sOurCookie_Settings = sThisCookie;
         }
     }
-    HandleCookie_Puzzle(sOurCookie_Puzzle);
     HandleCookie_Settings(sOurCookie_Settings);
+    HandleCookie_Puzzle(sOurCookie_Puzzle);
 }
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
