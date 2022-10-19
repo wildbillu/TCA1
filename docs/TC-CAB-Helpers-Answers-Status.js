@@ -64,10 +64,10 @@ function CAB_ForRowLetter_UpdateAnswersPlayer(cAnswer, iRow, iLetter)
 
 function CAB_SetAnswersPlayer()
 {
-    g_sAnswersPlayer = g_aAnswersPlayer.join('');
+    g_sAnswersPlayer = g_aAnswersPlayer.join('|');
 }
 
 function CAB_SetStatusPlayer()
 {
-    g_sAnswersStatusPlayer = g_aAnswersStatusPlayer.join('');
+    g_sAnswersStatusPlayer = g_aAnswersStatusPlayer.join('|');
 }
