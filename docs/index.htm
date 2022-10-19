@@ -104,8 +104,11 @@ function LoadValues()
     Status_Check();
     SetInitialSelection();
     if ( g_bSettings_ShowInfoOnStart )
+    {
         Button_Info_Click();
-    g_bSettings_ShowInfoOnStart = false;        
+        g_bSettings_ShowInfoOnStart = false;    
+        StoreCookie_Settings();
+    }
 //    
 }
 function MakeItAll()
