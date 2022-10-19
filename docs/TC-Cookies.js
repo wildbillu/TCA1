@@ -78,7 +78,7 @@ function StoreCookie_Puzzle()
 {
     var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleDate, g_sPuzzleName, g_sAnswersPlayer, g_sAnswersStatusPlayer, g_sGridAnswersPlayer, g_sGridStatusPlayer, 0, g_bPuzzleSolved)
     document.cookie = sCookieToAdd;
-//setline('storepuzzlecookie')
+setline('storepuzzlecookie')
 }
 
 function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, iSeconds, bPuzzleSolved)
@@ -87,11 +87,11 @@ function MakeCookie_Puzzle(sDate, sPuzzleName, sAnswersPlayer, sStatusPlayer, sG
     var sCookie = '';
     sCookie += sPuzzleName;
      sCookie += g_cCookieDelimiter;
-    sCookie += sAnswersPlayer
+    sCookie += sAnswersPlayer;
      sCookie += g_cCookieDelimiter;
-    sCookie += sStatusPlayer
+    sCookie += sStatusPlayer;
      sCookie += g_cCookieDelimiter;
-    sCookie += sGridAnswersPlayer
+    sCookie += sGridAnswersPlayer;
      sCookie += g_cCookieDelimiter;
     sCookie += sGridStatusPlayer
     sCookie += g_cCookieDelimiter;
