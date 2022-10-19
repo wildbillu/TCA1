@@ -41,12 +41,8 @@ function LoadPuzzle()
     g_aAnswers = sAnswers.split(g_TC_cGeneralDelimiter);
     g_iAnswers = g_aAnswers.length;
     g_sAnswers              = sAnswers;
-
-    alert('sAP:' + sAnswersPlayer)
-    alert('sASP:' + sStatusPlayer)
     g_aAnswersPlayer        = sAnswersPlayer.split(g_TC_cGeneralDelimiter);
     g_sAnswersPlayer        = sAnswersPlayer;
-
     g_aAnswersStatusPlayer  = sStatusPlayer.split(g_TC_cGeneralDelimiter);
     g_sAnswersStatusPlayer  = sStatusPlayer;
     if ( g_aClues.length != g_iClues || g_aAnswers.length != g_iClues || g_aAnswersPlayer.length != g_iClues)
