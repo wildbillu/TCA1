@@ -74,6 +74,7 @@ function getResolution()
 
 function LoadValues()
 {
+    alert("a")
     g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.020'
     getResolution(); 
     var g_bLocal = false;
@@ -96,16 +97,21 @@ function LoadValues()
         }
         LoadPuzzleFromFile(sFile);
     }
+    alert("b")
     HandleCookiesOnStart();
+    alert("c")
     LoadPuzzle();
+    alert("d")
     MakeItAll();
     TopRowButtons_Setup();
     LoadInnerHTML();
     Status_Check();
     SetInitialSelection();
+    alert("e")
     if ( g_bSettings_ShowInfoOnStart )
         Button_Info_Click();
     g_bSettings_ShowInfoOnStart = false;        
+    alert("f")
 //    
 }
 function MakeItAll()
