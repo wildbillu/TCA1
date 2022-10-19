@@ -43,6 +43,7 @@ function LoadPuzzle()
     g_sAnswers              = sAnswers;
 
     alert('sAP:' + sAnswersPlayer)
+    alert('sASP:' + sStatusPlayer)
     g_aAnswersPlayer        = sAnswersPlayer.split(g_TC_cGeneralDelimiter);
     g_sAnswersPlayer        = sAnswersPlayer;
 

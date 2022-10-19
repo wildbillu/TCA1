@@ -23,8 +23,8 @@ function CAB_ForRowLetter_IsLastLetter(iRow, iLetter)
 
 function CAB_ForRowLetter_SetAnswersPlayer(cLetter, iRow, iLetter)
 {
-    var sAnswersPlayer = g_aAnswersPlayer[iRow];
-    g_aAnswersPlayer[iRow] = replaceAt(sAnswersPlayer, iLetter, cLetter);
+    var sAnswerPlayer = g_aAnswersPlayer[iRow];
+    g_aAnswersPlayer[iRow] = replaceAt(sAnswerPlayer, iLetter, cLetter);
     CAB_SetAnswersPlayer();
 }
 
