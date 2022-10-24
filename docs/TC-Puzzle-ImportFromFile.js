@@ -17,16 +17,13 @@ function LoadPuzzleFromFile()
         }
     }
     var iUpdated = 0;
-alert("file:" + sFilename)    
     var xmlhr = new XMLHttpRequest();
     var sFullFilename = 'puzzles/' + sFilename;
     xmlhr.open( "GET", sFullFilename, false);
     xmlhr.send( null );
     var sResult = xmlhr.responseText;
-alert('Resonse:' + sResult)
-    if ( sResult.search('404 Not Found') != -1 )
+    if ( sResult.search('404 Not Found') != -1 || sResult.search('GridAnswers') == -1)
     {
-alert("didnotfind file returned false")
         setline('F:Didnotfindpuzzlefile');
         return false;
     }
