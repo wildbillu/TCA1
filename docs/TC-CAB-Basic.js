@@ -18,7 +18,6 @@ function CAB_SetRowToInActive(iRow)
         CAB_ForRowLetter_SetButton(iRow, iL, g_TC_cCodeMeaning_Inactive)
     }
 }
-
 function CAB_SetRowToActive(iRow, iActiveLetter)
 {
     var iLength = g_aAnswers[iRow].length;

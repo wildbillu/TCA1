@@ -5,7 +5,9 @@ function GRB_MakeGridAsButtons()
     var sInner = '';
     for ( var iR = 0; iR < g_iGridHeight; iR++ )
     { 
-        sInner += '<DIV class="GRB_Div" Id="GRB_Div' + iR + '">aa</DIV>'
+        sInner += '<DIV class="';
+        sInner += g_GR_Grid_Div_sClass;
+        sInner += '" Id="GRB_Div' + iR + '">aa</DIV>'
     }
     sInner += '<DIV Id="Place_Popup_Locator" height=0 align=left></DIV>'
     document.getElementById("GRB_GridRows").innerHTML = sInner;
@@ -27,7 +29,8 @@ function GRB_MakeGridRowAsButtons(iRow)
         sFunctionsToCall += ' onfocus="GRB_onfocus(this);"';
         sInnerRowHTML += '<BUTTON '
         sInnerRowHTML += GRB_MakeHTMLId(iRow, iLetter);
-        sInnerRowHTML += ' class="GRB_Base" ';
+        sInnerRowHTML += ' class="';
+        sInnerRowHTML += g_GR_Grid_sClass + '" ';
         sInnerRowHTML += sFunctionsToCall;
         sInnerRowHTML += '>';
     }

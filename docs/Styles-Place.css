@@ -1,5 +1,59 @@
 /* Styles-Place.css */
 
+/* for direct place buttons */
+
+.Span_DragMe_Across
+{
+  border:1px solid red;
+  width:30px;
+  height:30px;
+  visibility: visible;
+}
+
+.Span_DragMe_Down
+{
+  border:1px solid red;
+  width:30px;
+  height:30px;
+  visibility: visible;
+}
+
+
+.CA_Place_Across_Button
+{
+  border:1px solid red;
+  width:30px;
+  height:30px;
+  background-size:30px;
+  background-image: url("images/Button_PlaceAcross.png");
+}
+
+.CA_Place_Down_Button
+{
+  border:1px solid red;
+  width:30px;
+  height:30px;
+  background-size:30px;
+  background-image: url("images/Button_PlaceDown.png");
+}
+
+/* for popup with place buttons */
+.Place_Button
+{
+    border: 1px solid black;
+    text-align:center;
+    font-size: 14px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;  
+    color: blue;
+    height:30px;
+    width: 50px;
+    background-color: #EEEEEE;
+}
+.Place_Button:hover{background-color: lightblue;}
+
+
+
 .Place_DragInstruction
 {
   position:absolute;
@@ -21,8 +75,8 @@
   top:50;
   left:50;
   width:42px;
-  height:10px;
-  border:0px solid red;
+  height:100px;
+  border:1px solid green;
   background-color:lightblue;
 }
 
@@ -31,9 +85,9 @@
   position:absolute;
   top:50;
   left:150;
-  width:10px;
+  width:100px;
   height:10px;
-  border:0px solid green;
+  border:1px solid red;
   background-color:lightblue;
 }
 
@@ -70,6 +124,21 @@
   left:5;
   width:40;
   height:146;
+  border:1px solid green;
+  z-index:4;
+  text-align: center;
+  font-size: 45px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:0px;
+}
+
+.Place_Draggable_Down_50
+{
+  position:absolute;
+  top:50;
+  left:5;
+  width:50;
+  height:146;
   border:1px solid red;
   z-index:4;
   text-align: center;
@@ -84,6 +153,21 @@
   left:50px;
   width:250px;
   height:40px;
+  border:1px solid green;
+  position:absolute;
+  z-index:4;
+  text-align: center;
+  font-size: 45px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:0px;
+}
+
+.Place_Draggable_Across_50
+{
+  top:5px;
+  left:50px;
+  width:250px;
+  height:50px;
   border:1px solid red;
   position:absolute;
   z-index:4;

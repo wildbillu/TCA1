@@ -25,9 +25,9 @@ function GRB_ForRowLetter_DoItAll(cAnswerPlayer, iRow, iLetter)
     }
 // now we need to deal with the the entire row or letter to get the images right
     if ( g_GRB_bAcross )
-        GRB_SetRowToActive(iRow, iLetter);
+        GRB_ForRow_SetToActive(iRow, iLetter);
     else
-        GRB_SetColumnToActive(iRow, iLetter);
+        GRB_ForLetter_SetToActive(iRow, iLetter);
 }
 
 function GRB_onmousedown(iRow, iLetter)
@@ -38,14 +38,14 @@ function GRB_onmousedown(iRow, iLetter)
         if ( g_GRB_bAcross )
         {
             g_GRB_bAcross = false;
-            GRB_SetRowToInActive(iRow);
-            GRB_SetColumnToActive(iRow, iLetter);
+            GRB_ForRow_SetToInactive(iRow);
+            GRB_ForLetter_SetToActive(iRow, iLetter);
         }
         else
         {
             g_GRB_bAcross = true;
-            GRB_SetColumnToInActive(iLetter);
-            GRB_SetRowToActive(iRow, iLetter);
+            GRB_ForLetter_SetToInactive(iLetter);
+            GRB_ForRow_SetToActive(iRow, iLetter);
         }
         return false;
     }
@@ -95,16 +95,16 @@ function GRB_onfocus(elem)
     }
     var iThisRow        = GRB_RowFromId(sThisId);
     var iThisCharacter  = GRB_LetterFromId(sThisId);
-    if ( GRB_ForRowAndLetter_isThisSquareABlackSquare(iThisRow, iThisCharacter) )
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iThisRow, iThisCharacter) )
     {
         setline('noBSFocus');
         return;
     }
     // deal with changes to the new focus
     if ( g_GRB_bAcross )
-        GRB_SetRowToActive(iThisRow, iThisCharacter);
+        GRB_ForRow_SetToActive(iThisRow, iThisCharacter);
     else       
-        GRB_SetColumnToActive(iThisRow, iThisCharacter);
+        GRB_ForLetter_SetToActive(iThisRow, iThisCharacter);
     if ( g_GRB_Focus_sId != '' )
     {    
         var iOldRow        = GRB_RowFromId(g_GRB_Focus_sId);
@@ -112,12 +112,12 @@ function GRB_onfocus(elem)
         if ( g_GRB_bAcross )
         { // fixing to oldrows
             if ( iThisRow != iOldRow)
-                GRB_SetRowToInActive(iOldRow)
+                GRB_ForRow_SetToInactive(iOldRow)
         }
         else
         { // fixing to oldcolumns
             if ( iThisCharacter != iOldCharacter)
-                GRB_SetColumnToInActive(iOldCharacter);
+                GRB_ForLetter_SetToInactive(iOldCharacter);
         }
     }
     g_GRB_Focus_sId = sThisId;

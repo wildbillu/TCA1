@@ -2,15 +2,25 @@
 // 
 var sToDisplay = '';
 
+var g_iScreen_Width = 800;
+var g_iScreen_Height= 450;
+function getResolution() 
+{
+g_iScreen_Width = Math.round(screen.width * window.devicePixelRatio);
+g_iScreen_Height= Math.round(screen.height * window.devicePixelRatio);
+}
+
+
 function MakePixelString(i)
 {
     var s = i.toString() + 'px';
     return s;
 }
 
-function showRect(sName, rect)
+function RectAsString(sName, rect)
 {
-    alert(sName + ':' + rect.top + '|' + rect.left + '|' + rect.height + '|' + rect.width);
+    var s = sName + ':' + rect.top + '|' + rect.left + '|' + rect.height + '|' + rect.width;
+    return s;
 }
 
 function ScreenSizes() 

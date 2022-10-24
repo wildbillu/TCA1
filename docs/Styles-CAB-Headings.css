@@ -3,13 +3,13 @@
 .CAB_Row_Base
 {
     padding: 0px;
-    height: 40px;
+    height: 50px;
     width: 450px;
     border: 0px;
     border-collapse: collapse;    
     outline: none;    
     text-align: right;
-    font-size: 14px;
+    font-size: 18px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
 }
@@ -19,7 +19,7 @@
     outline: none; 
     border: 0px solid black;
     text-align: right;
-    font-size: 16px;
+    font-size: 18px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
     caret-color: transparent;

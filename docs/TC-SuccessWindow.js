@@ -7,7 +7,7 @@ function LoadSuccessWindowPopup()
     var sPopupWindow = '';
     sPopupWindow += '<div class="SuccessWindow_popup">';
     sPopupWindow += '<span class="SuccessWindow_popuptext" Id="SuccessWindow_Popup" onclick="SuccessWindowPopup_Toggle();">';
-    sPopupWindow += '<img src="' + g_sSuccessWindowFilename + '" Id="SuccessWindow_Image" alt="Success" width=100%>';
+    sPopupWindow += '<img src="' + g_ST_sFilename_Success + '" Id="SuccessWindow_Image" alt="Success" width=100%>';
     sPopupWindow += '</span></div>';
     document.getElementById('Popup_SuccessWindow').innerHTML = sPopupWindow;
 }

@@ -21,6 +21,22 @@ function GRB_MoveFocus(iNewRow, iNewLetter)
     var sNextBoxID = GRB_MakeId(iNewRow, iNewLetter);
 	document.getElementById(sNextBoxID).focus();
 }
+function GRB_StopHere(iRow, iLetter)
+{
+    var bPlayerSet = GRB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter);
+    var bBlackSquare = GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter);
+    var cStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    var bIsIncorrect = false;
+    if ( cStatus == g_TC_cCodeMeaning_Incorrect) bIsIncorrect = true;
+    var bIsCorrect = false;
+    if ( cStatus == g_TC_cCodeMeaning_Correct) bIsCorrect = true;
+    var bStopHere = true;
+    if ( bIsCorrect )   bStopHere = false;
+    if ( bPlayerSet )   bStopHere = false;    
+    if ( bIsIncorrect ) bStopHere = true;
+    if ( bBlackSquare ) bStopHere = false;
+    return bStopHere;
+}
 
 function GRB_SetFocusToNext(iRow, iLetter)
 {
@@ -33,9 +49,8 @@ function GRB_SetFocusToNext(iRow, iLetter)
         {
             for ( iL = iLetter+1; iL < g_iGridWidth; iL++)
             {
-                var bPlayerSet = GRB_ForRowLetter_IsPlayerAnswerSet(iRow, iL);
-                var bBlackSquare = GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iL);
-                if ( !bPlayerSet && !bBlackSquare )
+                var bStopHere = GRB_StopHere(iRow, iL)
+                if ( bStopHere )
                 {
                     GRB_MoveFocus(iRow, iL);
                     return;
@@ -48,7 +63,8 @@ function GRB_SetFocusToNext(iRow, iLetter)
         { 
             for ( iL = 0; iL < iLetter; iL++)
             {
-                if ( !GRB_ForRowLetter_IsPlayerAnswerSet(iRow, iL)  && !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iL))
+                var bStopHere = GRB_StopHere(iRow, iL)
+                if ( bStopHere )
                 {
                     GRB_MoveFocus(iRow, iL);
                     return;
@@ -83,9 +99,8 @@ function GRB_SetFocusToNext(iRow, iLetter)
         {
             for ( iR = iRow+1; iR < g_iGridHeight; iR++)
             {
-                var bPlayerSet = GRB_ForRowLetter_IsPlayerAnswerSet(iR, iLetter);
-                var bBlackSquare = GRB_ForRowAndLetter_isThisSquareABlackSquare(iR, iLetter);
-                if ( !bPlayerSet && !bBlackSquare )
+                var bStopHere = GRB_StopHere(iR, iLetter)
+                if ( bStopHere )
                 {
                     GRB_MoveFocus(iR, iLetter);
                     return;
@@ -98,8 +113,8 @@ function GRB_SetFocusToNext(iRow, iLetter)
         { 
             for ( iR = 0; iR < g_iGridHeight-1; iR++)
             {
-                var bBlackSquare = GRB_ForRowAndLetter_isThisSquareABlackSquare(iR, iLetter);
-                if ( !GRB_ForRowLetter_IsPlayerAnswerSet(iR, iLetter) && !bBlackSquare )
+                var bStopHere = GRB_StopHere(iR, iLetter)
+                if ( bStopHere )
                 {
                     GRB_MoveFocus(iR, iLetter);
                     return;
@@ -132,7 +147,7 @@ function GRB_SetFocusToNext(iRow, iLetter)
             }
         }
     }
-    if ( GRB_ForRowAndLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
     {
         GRB_SetFocusToNext(iNewRow, iNewLetter);
         return;

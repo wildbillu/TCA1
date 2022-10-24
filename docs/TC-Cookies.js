@@ -14,29 +14,37 @@ setlineAdd('C:HandleCookieStart');
 let s = document.cookie;
     if ( s == '' )
     {
-setline('C:NoCookies');
-return false;
+        setline('C:NoCookies');
+        return false;
     }
     var aCookies = s.split(';');
     var iCookies = aCookies.length;
 //    
-    var sOurCookieName_Puzzle = "SketchiCross-" + sPuzzleDate;
+    var sOurCookieName_Puzzle = "SketchiCross-" + g_sPuzzleDate;
     var sOurCookieName_Settings = 'SketchiCross-Settings'; 
     var sOurCookie_Puzzle = '';
     var sOurCookie_Settings = '';
+//
     for ( var iCookie = 0; iCookie < iCookies ; iCookie++)
     {
         var sThisCookie = aCookies[iCookie]
         if ( sThisCookie.includes(sOurCookieName_Puzzle) )
             sOurCookie_Puzzle = sThisCookie;
-        if ( sThisCookie.includes(sOurCookieName_Settings) )
-        {
+            if ( sThisCookie.includes(sOurCookieName_Settings) )
             sOurCookie_Settings = sThisCookie;
-        }
     }
-    HandleCookie_Settings(sOurCookie_Settings);
     HandleCookie_Puzzle(sOurCookie_Puzzle);
+    HandleCookie_Settings(sOurCookie_Settings);
 }
+var g_Cookie_bValid = false;
+var g_Cookie_sPuzzle = '';
+var g_Cookie_sAnswersPlayer = '';
+var g_Cookie_sStatusPlayer = '';
+var g_Cookie_sGridAnswersPlayer = '';
+var g_Cookie_sGridStatusPlayer = '';
+var g_Cookie_bPuzzleSolved = false;
+var g_Cookie_bGridSolved = false;
+var g_Cookie_bAnswersSolved = false;
 
 function HandleCookie_Puzzle(sOurCookie_Puzzle)
 {
@@ -48,35 +56,38 @@ setline('CP:EmptyPuzzleCookie');
     var iEqual = sOurCookie_Puzzle.indexOf("=");
     if ( iEqual == -1 )
     {   
-setline('CP:cookiemissing=')
+        setline('CP:cookiemissing=')
         return false;
     }
     var sCookieValue = sOurCookie_Puzzle.substring(iEqual + 1);
+    var aOurValues = [];
     var aOurValues = sCookieValue.split(g_cCookieDelimiter);
     var iOurValues = aOurValues.length;
     if ( iOurValues != 9 )
     {
-setline('CP:not7values')
+        setline('CP:not9values')
         return false;
     }
-    if ( sPuzzleName != aOurValues[0] )
-    {
-setline("CP:wrong puzzle:" + sPuzzleName + ':' + aOurValues[0])
-        return false;
-    }
-    sAnswersPlayer = aOurValues[1];
-    sStatusPlayer = aOurValues[2];
-    sGridAnswersPlayer = aOurValues[3];
-    sGridStatusPlayer = aOurValues[4];
-    g_bPuzzleSolved = IsTrue(aOurValues[6]);
-    g_bGridSolved = IsTrue(aOurValues[7]);
-    g_bAnswersSolved = IsTrue(aOurValues[8]);
-setline('CP.LoadedPuzzleCookie');
+    g_Cookie_sPuzzle = aOurValues[0];
+    g_Cookie_sAnswersPlayer = aOurValues[1];
+    g_Cookie_sStatusPlayer = aOurValues[2];
+    g_Cookie_sGridAnswersPlayer = aOurValues[3];
+    g_Cookie_sGridStatusPlayer = aOurValues[4];
+    g_Cookie_bPuzzleSolved = IsTrue(aOurValues[6]);
+    g_Cookie_bGridSolved = IsTrue(aOurValues[7]);
+    g_Cookie_bAnswersSolved = IsTrue(aOurValues[8]);
+    g_Cookie_bValid = true;
+    setline('CP.LoadedPuzzleCookie');
 }
 
 function StoreCookie_Puzzle()
 {
-    var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleDate, g_sPuzzleName, g_sAnswersPlayer, g_sAnswersStatusPlayer, g_sGridAnswersPlayer, g_sGridStatusPlayer, 0, g_bPuzzleSolved)
+// for CAB we need to wrap the player answers and status with the '|'
+    var sAnswersPlayer = g_aAnswersPlayer.join('|');
+    var sAnswersStatusPlayer = g_aAnswersStatusPlayer.join('|');
+    var sGridAnswersPlayer = g_aGridAnswersPlayer.join('')
+    var sGridStatusPlayer = g_aGridStatusPlayer.join('')
+    var sCookieToAdd = MakeCookie_Puzzle(g_sPuzzleDate, g_sPuzzleName, sAnswersPlayer, sAnswersStatusPlayer, sGridAnswersPlayer, sGridStatusPlayer, 0, g_bPuzzleSolved)
     document.cookie = sCookieToAdd;
 setline('storepuzzlecookie')
 }

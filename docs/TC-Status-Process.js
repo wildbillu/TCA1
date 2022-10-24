@@ -28,16 +28,20 @@ function FeaturesDependingOnPuzzleSolved()
     document.getElementById("Dropdown_More_CheckSquare").className = sClass_PuzzleSolved;
     document.getElementById("Dropdown_More_CheckPuzzle").className = sClass_PuzzleSolved;
 //
-    var sClassName = 'Place_Button';
-    if ( g_bGridSolved )
-        sClassName = 'Place_Buttion_Disabled';
-    for ( iRow = 0; iRow < g_aAnswers.length; iRow++ )
+    if ( !g_Place_bDirectPlaceSupport )
     {
-        var sId = 'Place_' + iRow;
-        document.getElementById(sId).disabled = g_bGridSolved;
-        document.getElementById(sId).className = sClassName;
+        var sClassName = 'Place_Button';
+        if ( g_bGridSolved )
+            sClassName = 'Place_Buttion_Disabled';
+        for ( iRow = 0; iRow < g_aAnswers.length; iRow++ )
+        {
+            var sId = 'Place_' + iRow;
+            document.getElementById(sId).disabled = g_bGridSolved;
+            document.getElementById(sId).className = sClassName;
+        }
     }
 }
+
 
 function Status_Check()
 { // called everytime character is done, show answer(CA or GR), solve(CA, GR, All)
@@ -92,7 +96,8 @@ function Status_Check()
         g_bAnswersSolved = true;
     else
         g_bAnswersSolved = false;
-    if ( g_bPuzzleSolved ) // if was already solved
+
+    if ( g_bPuzzleSolved && g_bAnswersSolved && g_bGridSolved ) // if was already solved
         return; 
     g_bPuzzleSolved = g_bAnswersSolved && g_bGridSolved;        
     if ( g_bPuzzleSolved && g_bSettings_CAGR_Display_Complete )

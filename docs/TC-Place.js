@@ -6,23 +6,20 @@ var g_Place_OnSet_GRB_Focus_sId = '';
 function CA_PlaceButton_Setup(iRow)
 {
     var sId = 'Id=Place_' + iRow + ' ';
-    var sFunctionsToCall = ''; 
-    sFunctionsToCall += ' onclick="return CA_Place(' + iRow + ');"';
     var sButton = '';
-    sButton += '<TD><BUTTON class="Place_Button" ' + sId + sFunctionsToCall + '>Place</BUTTON></TD>'
+    sButton = '<DIV>';
+    if ( g_Place_bDirectPlaceSupport )    
+    {
+        sButton += TC_Place_Direct_Buttons(iRow);
+    }
+    if ( g_Place_bPopupPlaceSupport )
+    {
+        var sFunctionsToCall = ''; 
+        sFunctionsToCall += ' onclick="return CA_Place(' + iRow + ');"';
+        sButton += '<BUTTON class="Place_Button" ' + sId + sFunctionsToCall + '>Place</BUTTON>';
+    }        
+    sButton += '</DIV>';
     return sButton;
-}
-
-function CA_Place_Down(iLetter, sSetTo)
-{
-    GRB_ForLetterSetAnswerTo(iLetter, sSetTo);
-    Place_Popup_Toggle();
-}
-
-function CA_Place_Across(iRow, sSetTo)
-{
-    GRB_ForRowSetAnswerTo(iRow, sSetTo);
-    Place_Popup_Toggle();
 }
 
 function CA_Place(iRow_CA)
@@ -71,7 +68,6 @@ function CA_Place(iRow_CA)
     var elemAcrossRow = document.getElementById("Place_Across_Row_Controls");
 // now adjust the size of the container
     elemAcrossRow.innerHTML = sAcrossinnerHTML;
-    elemAcrossRow.style.height = iWidthAcross.toString() + 'px' 
 //
     var sDowninnerHTML = ''; 
     var iWidthDown = 0;
@@ -96,6 +92,15 @@ function CA_Place(iRow_CA)
     var elemDownRow = document.getElementById("Place_Down_Row_Controls")
     elemDownRow.innerHTML = sDowninnerHTML;
     elemDownRow.style.width = MakePixelString(iWidthDown);
+    elemDownRow.style.top = MakePixelString(g_GR_Draggable_iSize + 10);
+    elemDownRow.style.left = MakePixelString(g_GR_Draggable_iSize + 10);
+
+//    elemAcrossRow.style.width = MakePixelString(iWidthAcross); 
+    elemAcrossRow.style.height = MakePixelString(iWidthAcross); 
+    elemAcrossRow.style.left = MakePixelString(g_GR_Draggable_iSize + 10 + iWidthDown);
+    elemAcrossRow.style.top = MakePixelString(g_GR_Draggable_iSize + 10);
+
+
 
 // fill in and place the draggable words
     var elemSD = document.getElementById("Span_Draggable_Down")
@@ -104,7 +109,7 @@ function CA_Place(iRow_CA)
 
     var elemSA = document.getElementById("Span_Draggable_Across")
     elemSA.innerHTML = TC_Place_Draggable_AcrossGridInDiv(sWordBeingPlaced);
-    var elemPS = document.getElementById("Div_Draggable_Across");
+    var elemPA = document.getElementById("Div_Draggable_Across");
 //
     var sHintsHTML = ''
     sHintsHTML += '<DIV class="Place_Hints_Div" Id="Place_Hints_Div"><TABLE>'
@@ -122,13 +127,13 @@ function CA_Place(iRow_CA)
     var elemHints = document.getElementById("Place_Hints");
     elemHints.innerHTML = sHintsHTML;
 // 
-    var iSizeDraggable = sWordBeingPlaced.length * 40 + 2;
+    var iSizeDraggable = sWordBeingPlaced.length * g_GR_Draggable_iSize + 2;
 //
     var elemPopup = document.getElementById("Place");
 // set the width
-    var iWidthPopup = 50 + iSizeDraggable + 60 + 20;
+    var iWidthPopup = 10 + g_GR_Draggable_iSize + iSizeDraggable + 60 + 20;
     elemPopup.style.width = MakePixelString(iWidthPopup);
-    var iHeightPopup = 50 + iSizeDraggable + 5;
+    var iHeightPopup = 10 + g_GR_Draggable_iSize + iSizeDraggable + 5;
     elemPopup.style.height = MakePixelString(iHeightPopup);
 // move the button to a reasonable place
     var iButtonLeft = iWidthPopup - 65;
@@ -136,18 +141,25 @@ function CA_Place(iRow_CA)
 // now the draggable words
     var s = iSizeDraggable.toString() + 'px';
     elemSA.style.width = s;
-    elemPS.style.width = s;
+    elemPA.style.width = s;
+    elemPA.style.left = MakePixelString(10 + g_GR_Draggable_iSize);
+
     elemSD.style.height = s;
     elemPD.style.height = s;
+    elemPD.style.top = MakePixelString(10 + g_GR_Draggable_iSize);
+
+
 // now we adjust positions
 //    elemDownRow;
+elemDownRow.left = MakePixelString(100 + g_GR_Draggable_iSize);
+elemDownRow.top = MakePixelString(100 + g_GR_Draggable_iSize);
 //    elemAcrossRow
 //    elemHints
 // first we move the x position of elemAcross row to computed right edge of the down elements
     var iPadding = 2;
     var rectDownRow = CA_Place_RelativeToPlacePopup_rect(elemDownRow);
     var iNewLeft = rectDownRow.left + 21 * g_TC_Place_Draggable_sDownLettersAllowed.length + iPadding;
-    elemAcrossRow.style.left = iNewLeft.toString() + "px";
+    elemAcrossRow.style.left = MakePixelString(iNewLeft);
 
 
 
@@ -167,9 +179,6 @@ function CA_Place(iRow_CA)
 //
     Place_Popup_Toggle();
 }
-
-
-
 
 function CA_Place_RelativeToPlacePopup_rect(elem)
 {

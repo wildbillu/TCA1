@@ -1,26 +1,11 @@
 /* Styles-CAB-Button.css */
 
-.Place_Button
-{
-    border: 1px solid black;
-    padding:2px;
-    text-align:center;
-    font-size: 14px;
-    font-family:Arial, Helvetica, sans-serif;
-    font-style:normal;  
-    color: blue;
-    height:30px;
-    width: 50px;
-    background-color: #EEEEEE;
-}
-.Place_Button:hover{background-color: lightblue;}
-
 .CAB_Div
 {
     outline: none; 
     border-collapse: collapse; 
-    height: 40px;
-    width: 152px;
+    height: 50px;
+    width: 252px;
     padding: 0px;
     margin:0;
     font-size:0px;
@@ -41,9 +26,9 @@
     font-size: 24px;
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
-    width: 40px;
-    height: 40px;
-    background-size: 40px;
+    width: 50px;
+    height: 50px;
+    background-size: 50px;
     caret-color: transparent;
 }
 

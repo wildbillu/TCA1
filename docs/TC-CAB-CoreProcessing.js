@@ -31,13 +31,28 @@ function CAB_Set_RowBackgroundColors()
 
 function CAB_MoveFocus(iNewRow, iNewLetter)
 {
-    if ( iNewRow > iClueAnswers -1 || iNewRow < 0 )
+    if ( iNewRow > g_iClues -1 || iNewRow < 0 )
     {
         setline('Invalid Row:'+ iNewRow + 'iNewLetter:' + iNewLetter);
         iNewRow = 0;
     }
     var sNextBox = CAB_MakeId(iNewRow, iNewLetter);
 	document.getElementById(sNextBox).focus();
+}
+
+function CAB_StopHere(iRow, iLetter)
+{
+    var bPlayerSet = CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iLetter);
+    var cStatus = CAB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
+    var bIsIncorrect = false;
+    if ( cStatus == g_TC_cCodeMeaning_Incorrect) bIsIncorrect = true;
+    var bIsCorrect = false;
+    if ( cStatus == g_TC_cCodeMeaning_Correct) bIsCorrect = true;
+    var bStopHere = true;
+    if ( bIsCorrect )   bStopHere = false;
+    if ( bPlayerSet )   bStopHere = false;    
+    if ( bIsIncorrect ) bStopHere = true;
+    return bStopHere;
 }
 
 function CAB_SetFocusToNext(iRow, iLetter)
@@ -48,7 +63,8 @@ function CAB_SetFocusToNext(iRow, iLetter)
     {
         for ( iL = iLetter+1; iL < iLength; iL++)
         {
-            if ( !CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iL) )
+            var bStopHere = CAB_StopHere(iRow, iL)
+            if ( bStopHere )
             {
                 CAB_MoveFocus(iRow, iL);
                 return;
@@ -60,7 +76,8 @@ function CAB_SetFocusToNext(iRow, iLetter)
     { 
         for ( iL = 0; iL < iLength; iL++)
         {
-            if ( !CAB_ForRowLetter_IsPlayerAnswerSet(iRow, iL) )
+            var bStopHere = CAB_StopHere(iRow, iL)
+            if ( bStopHere )
             {
                 CAB_MoveFocus(iRow, iL);
                 return;

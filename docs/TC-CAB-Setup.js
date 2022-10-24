@@ -67,7 +67,8 @@ function CAB_SetRow(iRow)
     document.getElementById(sAnswerElement).innerHTML = sInnerHTML;
 
     var sPlaceElement = 'CA_' + iRow + '_Place'
-    var sPlaceInnerHTML = CA_PlaceButton_Setup(iRow);
+    var sPlaceInnerHTML = '<TD>' + CA_PlaceButton_Setup(iRow) + '</TD>';
+//alert('ROW:' + sPlaceInnerHTML)    
     document.getElementById(sPlaceElement).innerHTML = sPlaceInnerHTML;
 }
 

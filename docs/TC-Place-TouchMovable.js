@@ -69,6 +69,7 @@ function touchUp(e)
     g_TM_sWordToPlace = '';
     g_TM_sRowsAllowed = '';
     g_TM_sLettersAllowed = '';
+    Status_Check();
     e.preventDefault();
 }
 
@@ -94,7 +95,7 @@ function touchMove(e)
         { // assumes across
             var iRow = GRB_RowFromId(sId)
             var iLetter = GRB_LetterFromId(sId)
-            if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+            if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
             {
                 var sRow = iRow.toString();
                 var sLetter = iLetter.toString();
@@ -117,6 +118,16 @@ function touchMove(e)
             }
         }
         iE++;
+    }
+    if ( !bFound )
+    { // if not over any valid we must set all the rows inactive 
+        if ( g_TM_iRowFound != -1 )
+        {
+            GRB_ForRow_SetToInactive(g_MM_iRowFound);
+            GRB_ForLetter_SetToInactive(g_MM_iLetterFound);
+            g_TM_iRowFound = -1;
+            g_TM_iLetterFound = -1;
+        }
     }
     e.preventDefault();
 }

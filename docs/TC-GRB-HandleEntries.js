@@ -9,7 +9,7 @@ function GRB_ForLetterSetAnswerTo(iLetter, sForceAnswer)
     var iForce = 0;
     for ( iRow = 0; iRow < g_iGridHeight; iRow++ )
     {
-        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+        if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
         {
             var cAnswerPlayer_New = sForceAnswer.charAt(iForce);
             if ( CharValidEntry(cAnswerPlayer_New) )
@@ -27,10 +27,9 @@ function GRB_ForLetterSetAnswerTo(iLetter, sForceAnswer)
             iForce++;
         }
     }
-    GRB_SetAnswersPlayer();
     for ( iRR = 0; iRR < g_iGridHeight; iRR++ )
     {
-        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRR, iLetter) )
+        if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRR, iLetter) )
         {
             GRB_ForRowLetter_SetButton(iRR, iLetter, g_TC_cCodeMeaning_Inactive);
             if ( g_bSettings_CAGR_Answers_CheckRow || g_bSettings_CAGR_Answers_ShowCorrectLetters )
@@ -48,7 +47,7 @@ function GRB_ForRowSetAnswerTo(iRow, sForceAnswer)
     var iForce = 0;
     for ( iCC = 0; iCC < g_iGridWidth; iCC++ )
     {
-        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iCC) )
+        if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iCC) )
         {
             var cAnswerPlayer_New = sForceAnswer.charAt(iForce);
             if ( CharValidEntry(cAnswerPlayer_New) )
@@ -65,10 +64,9 @@ function GRB_ForRowSetAnswerTo(iRow, sForceAnswer)
         }
     }
     g_aGridAnswersPlayer[iRow] = sGridAnswerPlayerRow;
-    GRB_SetAnswersPlayer();
     for ( iC = 0; iC < g_iGridWidth; iC++ )
     {
-        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iC) )
+        if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iC) )
         {
             GRB_ForRowLetter_SetButton(iRow, iC, g_TC_cCodeMeaning_Inactive);
             if ( g_bSettings_CAGR_Answers_CheckRow || g_bSettings_CAGR_Answers_ShowCorrectLetters )
@@ -91,7 +89,7 @@ function GRB_ForLetterMakeHints(iLetter, sAnswerPlace)
     var iIndex = 0;
     for ( iRow = 0; iRow < g_iGridHeight; iRow++ )
     {
-        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+        if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
         {
             cAnswerPlace = sAnswerPlace.charAt(iIndex);
             if ( CharValidEntry(cAnswerPlace) )
@@ -129,7 +127,7 @@ function GRB_ForRowMakeHints(iRow, sAnswerPlace)
     var iIndex = 0;
     for ( iLetter = 0; iLetter < g_iGridWidth; iLetter++ )
     {
-        if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+        if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
         {
             cAnswerPlace = sAnswerPlace.charAt(iIndex);
             if ( CharValidEntry(cAnswerPlace) )
@@ -227,7 +225,7 @@ function GRB_ShowCheckAnswerActiveRowOrColumn(sToDo)
 
 function GRB_ForRowLetterShowCheckSquare(iRow, iLetter, sToDo, cCodeFocusActiveInactive)
 {
-    if ( GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
         return; // actually we should never get here
     var cInitialStatus = GRB_ForRowLetter_GetStatusPlayer(iRow, iLetter);
     if ( cInitialStatus == g_TC_cCodeMeaning_Corrected )
@@ -273,7 +271,7 @@ function GRB_ClearGrid()
     {
         for ( var iL = 0; iL < g_iGridWidth; iL++ )
         {
-            if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iR, iL) )
+            if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iR, iL) )
             {
                 GRB_ForRowLetter_SetAnswerPlayer(g_TC_cCharMeaningNotSet, iR, iL);
                 GRB_ForRowLetter_SetStatusPlayer(g_TC_cCodeMeaning_Normal, iR, iL);

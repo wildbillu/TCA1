@@ -93,12 +93,16 @@ function TC_Place_Draggable_AcrossGridInDiv(sWordToPlace)
     var sTouchMovableInner = TC_Place_TouchMovable_MakeFunctionString_Across(sWordToPlace);
     var sMouseMovableInner = TC_Place_MouseMovable_MakeFunctionString_Across(sWordToPlace);
     var sInner = '';
-    sInner += '<DIV class="Place_Draggable_Across" Id="Div_Draggable_Across" ' + sDraggableInner + sMouseMovableInner + sTouchMovableInner + '>';
+    sInner += '<DIV class="'
+    sInner += g_GR_Draggable_Div_Across_sClass;
+    sInner += '" Id="Div_Draggable_Across" ' + sDraggableInner + sMouseMovableInner + sTouchMovableInner + '>';
     for ( var iL = 0; iL < sWordToPlace.length; iL++ )
     {
         var cLetter = sWordToPlace.charAt(iL);
         var sBackgroundImage = TC_Place_Draggable_BackgroundImage(cLetter);
-        sInner += '<BUTTON class="GRB_Base" style="background-image:' + sBackgroundImage + '">';
+        sInner += '<BUTTON class="'
+        sInner += g_GR_Draggable_sClass + '" ';
+        sInner += ' style="background-image:' + sBackgroundImage + '">';
         sInner += '</BUTTON>';
     }
     sInner += '</DIV>';
@@ -111,13 +115,18 @@ function TC_Place_Draggable_AcrossGridInDiv(sWordToPlace)
     var sDraggableInner = ' draggable="false" ondragstart="TC_PlaceDrag_D_Start(event, \'' + sWordToPlace + '\');" ';
     var sTouchMovableInner = TC_Place_TouchMovable_MakeFunctionString_Down(sWordToPlace);
     var sMouseMovableInner = TC_Place_MouseMovable_MakeFunctionString_Down(sWordToPlace);
-    sInner += '<DIV class="Place_Draggable_Down" Id="Div_Draggable_Down" ' + sDraggableInner + sTouchMovableInner + sMouseMovableInner + '>';
+
+    sInner += '<DIV class="'
+    sInner += g_GR_Draggable_Div_Down_sClass;
+    sInner += '" Id="Div_Draggable_Down" ' + sDraggableInner + sTouchMovableInner + sMouseMovableInner + '>';
     sInner += '<TABLE CELLSPACING=0 cellpadding=0 padding=0 margin=0 border=0>'
     for ( var iL = 0; iL < sWordToPlace.length; iL++ )
     {
         var cLetter = sWordToPlace.charAt(iL);
         var sBackgroundImage = TC_Place_Draggable_BackgroundImage(cLetter);
-        sInner += '<TR padding=0 margin=0 border=0><TD padding=0 margin=0 border=0><BUTTON class="GRB_Base" style="background-image:' + sBackgroundImage + '"></BUTTON></TD></TR>';
+        sInner += '<TR padding=0 margin=0 border=0><TD padding=0 margin=0 border=0><BUTTON class="';
+        sInner += g_GR_Draggable_sClass + '" ';
+        sInner += 'style="background-image:' + sBackgroundImage + '"></BUTTON></TD></TR>';
     }
     sInner += '</TABLE>'
     sInner += '</DIV>';

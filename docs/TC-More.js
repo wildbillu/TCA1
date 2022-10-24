@@ -5,8 +5,8 @@ function Dropdown_More_ResetPuzzle()
 {
     CAB_ClearAnswers();
     GRB_ClearGrid();
-    StoreCookie_Puzzle();
     Status_Check();  
+    StoreCookie_Puzzle();
     FeaturesDependingOnPuzzleSolved();
     elem = document.getElementById(CAB_MakeId(0,0)).focus();
 }

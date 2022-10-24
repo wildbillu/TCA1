@@ -35,7 +35,7 @@ function GRB_GoUpToNext(iRow, iLetter)
     var iNewRow = iRow - 1;
     if ( iNewRow < 0 )
         iNewRow = g_iGridHeight - 1;
-    if ( GRB_ForRowAndLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
     {
         return GRB_GoUpToNext(iNewRow, iNewLetter);
     }
@@ -51,7 +51,7 @@ function GRB_GoDownToNext(iRow, iLetter)
     {
         iNewRow = 0;
     }        
-    if ( GRB_ForRowAndLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
     {
         return GRB_GoDownToNext(iNewRow, iNewLetter);
     }
@@ -65,7 +65,7 @@ function GRB_GoLeftToNext(iRow, iLetter)
     var iNewLetter = iLetter - 1;
     if ( iNewLetter < 0 )
         iNewLetter = g_iGridWidth - 1;
-    if ( GRB_ForRowAndLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
     {
         return GRB_GoLeftToNext(iNewRow, iNewLetter);
     }
@@ -79,7 +79,7 @@ function GRB_GoRightToNext(iRow, iLetter)
     var iNewLetter = iLetter + 1;
     if ( iNewLetter >= g_iGridWidth )
         iNewLetter = 0;
-    if ( GRB_ForRowAndLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
+    if ( GRB_ForRowLetter_isThisSquareABlackSquare(iNewRow, iNewLetter) )
     {
         return GRB_GoRightToNext(iNewRow, iNewLetter);
     }

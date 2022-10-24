@@ -69,11 +69,13 @@ function mouseUp(ev)
     g_MM_sWordToPlace = '';
     g_MM_sRowsAllowed = '';
     g_MM_sLettersAllowed = '';
+    Status_Check();
     ev.preventDefault();
 }
 
 function mouseMove(e)
 {
+    e.preventDefault();
     if ( !g_MM_elemMoving )
         return;
     var x = Math.round(e.clientX);
@@ -94,7 +96,7 @@ function mouseMove(e)
         { // assumes across
             var iRow = GRB_RowFromId(sId)
             var iLetter = GRB_LetterFromId(sId)
-            if ( !GRB_ForRowAndLetter_isThisSquareABlackSquare(iRow, iLetter) )
+            if ( !GRB_ForRowLetter_isThisSquareABlackSquare(iRow, iLetter) )
             {
                 var sRow = iRow.toString();
                 var sLetter = iLetter.toString();
@@ -118,5 +120,14 @@ function mouseMove(e)
         }
         iE++;
     }
-    e.preventDefault();
+    if ( !bFound )
+    { // if not over any valid we must set all the rows inactive 
+        if ( g_MM_iRowFound != -1 )
+        {
+            GRB_ForRow_SetToInactive(g_MM_iRowFound);
+            GRB_ForLetter_SetToInactive(g_MM_iLetterFound);
+            g_MM_iRowFound = -1;
+            g_MM_iLetterFound = -1;
+        }
+    }
 }
