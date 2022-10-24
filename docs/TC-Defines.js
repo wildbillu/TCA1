@@ -18,4 +18,4 @@ var g_ST_sFilename = '';
 var g_ST_sFilename_Extra = '';
 var g_ST_sFilename_Success = '';
 
-var g_sPuzzleVersion = '------V.0.0.020'
+var g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.021'
