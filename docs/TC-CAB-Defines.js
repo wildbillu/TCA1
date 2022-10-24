@@ -6,7 +6,7 @@ var g_aAnswers     =    [];
 var g_aAnswersPlayer        = [];
 var g_aAnswersStatusPlayer  = [];
 
-var g_sDualClueBefore; 
-var g_sDualClueMiddle;
-var g_sDualClueEnd;
+var g_sDualClueBefore = ''; 
+var g_sDualClueMiddle = '';
+var g_sDualClueEnd = '';
 

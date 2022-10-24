@@ -13,7 +13,7 @@ function Make_Info_Content()
 }
 function Make_Info_Content_Update()
 {
+    document.getElementById("Info_Content_PuzzleVersion").innerHTML = g_sPuzzleVersion;
     document.getElementById("Info_Content_AuthorCredit").innerHTML = g_sPuzzleCreditAuthor;
     document.getElementById("Info_Content_PuzzleDate").innerHTML = g_sPuzzleCreditDate;
-    document.getElementById("Info_Content_PuzzleVersion").innerHTML = g_sPuzzleVersion;
 }

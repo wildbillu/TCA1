@@ -56,6 +56,7 @@ function LoadPuzzleFromFile()
         else if ( sLine.startsWith('ST_sFilename_Success=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_ST_sFilename_Success = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sDualClueBefore=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sDualClueBefore = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sDualClueMiddle=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sDualClueMiddle = aEntries[1]; iUpdated++;}}
+        else if ( sLine.startsWith('sDualClueEnd=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sDualClueEnd = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sPuzzleCreditAuthor=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleCreditAuthor = aEntries[1]; iUpdated++;}}
         else if ( sLine.startsWith('sPuzzleCreditDate=') ){var aEntries=sLine.split('=');if ( aEntries.length == 2 ){g_sPuzzleCreditDate = aEntries[1]; iUpdated++;}}
     }

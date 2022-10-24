@@ -14,7 +14,7 @@ function TC_Puzzle_Load_AsJS()
     g_sPuzzleCreditAuthor = 'Puzzle By Sketchi Bill, Images By Sketchi Bill'
     g_sPuzzleCreditDate = 'September 25, 2022'
 // CA Stuff
-    var sClues  = 'A|And|Switch Position|Also|Apt name for a worrier|Unfit to be eaten, not Kosher|One might have green filling for St. Pat\'s|Craft for ET';
+    var sClues  = 'A|And|Switch Position|Also|Apt name for a worrier|Unfit to be eaten, not Kosher|One with green filling for St. Pat\'s Day|Craft for ET';
     var sAnswers                    = 'SURF|TURF|OFF|TOO|STU|TREF|OREO|UFO';
     var sAnswersPlayer             = '-U--|-U--|---|---|---|----|----|---';
     var sStatusPlayer              = 'NCNN|NCNN|NNN|NNN|NNN|NNNN|NNNN|NNN';
