@@ -17,6 +17,3 @@ function Make_Info_Content_Update()
     document.getElementById("Info_Content_PuzzleDate").innerHTML = g_sPuzzleCreditDate;
     document.getElementById("Info_Content_PuzzleVersion").innerHTML = g_sPuzzleVersion;
 }
-
-
-
