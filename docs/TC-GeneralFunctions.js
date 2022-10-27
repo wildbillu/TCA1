@@ -10,6 +10,21 @@ g_iScreen_Width = Math.round(screen.width * window.devicePixelRatio);
 g_iScreen_Height= Math.round(screen.height * window.devicePixelRatio);
 }
 
+function GetComputedStyleProperty(elem, sProperty)
+{
+    var cssObj = window.getComputedStyle(elem, null);
+    var sValue = cssObj.getPropertyValue(sProperty);
+    return sValue;
+}
+
+function GetWidthOfTextInPixels(elem, sText)
+{ // elem is used to get the font
+    var sFont = GetComputedStyleProperty(elem, 'font');
+    canvas = document.createElement("canvas");
+    context = canvas.getContext("2d");
+    context.font = sFont;
+    return context.measureText(sText).width;
+}
 
 function MakePixelString(i)
 {

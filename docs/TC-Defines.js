@@ -19,3 +19,5 @@ var g_ST_sFilename_Extra = '';
 var g_ST_sFilename_Success = '';
 
 var g_sPuzzleVersion = '&nbsp;&nbsp;&nbsp;V.0.0.021'
+
+var g_File_iMinimumLines = 24;

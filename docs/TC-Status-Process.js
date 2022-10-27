@@ -2,6 +2,13 @@
 
 function FeaturesDependingOnPuzzleSolved()
 {
+    var bHaveAnswerLocations = (g_aAnswerLocations.length == g_iClues)
+    if ( !bHaveAnswerLocations )
+    {
+        setline('do not have clue location')
+        document.getElementById("Dropdown_More_SolveAsConventional").disabled = true;
+        document.getElementById("Dropdown_More_ShowAnswer").className = 'Dropdown_More_Button_Disabled';
+    }
     document.getElementById("Dropdown_More_ShowAnswer").disabled = g_bPuzzleSolved;
     document.getElementById("Dropdown_More_ShowSquare").disabled = g_bPuzzleSolved;    
     document.getElementById("Dropdown_More_SolveAnswers").disabled = g_bPuzzleSolved;    

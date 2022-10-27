@@ -14,11 +14,12 @@ function TC_Puzzle_Load_AsJS()
     g_sPuzzleCreditAuthor = 'Puzzle By Sketchi Bill, Images By Sketchi Bill'
     g_sPuzzleCreditDate = 'September 25, 2022'
 // CA Stuff
-    var sClues  = 'A|And|Switch Position|Also|Apt name for a worrier|Unfit to be eaten, not Kosher|One with green filling for St. Pat\'s Day|Craft for ET';
+    var sClues  = 'A|And|Switch Position|Also|Apt name for a worrier|Unfit to be eaten, not Kosher|Cookie with green filling for St. Pat\'s Day|Craft for ET';
     var sAnswers                    = 'SURF|TURF|OFF|TOO|STU|TREF|OREO|UFO';
     var sAnswersPlayer             = '-U--|-U--|---|---|---|----|----|---';
     var sStatusPlayer              = 'NCNN|NCNN|NNN|NNN|NNN|NNNN|NNNN|NNN';
-    CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer);
+    var sAnswerLocations           = '4 Across|1 Down|3 Down|1 Across|4 Down|5 Across|2 Down|6 Across'
+    CA_SetupGlobals(sClues, sAnswers, sAnswersPlayer, sStatusPlayer, sAnswerLocations);
 // GR_Stuff
     var iGridWidth      = 4;
     var iGridHeight     = 4;

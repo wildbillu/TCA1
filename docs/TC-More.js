@@ -1,5 +1,20 @@
-// TC-Button-More.js
-//sDropdownMenu += '<span class="Dropdown_SpanPadding" style="display: inline-block; width: 300px;" Id="span1"></span>';
+// TC-More.js
+
+function Dropdown_More_SolveAsConventional()
+{
+    if ( g_aAnswerLocations.length != g_iClues ) // should never get here but....
+        return;
+    var sNewDualClueText = '(' + g_aAnswerLocations[0] + ') ' + g_ST_sClue_Itself + ' (' + g_aAnswerLocations[1] + ')'
+	document.getElementById('CA01C').innerHTML = sNewDualClueText;
+    for ( iRR = 2; iRR < g_iClues; iRR++ )
+    {
+        var sId = 'CA_' + iRR + '_C';
+        var eRow = document.getElementById(sId)
+        var sClue = g_aClues[iRR];
+        var sNewText = '(' + g_aAnswerLocations[iRR] + ') \n' + sClue;
+        eRow.innerHTML = sNewText;
+    }
+}
 
 function Dropdown_More_ResetPuzzle()
 {
@@ -133,6 +148,7 @@ function Dropdown_More_Hide()
     g_bDropdown_Menu_Active = false;
 }
 
+
 function Insertable_Dropdown_Menu_More()
 {
     var sDropdownMenu = ''
@@ -147,6 +163,7 @@ function Insertable_Dropdown_Menu_More()
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckAnswer" onclick="Dropdown_More_CheckAnswer();">Check Selected Answer</BUTTON>';
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckSquare" onclick="Dropdown_More_CheckSquare();">Check Selected Square</BUTTON>';
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_CheckPuzzle" onclick="Dropdown_More_CheckPuzzle();">Check Puzzle</BUTTON>';
+    sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_SolveAsConventional" onclick="Dropdown_More_SolveAsConventional();">Solve As Standard Crossword</BUTTON>';
     sDropdownMenu += '      <BUTTON class="Dropdown_More_Button" Id="Dropdown_More_ResetPuzzle" onclick="Dropdown_More_ResetPuzzle();">Reset All</BUTTON>';
     sDropdownMenu += '   </div>';
     sDropdownMenu += '</div>';
@@ -162,7 +179,7 @@ function Make_Dropdown_Menu_More()
 {
     sImage = '<img Id="Button_More_Image" src="images/Button_More.png" alt="Success" width=100%>'
     var sDropdownMenu = '';
-    sDropdownMenu += '<BUTTON class="TopRowControl_Button" onclick="Dropdown_More_Show();" >' + sImage + '</BUTTON>';
+    sDropdownMenu += '<BUTTON Id="MoreButton" class="TopRowControl_Button" onclick="Dropdown_More_Show();" >' + sImage + '</BUTTON>';
     return sDropdownMenu;
 }
 

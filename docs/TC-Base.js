@@ -24,6 +24,24 @@ function LoadValues()
         g_GR_Draggable_sClass = 'GRB_Base_50';
         g_GR_Draggable_Div_Across_sClass = 'Place_Draggable_Across_50'
         g_GR_Draggable_Div_Down_sClass = 'Place_Draggable_Down_50'
+//
+        g_CAB_Button_iSize = 50;
+        g_CAB_Button_sClass = 'CAB_Base_50';
+        g_CAB_Button_Div_sClass = 'CAB_Div_50'
+    }
+    else
+    {
+        g_GR_Grid_iSize = 40;
+        g_GR_Grid_sClass = 'GRB_Base_40';
+        g_GR_Grid_Div_sClass = 'GRB_Div_40'
+        g_GR_Draggable_iSize = 40;
+        g_GR_Draggable_sClass = 'GRB_Base_40';
+        g_GR_Draggable_Div_Across_sClass = 'Place_Draggable_Across_40'
+        g_GR_Draggable_Div_Down_sClass = 'Place_Draggable_Down_40'
+//
+        g_CAB_Button_iSize = 40;
+        g_CAB_Button_sClass = 'CAB_Base_40';
+        g_CAB_Button_Div_sClass = 'CAB_Div_40'
     }
     MakeItAll();
     TopRowButtons_Setup();
@@ -36,6 +54,8 @@ function LoadValues()
         g_bSettings_ShowInfoOnStart = false;    
         StoreCookie_Settings();
     }
+
+
 }
 
 function MakeItAll()

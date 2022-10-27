@@ -1,6 +1,6 @@
 /* Styles-GRB-Button.css */
 
-.GRB_Div
+.GRB_Div_40
 {
     outline: none; 
     border-collapse: collapse; 
@@ -22,7 +22,7 @@
     font-size:0px;
 }
 
-.GRB_Base 
+.GRB_Base_40 
 {
     position:relative;
     left: 0px;

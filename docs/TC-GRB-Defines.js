@@ -16,10 +16,10 @@ var g_GR_aDownAnswersNumber = [];
 var g_sGridNumbering;
 
 var g_GR_Grid_iSize = 40;
-var g_GR_Grid_Div_sClass = 'GRB_Div';
-var g_GR_Grid_sClass = 'GRB_Base';
+var g_GR_Grid_Div_sClass = 'GRB_Div_40';
+var g_GR_Grid_sClass = 'GRB_Base_40';
 var g_GR_Draggable_iSize = 40;
-var g_GR_Draggable_sClass = 'GRB_Base';
+var g_GR_Draggable_sClass = 'GRB_Base_40';
 var g_GR_Draggable_Div_Across_sClass = 'Place_Draggable_Across'
 var g_GR_Draggable_Div_Down_sClass = 'Place_Draggable_Down'
 

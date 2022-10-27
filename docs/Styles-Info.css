@@ -1,4 +1,13 @@
 /* Styles-Button-Info.css */
+.DivBorder
+{
+  border-width:1px;
+  border-style:solid;
+  border-color:black;
+  width:450px;
+}
+
+
 .Info_DivBorder_Image
 {
   width: 450px;

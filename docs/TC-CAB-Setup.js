@@ -51,7 +51,7 @@ function CAB_MakeButtonSingleHTML(iRow, iLetter)
     sFunctionsToCall += ' onfocus="CAB_onfocus(this);"';
     sInnerRowHTML += '<BUTTON '
     sInnerRowHTML += CAB_MakeHTMLId(iRow, iLetter);
-    sInnerRowHTML += ' class="CAB_Base" ';
+    sInnerRowHTML += ' class="' + g_CAB_Button_sClass + '" ';
     sInnerRowHTML += sFunctionsToCall;
     sInnerRowHTML += '>';
     return sInnerRowHTML;
@@ -60,16 +60,29 @@ function CAB_MakeButtonSingleHTML(iRow, iLetter)
 function CAB_SetRow(iRow)
 {
     var sClue = g_aClues[iRow];
-    var sClueElement = 'CA_' + iRow + '_C'
-    document.getElementById(sClueElement).innerHTML = sClue;
     var sInnerHTML = CAB_MakeButtonsForAnswer(iRow);
     var sAnswerElement = 'CA_' + iRow + '_A'
     document.getElementById(sAnswerElement).innerHTML = sInnerHTML;
-
+//
     var sPlaceElement = 'CA_' + iRow + '_Place'
     var sPlaceInnerHTML = '<TD>' + CA_PlaceButton_Setup(iRow) + '</TD>';
-//alert('ROW:' + sPlaceInnerHTML)    
-    document.getElementById(sPlaceElement).innerHTML = sPlaceInnerHTML;
+    var elemPlace = document.getElementById(sPlaceElement);
+    elemPlace.innerHTML = sPlaceInnerHTML;
+    var iPlaceWidth = elemPlace.getBoundingClientRect().width;
+//
+    var sClueElement = 'CA_' + iRow + '_C'
+    var elemClue = document.getElementById(sClueElement);
+
+    var iAnswerLength = g_aAnswers[iRow].length;
+    var sRightButtonElem = CAB_MakeId(iRow, iAnswerLength-1);
+    var rectRightButtonElem = document.getElementById(sRightButtonElem).getBoundingClientRect();
+
+    var elem = document.getElementById("MoreButton");
+    var rectMoreButton = elem.getBoundingClientRect();
+    var iKnownWidth = rectMoreButton.right-10;
+    var iWidthLeft = iKnownWidth - iPlaceWidth - iAnswerLength * rectRightButtonElem.width; 
+    elemClue.innerHTML = sClue;
+    elemClue.style.width = MakePixelString(iWidthLeft);
 }
 
 function CAB_Clues1And2Entries_MakeInnerHTML()
