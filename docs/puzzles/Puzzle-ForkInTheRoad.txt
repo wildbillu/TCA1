@@ -22,3 +22,4 @@ sDualClueMiddle= in the
 sDualClueEnd= 
 sPuzzleCreditAuthor=Puzzle By Sketchi Bill, Images By Sketchi Bill
 sPuzzleCreditDate=September 25, 2022
+sAnswerLocations=1 Across|3 Down|4 Down|5 Across|1 Down|7 Across|2 Down|6 Across
