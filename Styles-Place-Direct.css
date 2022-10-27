@@ -1,0 +1,38 @@
+/* Styles-Place-Direct.css */
+
+/* for direct place buttons */
+
+.Div_Place_Direct_Across
+{
+  border:1px solid red;
+  width:30px;
+  height:30px;
+  visibility: visible;
+}
+
+.Div_Place_Direct_Down
+{
+  border:1px solid red;
+  width:30px;
+  height:30px;
+  visibility: visible;
+}
+
+.Place_Direct_Across_Button
+{
+  border:1px solid red;
+  width:30px;
+  height:30px;
+  background-size:30px;
+  background-image: url("images/Button_PlaceAcross.png");
+}
+
+.Place_Direct_Down_Button
+{
+  border:1px solid red;
+  width:30px;
+  height:30px;
+  background-size:30px;
+  background-image: url("images/Button_PlaceDown.png");
+}
+

@@ -1,0 +1,40 @@
+/* Styles-CAB-Headings.css */
+
+.CAB_Row_Base
+{
+    padding: 0px;
+    height: 50px;
+    width: 450px;
+    border: 0px;
+    border-collapse: collapse;    
+    outline: none;    
+    text-align: right;
+    font-size: 18px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+}
+
+.CAB_Clue_Text
+{
+    outline: none; 
+    border: 0px solid black;
+    text-align: right;
+    font-size: 18px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    caret-color: transparent;
+    padding-right:3px;
+}
+
+.CAB_Color_InActive
+{
+    background-color: white;
+    caret-color: transparent;
+}
+
+.CAB_Color_Active
+{
+    background-color: #C0EFFF;
+    caret-color: transparent;
+}
+
