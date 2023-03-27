@@ -16,12 +16,28 @@ var g_TC_ShadeBackgroundOnStatus_sId = "Body_Any";
 var g_TC_ShadeBackgroundOnStatus_fMaxOpacity = 0.1;
 var g_TC_ShadeBackgroundOnStatus_sColorCode = 'rgba(0,255,0,O)';
 
+function Status_Check_AddChange(sNew)
+{
+    if ( sNew == '' )
+        return;
+    if ( g_TC_Status_sChanges == '' )
+        g_TC_Status_sChanges += g_cGeneralDelimiter;
+    g_TC_Status_sChanges += sNew;
+    g_TC_Status_iChanges++
+}
+
 function Status_Check(bNonPlayerFixes)
 { // called everytime character is done, show answer(CA or GR), solve(CA, GR, All)
 
     g_TC_Status_iChanges    = 0;
     g_TC_Status_sChanges    = '';
     let bInitiallySolved = g_bPuzzleSolved;
+
+    let sMessage = CAB_CheckForCorrectAnswer();
+    if ( sMessage != '' )
+    {
+        Status_Check_AddChange(sMessage);
+    }
     if ( g_bSettings_CA_Display_ShowProgress )
     {
         let sSQ = Status_Check_Squares();
@@ -78,12 +94,7 @@ function TC_ClearDualClueAnswers()
     if ( TC_ForIndexIsClueTypeSpecial(1) )CAB_ForRow_SetToInactive(1);
 }
 
-function Status_Check_AddChange(sNew)
-{
-    if ( g_TC_Status_sChanges != '' )
-        g_TC_Status_sChanges += g_cGeneralDelimiter;
-    g_TC_Status_sChanges += sNew;
-}
+
 
 
 function Status_ShadeBackground()
@@ -172,7 +183,6 @@ function Status_Check_Grid()
     }
     g_TC_iGridAnswers = g_iGridWidth + g_iGridHeight;
     sGR = 'Grid: ' + g_TC_iGridAnswers_Correct + ' of ' + g_TC_iGridAnswers;
-
     let sMessage = CAB_CheckForCorrectAnswer();
     if ( sMessage != '' )
     {
